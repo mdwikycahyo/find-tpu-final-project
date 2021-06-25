@@ -1,12 +1,14 @@
 import React from "react"
+import { useHistory } from "react-router-dom"
 
 function NavBar() {
+    const history = useHistory()
     return (
         <>
             <nav className="px-6 py-2 bg-white shadow-md md:flex ">
                 <div className="flex justify-between items-center">
                     <div className="text-3xl text-gray-800 font-bold hover:text-gray-800">
-                        <a href="#">Brand</a>
+                        <a href="#">FIND TPU</a>
                     </div>
                     <div className="md:hidden">
                         <button type="button" className="block text-gray-900 hover:text-gray-700 focus:text-gray-700 focus:outline-none">
@@ -18,9 +20,9 @@ function NavBar() {
                 </div>
                 <div className="w-full pb-2 md:flex md:items-center md:justify-between md:pb-0">
                     <div className="flex flex-col px-2 md:flex-row">
-                        <a href="#" className="py-2 px-2 text-gray-800 rounded hover:bg-gray-900 hover:text-gray-100 hover:font-medium md:mx-2">Home</a>
-                        <a href="#" className="py-2 px-2 text-gray-800 rounded hover:bg-gray-900 hover:text-gray-100 hover:font-medium md:mx-2">About</a>
-                        <a href="#" className="py-2 px-2 text-gray-800 rounded hover:bg-gray-900 hover:text-gray-100 hover:font-medium md:mx-2">Contact</a>
+                        <a href="#" className="py-2 px-2 text-gray-800 rounded hover:bg-gray-900 hover:text-gray-100 hover:font-medium md:mx-2" onClick={()=>{history.push('/')}}>Home</a>
+                        <a href="#" className="py-2 px-2 text-gray-800 rounded hover:bg-gray-900 hover:text-gray-100 hover:font-medium md:mx-2" onClick={()=>{history.push('/about')}}>Tentang Kami</a>
+                        <a href="#" className="py-2 px-2 text-gray-800 rounded hover:bg-gray-900 hover:text-gray-100 hover:font-medium md:mx-2" onClick={()=>{history.push('/contact')}}>Hubungi Kami</a>
                     </div>
                     <div className=" flex item-center">
                         <input type="text" className="w-full px-4 py-3 mx-4 leading-tight text-sm text-gray-400 bg-gray-900 rounded placeholder-gray-200 focus:outline-none focus:shadow-outline" placeholder="Cari TPU Lain" />
