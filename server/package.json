@@ -4,7 +4,9 @@
   "description": "An app to find a suitable cemetary for the deceased",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon ./bin/http",
+    "test": "jest --detectOpenHandles --forceExit --runInBand",
+    "start": "node ./bin/http"
   },
   "repository": {
     "type": "git",
@@ -22,11 +24,13 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jest": "^27.0.5",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.9",
     "supertest": "^6.1.3"
   }
 }
