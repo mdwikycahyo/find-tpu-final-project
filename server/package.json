@@ -4,7 +4,9 @@
   "description": "An app to find a suitable cemetary for the deceased",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon ./bin/http",
+    "test": "jest --detectOpenHandles --forceExit --runInBand",
+    "start": "node ./bin/http"
   },
   "repository": {
     "type": "git",
