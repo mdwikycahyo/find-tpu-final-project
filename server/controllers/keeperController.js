@@ -1,7 +1,29 @@
 const Keeper = require("../models/keeperModel")
 const {decode, encode} = require("../helpers/bcrypt")
+const { sign } = require("../helpers/jwt")
 
-class keeperController{
+class KeeperController{
+    static async loginKeeper(req, res, next){
+            const email =  req.body.email
+            const password =  req.body.password
+        try{
+            const keeperData = await Keeper.loginKeeper(email)
+            if(decode(password, keeperData.keeperPassword)){
+                const payload = {
+                    email: keeperData.keeperEmail,
+                    id: keeperData.id,
+                    role: "keeper"
+                }
+                const access_token = sign(payload)
+                res.status(200).json({access_token})
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+
+    }
+
      static async createKeeper(req, res, next){
         let keeperData = {
             cemetaryName: req.body.cemetaryName,
@@ -71,12 +93,31 @@ class keeperController{
         try{
             keeperData.keeperPassword = await encode(keeperData.keeperPassword)
             const updatedData = await Keeper.updateKeeperData(id, keeperData)
-            // res.status(201).json(updatedData.ops[0])
+            res.status(201).json({"message": "Data updated"})
         }
         catch(err){
             console.log(err)
         }
     }
+    static async updateCemetarySpace(req, res, next){
+        const id = req.params.id
+        const cemetaryPayload = {
+            cemetarySpaceId : req.body.cemetarySpaceId,
+            position : req.body.position
+        }
+        try{
+            const updateCemetarySpace = await Keeper.updateCemetarySpace(id, cemetaryPayload)
+            res.status(200).json({message: "Cemetary spaced filled"})
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async deleteKeeper(req, res, next){
+        const id = req.params.id
+        await Keeper.deleteKeeper(id)
+        res.status(200).json({message: "Keeper has been deleted"})
+    }
 }
 
-module.exports = keeperController
+module.exports = KeeperController

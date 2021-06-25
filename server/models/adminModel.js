@@ -1,23 +1,33 @@
 const {getDatabase} = require("../config/mongodb.js")
 const {ObjectId, Db} = require ('mongodb')
-const collectionName = 'admin'
+const collectionAdmin = 'admin'
 
 class Admin{
     static createAdmin(payload){
-        if(getDatabase()){
-            return getDatabase().collection(collectionName).insertOne(payload)
+        try{
+            if(getDatabase()){
+                return getDatabase().collection(collectionAdmin).insertOne(payload)
+            }
+            else{
+                console.log("ERROR");
+            }
         }
-        else{
-            console.log("ERROR");
+        catch(err){
+            console.log(err);
         }
     }
 
     static loginAdmin(email){
-        if(getDatabase()){
-            return getDatabase().collection(collectionName).findOne({email:email})
+        try{
+            if(getDatabase()){
+                return getDatabase().collection(collectionAdmin).findOne({email:email})
+            }
+            else{
+                console.log("here");
+            }
         }
-        else{
-            console.log("here");
+        catch(err){
+            console.log(err);
         }
     }
 }
