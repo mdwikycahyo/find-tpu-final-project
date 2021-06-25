@@ -7,6 +7,7 @@ async function authentication(req, res, next){
     }
     else{
         let decoded = verify(req.headers.access_token)
+        Admin.
 
         User
         .findByPk(decoded.id)

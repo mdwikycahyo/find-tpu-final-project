@@ -14,7 +14,7 @@ class AdminController{
         try{
             adminData.password = await encode(adminData.password)
             const addedData = await Admin.createAdmin(adminData)
-            res.status(201).json(addedData)
+            res.status(201).json(addedData.ops[0])
         }
         catch(err){
             console.log(err);

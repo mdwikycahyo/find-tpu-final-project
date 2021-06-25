@@ -7,5 +7,8 @@ const keeperController = require("../controllers/keeperController")
 // router.use(auhtorization)
 
 router.post("/", keeperController.createKeeper)
+router.get("/", keeperController.getAllData)
+router.get("/:id", keeperController.getById)
+router.put("/:id", keeperController.updateKeeperData)
 
 module.exports = router
