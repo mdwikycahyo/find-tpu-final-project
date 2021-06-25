@@ -9,9 +9,7 @@ class Keeper{
     static async loginKeeper(email){
         try{
             if(getDatabase()){
-                console.log(email);
                 return await getDatabase().collection(collectionKeeper).findOne({keeperEmail:email})
-
             }
         }
         catch(err){

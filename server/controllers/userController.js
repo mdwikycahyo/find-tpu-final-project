@@ -1,6 +1,8 @@
 const axios = require("axios")
 const radius = "1500"
 const keyword = "pemakaman"
+const User = require("../models/userModel")
+
 let api_key = "AIzaSyAhyFZadPdRIomY26veQj5j2_ztUz9G-Qw"
 
 
@@ -21,6 +23,16 @@ class UserController{
         try{
             let data = await axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${location},${keyword}&key=${api_key}`)
             res.status(200).json(data.data.results)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async getCemetaryData (req, res, next) {
+        const locationName = req.body.locationName
+        try{
+            const cemetarySpaceData = await User.getCemetaryData(locationName)
+            res.status(200).json(cemetarySpaceData)
         }
         catch(err){
             console.log(err);
