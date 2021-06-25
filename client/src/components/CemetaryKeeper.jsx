@@ -1,11 +1,41 @@
 import React from "react";
+import { useHistory } from "react-router";
 
 export default function CemetaryKeeper() {
+  const history = useHistory();
+  function toAddForm() {
+    // console.log("aku di klik yeay/");
+    history.push("/cemetaryKeeper/add");
+  }
+
+  function toEdit(id) {
+    console.log(id);
+    history.push(`/cemetaryKeeper/edit/${id}`);
+  }
+
   return (
     <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
       <h1 className="title-font font-semibold text-4xl text-center text-blue-600 mt-1 rounded-sm">
         Cemetary Keepers
       </h1>
+      <button
+        className="hover:bg-blue-200 hover:text-blue-800 group flex items-center rounded-md bg-blue-100 text-blue-600 text-sm font-medium px-4 py-2 mr-2"
+        onClick={toAddForm}
+      >
+        <svg
+          className="group-hover:text-blue-600 text-blue-500 mr-2"
+          width="12"
+          height="20"
+          fill="currentColor"
+        >
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M6 5a1 1 0 011 1v3h3a1 1 0 110 2H7v3a1 1 0 11-2 0v-3H2a1 1 0 110-2h3V6a1 1 0 011-1z"
+          />
+        </svg>
+        New
+      </button>
       <div className="mt-4 mx-2">
         <div className="w-full overflow-hidden rounded-lg shadow-xs">
           <div className="w-full overflow-x-auto">
@@ -25,9 +55,9 @@ export default function CemetaryKeeper() {
                   mr-4
                 "
                 >
-                  <th className="px-4 py-3">Keeper</th>
+                  <th className="px-4 py-3">Name</th>
 
-                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3">Phone</th>
                   <th className="px-4 py-3">Action</th>
                 </tr>
               </thead>
@@ -67,9 +97,9 @@ export default function CemetaryKeeper() {
                         ></div>
                       </div>
                       <div>
-                        <p className="font-semibold">Hans Burger</p>
+                        <p className="font-semibold">Pak Ujang</p>
                         <p className="text-xs text-gray-600 dark:text-gray-400">
-                          30 minutes ago
+                          pakUjang@mail.com
                         </p>
                       </div>
                     </div>
@@ -82,18 +112,19 @@ export default function CemetaryKeeper() {
                         py-1
                         font-semibold
                         leading-tight
-                        text-green-700
-                        bg-green-100
-                        rounded-full
-                        dark:bg-green-700 dark:text-green-100
+                        
                       "
                     >
-                      Approved
+                      08123456789
                     </span>
                   </td>
                   <td className="px-4 py-3 text-center">
                     <div className="flex item-center">
-                      <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                      <button
+                        className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
+                        type="submit"
+                        onClick={() => toEdit(1)}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -107,7 +138,7 @@ export default function CemetaryKeeper() {
                             d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
                           />
                         </svg>
-                      </div>
+                      </button>
                       <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

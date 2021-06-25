@@ -7,7 +7,8 @@ import CemetaryKeeper from "./components/CemetaryKeeper";
 import CemetaryBlocks from "./components/CemetaryBlocks";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
-import AddForm from "./pages/AddForm";
+import AddFormKeeper from "./pages/AddFormKeeper";
+import EditFormKeeper from "./pages/EditFormKeeper";
 
 function App() {
   return (
@@ -15,14 +16,17 @@ function App() {
       <Header />
       <Sidebar />
       <Switch>
+        <Route path="/cemetaryKeeper/edit/:id">
+          <EditFormKeeper />
+        </Route>
+        <Route path="/cemetaryKeeper/add">
+          <AddFormKeeper />
+        </Route>
         <Route path="/cemetaryBlocks">
           <CemetaryBlocks />
         </Route>
         <Route path="/cemetaryKeeper">
           <CemetaryKeeper />
-        </Route>
-        <Route path="/add">
-          <AddForm />
         </Route>
         <Route path="/dashboard">
           <Dashboard />
