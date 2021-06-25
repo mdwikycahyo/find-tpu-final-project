@@ -7,5 +7,6 @@ const adminController = require("../controllers/adminController")
 // router.use(auhtorization)
 
 router.post("/login", adminController.loginAdmin)
+router.post("/register", adminController.registerAdmin)
 
 module.exports = router
