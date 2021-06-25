@@ -31,7 +31,7 @@ function TabNavigator() {
         component={Notification}
       />
       <Tab.Screen
-        name='Edit'
+        name='Profil'
         options={{
           tabBarIcon: () => {
             return <MaterialCommunityIcons name='account-details' size={30} color='black' />
