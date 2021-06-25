@@ -1,285 +1,34 @@
 import React from "react";
 
-export default function Dashboard() {
+export default function CemetaryKeeper() {
   return (
     <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
-      {/* <h1>ini dashboard</h1> */}
-      {/*===STATISTIC CARD BEGIN===*/}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
-        {/* <div
-          className="
-            bg-blue-500
-            dark:bg-gray-800
-            shadow-lg
-            rounded-md
-            flex
-            items-center
-            justify-between
-            p-3
-            border-b-4 border-blue-600
-            dark:border-gray-600
-            text-white
-            font-medium
-            group
-          "
-        >
-          <div
-            className="
-              flex
-              justify-center
-              items-center
-              w-14
-              h-14
-              bg-white
-              rounded-full
-              transition-all
-              duration-300
-              transform
-              group-hover:rotate-12
-            "
-          >
-            <svg
-              width="30"
-              height="30"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="
-                stroke-current
-                text-blue-800
-                dark:text-gray-800
-                transform
-                transition-transform
-                duration-500
-                ease-in-out
-              "
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-              ></path>
-            </svg>
-          </div>
-          <div className="text-right">
-            <p className="text-2xl">1,257</p>
-            <p>Visitors</p>
-          </div>
-        </div> */}
-        <div
-          className="
-            bg-blue-500
-            dark:bg-gray-800
-            shadow-lg
-            rounded-md
-            flex
-            items-center
-            justify-between
-            p-3
-            border-b-4 border-blue-600
-            dark:border-gray-600
-            text-white
-            font-medium
-            group
-          "
-        >
-          <div
-            className="
-              flex
-              justify-center
-              items-center
-              w-14
-              h-14
-              bg-white
-              rounded-full
-              transition-all
-              duration-300
-              transform
-              group-hover:rotate-12
-            "
-          >
-            <svg
-              width="30"
-              height="30"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="
-                stroke-current
-                text-blue-800
-                dark:text-gray-800
-                transform
-                transition-transform
-                duration-500
-                ease-in-out
-              "
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-              ></path>
-            </svg>
-          </div>
-          <div className="text-right">
-            <p className="text-2xl">557</p>
-            <p>Orders</p>
-          </div>
-        </div>
-        <div
-          className="
-            bg-blue-500
-            dark:bg-gray-800
-            shadow-lg
-            rounded-md
-            flex
-            items-center
-            justify-between
-            p-3
-            border-b-4 border-blue-600
-            dark:border-gray-600
-            text-white
-            font-medium
-            group
-          "
-        >
-          <div
-            className="
-              flex
-              justify-center
-              items-center
-              w-14
-              h-14
-              bg-white
-              rounded-full
-              transition-all
-              duration-300
-              transform
-              group-hover:rotate-12
-            "
-          >
-            <svg
-              width="30"
-              height="30"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="
-                stroke-current
-                text-blue-800
-                dark:text-gray-800
-                transform
-                transition-transform
-                duration-500
-                ease-in-out
-              "
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-              ></path>
-            </svg>
-          </div>
-          <div className="text-right">
-            <p className="text-2xl">$11,257</p>
-            <p>Sales</p>
-          </div>
-        </div>
-        <div
-          className="
-            bg-blue-500
-            dark:bg-gray-800
-            shadow-lg
-            rounded-md
-            flex
-            items-center
-            justify-between
-            p-3
-            border-b-4 border-blue-600
-            dark:border-gray-600
-            text-white
-            font-medium
-            group
-          "
-        >
-          <div
-            className="
-              flex
-              justify-center
-              items-center
-              w-14
-              h-14
-              bg-white
-              rounded-full
-              transition-all
-              duration-300
-              transform
-              group-hover:rotate-12
-            "
-          >
-            <svg
-              width="30"
-              height="30"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="
-                stroke-current
-                text-blue-800
-                dark:text-gray-800
-                transform
-                transition-transform
-                duration-500
-                ease-in-out
-              "
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
-          </div>
-          <div className="text-right">
-            <p className="text-2xl">$75,257</p>
-            <p>Balances</p>
-          </div>
-        </div>
-      </div>
-      {/*===STATISTIC CARD END===*/}
-
-      {/*===CEMETARY TABLE BEGIN===*/}
-      {/* <CemetaryKeeper /> */}
-      {/*===CEMETARY TABLE END===*/}
-
-      {/*===CLIENT ORDER TABLE BEGIN===*/}
-      <div className="mt-4 mx-4">
+      <h1 className="title-font font-semibold text-4xl text-center text-blue-600 mt-1 rounded-sm">
+        Cemetary Keepers
+      </h1>
+      <div className="mt-4 mx-2">
         <div className="w-full overflow-hidden rounded-lg shadow-xs">
           <div className="w-full overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr
                   className="
-                    text-xs
-                    font-semibold
-                    tracking-wide
-                    text-left text-gray-500
-                    uppercase
-                    border-b
-                    dark:border-gray-700
-                    bg-gray-50
-                    dark:text-gray-400 dark:bg-gray-800
-                  "
+                  text-xs
+                  font-semibold
+                  tracking-wide
+                  text-left text-gray-500
+                  uppercase
+                  border-b
+                  dark:border-gray-900
+                  bg-gray-50
+                  dark:text-gray-400 dark:bg-gray-800
+                  mr-4
+                "
                 >
-                  <th className="px-4 py-3">Client</th>
-                  <th className="px-4 py-3">Amount</th>
+                  <th className="px-4 py-3">Keeper</th>
+
                   <th className="px-4 py-3">Status</th>
-                  <th className="px-4 py-3">Date</th>
+                  <th className="px-4 py-3">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -325,7 +74,7 @@ export default function Dashboard() {
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-sm">$855.85</td>
+
                   <td className="px-4 py-3 text-xs">
                     <span
                       className="
@@ -342,7 +91,40 @@ export default function Dashboard() {
                       Approved
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm">15-01-2021</td>
+                  <td className="px-4 py-3 text-center">
+                    <div className="flex item-center">
+                      <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                          />
+                        </svg>
+                      </div>
+                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr
                   className="
@@ -386,7 +168,7 @@ export default function Dashboard() {
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-sm">$369.75</td>
+
                   <td className="px-4 py-3 text-xs">
                     <span
                       className="
@@ -402,7 +184,40 @@ export default function Dashboard() {
                       Pending
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm">23-03-2021</td>
+                  <td className="px-4 py-3 text-sm">
+                    <div className="flex item-center">
+                      <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                          />
+                        </svg>
+                      </div>
+                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr
                   className="
@@ -446,7 +261,7 @@ export default function Dashboard() {
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-sm">$775.45</td>
+
                   <td className="px-4 py-3 text-xs">
                     <span
                       className="
@@ -463,7 +278,40 @@ export default function Dashboard() {
                       Expired
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm">09-02-2021</td>
+                  <td className="px-4 py-3 text-sm">
+                    <div className="flex item-center">
+                      <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                          />
+                        </svg>
+                      </div>
+                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr
                   className="
@@ -507,7 +355,7 @@ export default function Dashboard() {
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-sm">$1276.75</td>
+
                   <td className="px-4 py-3 text-xs">
                     <span
                       className="
@@ -524,7 +372,40 @@ export default function Dashboard() {
                       Approved
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm">17-04-2021</td>
+                  <td className="px-4 py-3 text-sm">
+                    <div className="flex item-center">
+                      <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                          />
+                        </svg>
+                      </div>
+                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr
                   className="
@@ -568,7 +449,7 @@ export default function Dashboard() {
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-sm">$863.45</td>
+
                   <td className="px-4 py-3 text-xs">
                     <span
                       className="
@@ -585,7 +466,40 @@ export default function Dashboard() {
                       Denied
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm">11-01-2021</td>
+                  <td className="px-4 py-3 text-sm">
+                    <div className="flex item-center">
+                      <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                          />
+                        </svg>
+                      </div>
+                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -750,7 +664,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      {/*===CLIENT ORDER TABLE END===*/}
     </div>
   );
 }

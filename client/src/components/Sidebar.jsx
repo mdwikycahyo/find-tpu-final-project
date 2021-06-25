@@ -44,7 +44,7 @@ export default function Sidebar() {
             </li>
             <li>
               <Link
-                href="#"
+                to="/dashboard"
                 className="
                 relative
                 flex flex-row
@@ -84,7 +84,7 @@ export default function Sidebar() {
             </li>
             <li>
               <Link
-                to="/add"
+                to="/cemetaryBlocks"
                 className="
                 relative
                 flex flex-row
@@ -118,7 +118,47 @@ export default function Sidebar() {
                   </svg>
                 </span>
                 <span className="ml-2 text-sm tracking-wide truncate">
-                  Add new Product
+                  Cemetary Blocks
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/cemetaryKeeper"
+                className="
+                relative
+                flex flex-row
+                items-center
+                h-11
+                focus:outline-none
+                hover:bg-blue-800
+                dark:hover:bg-gray-600
+                text-white-600
+                hover:text-white-800
+                border-l-4 border-transparent
+                hover:border-blue-500
+                dark:hover:border-gray-800
+                pr-6
+              "
+              >
+                <span className="inline-flex justify-center items-center ml-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                </span>
+                <span className="ml-2 text-sm tracking-wide truncate">
+                  Cemetary Keeper
                 </span>
               </Link>
             </li>
