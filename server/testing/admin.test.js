@@ -3,20 +3,20 @@ const request = require('supertest')
 describe('')
 
 let adminData = {
-    email:"admin",
+    email:"admin@gmail.com",
     password:"admin",
     role:"admin"
 }
 let loginData = {
-    email:"admin",
+    email:"admin@gmail.com",
     password:"admin"
 }
 let loginFailed1 = {
-    email : "admin",
+    email : "admin@gmail.com",
     password : "damin"
 }
 let loginFailed2 = {
-    email : "dam",
+    email : "dam@gmail.com",
     password : "damin"
 }
 let loginFailed3 = {
@@ -25,7 +25,7 @@ let loginFailed3 = {
 }
 
 describe('Login | Success Case', () =>{
-    test('Should send an access_token', (done) =>{
+    test('Mengirimkan akses token', (done) =>{
         request(app)
         .post('/login/admin')
         .send(loginData)
@@ -38,25 +38,25 @@ describe('Login | Success Case', () =>{
 })
 
 describe('Login | Failed Case', ()=>{
-    test('Should send 403 Unathorized Error', (done)=>{
+    test('Error 403: tidak diauthorisasi', (done)=>{
         request(app)
         .post('/login/admin')
         .send(loginFailed1)
         .end(function(err, res){
             if(err) return done(err)
             expect(res.status).toBe(403)
-            expect(res.body).toHaveProperty('message', 'Invalid email/password')
+            expect(res.body).toHaveProperty('pesan', 'Email / password yang anda masukkan salah')
             done()
         })
     })
-    test('Should send 404 Not Found', (done)=>{
+    test('Error 404: data tidak ditemukan', (done)=>{
         request(app)
         .post('/login/admin')
         .send(loginFailed2)
         .end(function(err, res){
             if(err) return done(err)
             expect(res.status).toBe(404)
-            expect(res.body).toHaveProperty('message', 'Invalid email/password')
+            expect(res.body).toHaveProperty('pesan', 'Email / password yang anda masukkan salah')
             done()
         })
     })
@@ -67,14 +67,14 @@ describe('Login | Failed Case', ()=>{
         .end(function(err, res){
             if(err) return done(err)
             expect(res.status).toBe(400)
-            expect(res.body).toHaveProperty('message', 'Email and password are required')
+            expect(res.body).toHaveProperty('pesan', 'Email / password harus diisi')
             done()
         })
     })
 })
 
 describe('Get All | Succes Case', ()=>{
-    test("Send Object Data", (done)=>{
+    test("Mengirimkan data pemakaman", (done)=>{
         request(app)
         .get("/pemakaman/")
         .set("access_token", adminInitialToken)
@@ -88,7 +88,7 @@ describe('Get All | Succes Case', ()=>{
 })
 
 describe('Get pemakaman by id | Succes Case', ()=>{
-    test("Send Object Data", (done)=>{
+    test("Mengirimkan objek pemakaman", (done)=>{
         request(app)
         .get("/pemakaman/:id")
         .set("access_token", adminInitialToken)

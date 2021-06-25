@@ -6,14 +6,16 @@ Admin
 ```
 POST/admin/login
 ```
-Pemakaman
+Keeper
 ```
-GET /pemakaman/
-GET /pemakaman/:id
-POST /pemakaman/
-PUT /pemakaman/:id
-DELETE /pemakaman/:id
+GET /keeper/
+GET /keeper/:id
+POST /keeper/
+PUT /keeper/:id
+DELETE /keeper/:id
+
 ```
+
 ## POST /admin/login
 
 ```
@@ -61,11 +63,56 @@ _Response (500 - Internal server error)
   "message": "Internal server error"
 }
 ```
+## POST /keeper/
 
-## GET /cart/
 
 ```
-GET All cart
+Register for Keeper
+```
+
+_Request Header_
+```
+not needed
+```
+_Request Body_
+```
+{
+    "email":"<email to get insert into>",
+    "password":"<password to get insert into>"
+}
+```
+_Response (200)_
+```
+{
+    {
+        "message": "User created",
+        "status-code": 201,
+        "data": {
+            "id": <given id>,
+            "email": <posted email>,
+            "role": <posted role>
+        }
+    }
+}
+```
+
+_Response (400 - Bad Request)_
+```
+{
+  "message": "Email and password are required"
+}
+
+```
+_Response (500 - Internal server error)
+```
+{
+  "message": "Internal server error"
+}
+```
+## GET /keeper/
+
+```
+GET All keeper data
 ```
 
 _Request Header_
@@ -78,14 +125,10 @@ _Response (200)_
 ```
 [
     {
-        "UserId":1,
-        "ProductId":1,
-        "Quantity":3
+        tbd
     },
     {
-        "UserId":1,
-        "ProductId":2,
-        "Quantity":3
+        tbd
     }
 ]
 ```
@@ -96,10 +139,11 @@ _Response (500 - Internal Server Error)
   "message": "Internal Server Error"
 }
 ```
-## POST /cart/
+
+## GET /keeper/:id
 
 ```
-POST cart
+GET keeper by id
 ```
 
 _Request Header_
@@ -108,35 +152,17 @@ _Request Header_
     "access_token":"<your access token>"
 }
 ```
-_Request Body_
+_Request Params_
 ```
-{
-    "UserId":<"UserId to get insert into">,
-    "ProductId":<"ProductId to get insert into">,
-    "Quantity":<"Quantity to get insert into">
-}
-```
-_Response (201)_
-```
-{
-    "message": "Product added",
-    "data": {
-        "id": <given id>,
-        "UserId": <posted UserId>,
-        "ProdutId": <posted ProductId>,
-        "Quantity": <posted Quantity>
-    }
-}
+req.params = <id to put update into>
+
 ```
 _Response (200)_
 ```
 {
-    "message": "Cart items edited",
+    "message": "keeper data edited",
     "data": {
-        "id": <given id>,
-        "UserId": <posted UserId>,
-        "ProdutId": <posted ProductId>,
-        "Quantity": <posted Quantity>
+        tbd
     }
 }
 ```
@@ -159,10 +185,11 @@ _Response (500 - Internal Server Error)_
   "message": "Internal Server Error"
 }
 ```
-## PUT /cart/:id
+
+## PUT /keeper/:id
 
 ```
-Update cart items
+Update keeper data
 ```
 
 _Request Header_
@@ -179,20 +206,15 @@ req.params = <id to put update into>
 _Request Body_
 ```
 {
-    "UserId":<"UserId to get insert into">,
-    "ProductId":<"ProductId to get insert into">,
-    "Quantity":<"Quantity to get insert into">
+    tbd
 }
 ```
 _Response (200)_
 ```
 {
-    "message": "Cart items edited",
+    "message": "Keeper data edited",
     "data": {
-        "id": <given id>,
-        "UserId": <posted UserId>,
-        "ProdutId": <posted ProductId>,
-        "Quantity": <posted Quantity>
+        tbd
     }
 }
 ```
@@ -215,10 +237,10 @@ _Response (500 - Internal Server Error)_
   "message": "Internal Server Error"
 }
 ```
-## DELETE /cart/:id
+## DELETE /keeper/:id
 
 ```
-DELETE cart
+DELETE keeper 
 ```
 
 _Request Header_
@@ -235,7 +257,7 @@ req.params = <id to put update into>
 _Response (200)_
 ```
 {
-    "message": "Cart Items deleted"
+    "message": "keeper data deleted"
 }
 ```
 _Response (401 - Unauthorized)_
