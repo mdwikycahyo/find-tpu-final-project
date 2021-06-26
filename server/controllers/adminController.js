@@ -46,8 +46,8 @@ class AdminController{
         catch(err){
             console.log(err);
         }
-
     }
+    
 }
 
 module.exports = AdminController

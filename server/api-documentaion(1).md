@@ -11,6 +11,7 @@ Keeper
 GET /keeper/
 GET /keeper/:id
 POST /keeper/
+PATCH /keeper/:id
 PUT /keeper/:id
 DELETE /keeper/:id
 
