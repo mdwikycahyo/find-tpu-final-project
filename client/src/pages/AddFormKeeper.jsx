@@ -1,24 +1,31 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addKeeper } from "../store/action/actionCreator";
+import Swal from "sweetalert2";
 
 export default function AddFormKeeper() {
-  const [loginInput, setLogin] = useState({
+  const dispatch = useDispatch();
+  const [keeperInput, setKeeperInput] = useState({
     name: "",
     email: "",
     password: "",
     phone: "",
   });
 
-  const formChange = (event) => {
-    const { value, name } = event.target;
-    const _loginInput = { ...setLogin, [name]: value };
-    console.log(_loginInput);
-    setLogin(_loginInput);
+  const inputChange = (event) => {
+    setKeeperInput({ ...keeperInput, [event.target.name]: event.target.value });
+    console.log(keeperInput, "chnge");
   };
-  const formSubmit = (event) => {
-    event.preventDefault();
-    alert(event);
+
+  const inputSubmit = (event) => {
+    event.prefentDefault();
+    // console.log(inputChange, "<<<input form");
+    console.log(keeperInput, "<<<inputSubmit");
+    dispatch(addKeeper(keeperInput));
   };
+
   return (
     <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
       <div className="pt-11">
@@ -27,14 +34,14 @@ export default function AddFormKeeper() {
             Cemetary Keeper Form
           </h1>
           <div className="container py-5 max-w-md mx-auto">
-            <form onSubmit={formSubmit}>
+            <form onSubmit={inputSubmit}>
               <input
                 type="text"
                 placeholder="Name"
                 name="name"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={loginInput.name}
-                onChange={formChange}
+                value={keeperInput.name}
+                onChange={inputChange}
               />
 
               <input
@@ -42,24 +49,24 @@ export default function AddFormKeeper() {
                 placeholder="Email"
                 name="email"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={loginInput.email}
-                onChange={formChange}
+                value={keeperInput.email}
+                onChange={inputChange}
               />
               <input
-                type="password"
+                type="text"
                 placeholder="Password"
                 name="password"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={loginInput.password}
-                onChange={formChange}
+                value={keeperInput.password}
+                onChange={inputChange}
               />
               <input
                 type="text"
                 placeholder="Phone"
                 name="phone"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={loginInput.phone}
-                onChange={formChange}
+                value={keeperInput.phone}
+                onChange={inputChange}
               />
               <div className="flex items-center justify-between">
                 <button

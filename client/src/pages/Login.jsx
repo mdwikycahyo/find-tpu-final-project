@@ -1,27 +1,64 @@
 import React from "react";
 import { useState } from "react";
+import { useHistory } from "react-router";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 export default function Login() {
+  //http://18.207.141.48:3000/admin/login
+  const history = useHistory();
   const [loginInput, setLogin] = useState({
     email: "",
     password: "",
   });
 
   const loginChange = (event) => {
-    const { value, name } = event.target;
-    const _loginInput = { ...setLogin, [name]: value };
-    console.log(_loginInput);
-    setLogin(_loginInput);
+    setLogin({ ...loginInput, [event.target.name]: event.target.value });
+    // console.log(loginInput, "<<<<input");
   };
+
   const loginSubmit = (event) => {
     event.preventDefault();
-    alert(event);
+    // alert(console.log("aku di klik yeay"));
+    axios({
+      method: "POST",
+      url: "http://18.207.141.48:3000/admin/login",
+      data: {
+        email: loginInput.email,
+        password: loginInput.password,
+      },
+    })
+      .then(({ data }) => {
+        console.log({ data });
+        localStorage.setItem("access_token", data.access_token);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: "success",
+          title: "Login success!",
+        });
+        history.push("/dashboard");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
   return (
     <div>
       <h1>ini login page</h1>
       <div className="pt-11">
-        <div className="max-w-lg max-w-xs bg-gray-50 shadow-md rounded-lg mx-auto text-center py-12 mt-4 rounded-xl">
+        <div className="max-w-lg max-w-xs bg-gray-50 shadow-xl rounded-lg mx-auto text-center py-12 mt-4 rounded-xl">
           <h1 className=" text-gray-800 text-center font-extrabold -mt-3 text-3xl">
             Login
           </h1>
