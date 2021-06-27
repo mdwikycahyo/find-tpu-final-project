@@ -1,38 +1,38 @@
 import React from "react";
 import { useHistory } from "react-router";
 
-export default function BodyTableKeeper(props) {
+export default function BodyTableCemetary(props) {
   const history = useHistory();
 
-  function toEdit(id) {
-    // console.log(id);
-    history.push(`/cemetaryKeeper/edit/${id}`);
+  function toEditCemetary(id) {
+    // console.log(id, "<<cemetary");
+    history.push(`/cemetaryBlocks/edit/${id}`);
   }
 
   return (
-    <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+    <tbody className="bg-white dark:divide-gray-700 dark:bg-gray-800">
       <tr
         className="
-    bg-gray-50
-    dark:bg-gray-800
-    hover:bg-gray-100
-    dark:hover:bg-gray-900
-    text-gray-700
-    dark:text-gray-400
-  "
+      bg-gray-50
+      dark:bg-gray-800
+      hover:bg-gray-100
+      dark:hover:bg-gray-900
+      text-gray-700
+      dark:text-gray-400
+    "
       >
         <td className="px-4 py-3">
           <div className="flex items-center text-sm">
             <div
               className="
-          relative
-          hidden
-          w-8
-          h-8
-          mr-3
-          rounded-full
-          md:block
-        "
+            relative
+            hidden
+            w-8
+            h-8
+            mr-3
+            rounded-full
+            md:block
+          "
             >
               <img
                 className="object-cover w-full h-full rounded-full"
@@ -46,25 +46,39 @@ export default function BodyTableKeeper(props) {
               ></div>
             </div>
             <div>
-              <p className="font-semibold">{props.keeper.keeperName}</p>
+              <p className="font-semibold">{props.cemetary.cemetaryName}</p>
               <p className="text-xs text-gray-600 dark:text-gray-400">
-                {props.keeper.keeperEmail}
+                {props.cemetary.cemetaryLocation}
               </p>
             </div>
           </div>
         </td>
-
+        <td className="px-4 py-3 text-xs">
+          <ul
+            className="
+          px-2
+          py-1
+          font-semibold
+          leading-tight
+          
+        "
+          >
+            {props.cemetary.facilities.map((item) => {
+              return <li>{item}</li>;
+            })}
+          </ul>
+        </td>
         <td className="px-4 py-3 text-xs">
           <span
             className="
-        px-2
-        py-1
-        font-semibold
-        leading-tight
-        
-      "
+          px-2
+          py-1
+          font-semibold
+          leading-tight
+          
+        "
           >
-            {props.keeper.keeperPhone}
+            Rp. {props.cemetary.price}
           </span>
         </td>
         <td className="px-4 py-3 text-center">
@@ -72,7 +86,7 @@ export default function BodyTableKeeper(props) {
             <button
               className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
               type="submit"
-              onClick={() => toEdit(props.keeper._id)}
+              onClick={() => toEditCemetary(props.cemetary._id)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

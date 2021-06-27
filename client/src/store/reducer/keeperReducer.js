@@ -4,6 +4,7 @@ import {
   SHOW_ERRORS,
   SHOW_LOADING,
 } from "../action/actionType";
+
 const initilState = {
   keepers: [],
   keeper: {},
@@ -19,7 +20,6 @@ function keeperReducer(state = initilState, action) {
       return { ...state, keepers: payload };
     case SHOW_KEEPER_DETAIL:
       return { ...state, keeper: payload };
-
     case SHOW_LOADING:
       return { ...state, loading: payload };
     case SHOW_ERRORS:

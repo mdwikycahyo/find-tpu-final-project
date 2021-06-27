@@ -4,16 +4,22 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import CemetaryKeeper from "./pages/CemetaryKeeper";
-import CemetaryBlocks from "./components/CemetaryBlocks";
+import CemetaryBlocks from "./pages/CemetaryBlocks";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import AddFormKeeper from "./pages/AddFormKeeper";
 import EditFormKeeper from "./pages/EditFormKeeper";
+import EditFormCemetary from "./pages/EditFormCemetary";
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/cemetaryBlocks/edit/:id">
+          <Header />
+          <Sidebar />
+          <EditFormCemetary />
+        </Route>
         <Route path="/cemetaryKeeper/edit/:id">
           <Header />
           <Sidebar />
