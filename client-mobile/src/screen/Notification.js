@@ -60,7 +60,6 @@ function Notification() {
       <View style={{ color: 'black', position: 'absolute', bottom: 10, right: 10, width: '40%' }}>
         <Button title='Terima' color='#72c955' />
       </View>
-
     </View>
   )
   return (

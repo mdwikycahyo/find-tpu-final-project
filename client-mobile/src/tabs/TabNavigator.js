@@ -1,24 +1,24 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
-import { FontAwesome5 } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+
 import Edit from '../screen/Edit'
-import Home from '../screen/Home'
+import Processing from '../screen/Processing'
 import Notification from '../screen/Notification'
 
 const Tab = createBottomTabNavigator()
 function TabNavigator() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName='Notifikasi'>
       <Tab.Screen
-        name='Beranda'
+        name='Diproses'
         options={{
           tabBarIcon: () => {
-            return <FontAwesome5 name='home' size={24} color='black' />
+            return <MaterialCommunityIcons name="progress-clock" size={24} color="black" />
           },
         }}
-        component={Home}
+        component={Processing}
       />
 
       <Tab.Screen
@@ -34,7 +34,7 @@ function TabNavigator() {
         name='Profil'
         options={{
           tabBarIcon: () => {
-            return <MaterialCommunityIcons name='account-details' size={30} color='black' />
+            return <MaterialCommunityIcons name='account-details' size={24} color='black' />
           },
         }}
         component={Edit}

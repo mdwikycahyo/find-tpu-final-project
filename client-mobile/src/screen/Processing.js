@@ -55,7 +55,7 @@ const DATA = [
   },
 ]
 
-function Home() {
+function Processing() {
   const renderItem = ({ item }) => (
     <View style={stylesHome.item}>
       <View>
@@ -76,7 +76,7 @@ function Home() {
       <HStack bg='#FFF' px={1} py={3} justifyContent='space-between' alignItems='center'>
         <HStack space={4} alignItems='center'>
           <Text color='black' fontSize={20} pt={2} px={5} fontWeight='bold'>
-            Daftar Pesanan
+            Sedang Diproses
           </Text>
         </HStack>
       </HStack>
@@ -112,4 +112,4 @@ const stylesHome = StyleSheet.create({
   },
 })
 
-export default Home
+export default Processing
