@@ -1,6 +1,6 @@
 const { getDatabase } = require("../config/mongodb");
 const {ObjectId, Db} = require ('mongodb')
-const collectionTransaction = "transacton"
+const collectionTransaction = "transaction"
 const collectionKeeper = 'keeper'
 const collectionCemetarySpace = "cemetarySpace"
 
@@ -71,8 +71,8 @@ class User{
         }
     }
 
-    static async changeStatus(id){
-        const newStatus = {$set: {status: "done"}}
+    static async changeStatus(id, status){
+        const newStatus = {$set: {status}}
         try{
             if(getDatabase()){
                 return await getDatabase().collection(collectionTransaction).updateOne({_id:ObjectId(id)}, newStatus)

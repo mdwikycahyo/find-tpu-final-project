@@ -14,4 +14,12 @@ router.put("/:id", keeperController.updateKeeperData)
 router.patch("/:id", keeperController.updateCemetarySpace)
 router.delete("/:id", keeperController.deleteKeeper)
 
+router.post("/status/pending", keeperController.getAllPending)
+router.post("/status/waiting", keeperController.getAllWaiting)
+router.post("/status/done", keeperController.getAllDone)
+router.post("/status/canceled", keeperController.getAllCanceled)
+
+router.patch("/status/:id", keeperController.changeStatus)
+
+
 module.exports = router

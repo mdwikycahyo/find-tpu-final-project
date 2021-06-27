@@ -4,6 +4,7 @@ const cemetaryMaker = require("../helpers/cemetaryMaker")
 const { get } = require("../routes/adminRoute.js")
 const collectionKeeper = 'keeper'
 const collectionCemetarySpace = "cemetarySpace"
+const collectionTransaction = "transaction"
 
 class Keeper{
     static async loginKeeper(email){
@@ -90,6 +91,46 @@ class Keeper{
         try{
             if(getDatabase()){
                 return await getDatabase().collection(collectionKeeper).deleteOne({_id:ObjectId(id)})
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async getAllPending(cemetaryName){
+        try{
+            if(getDatabase()){
+                return await getDatabase().collection(collectionTransaction).find({cemetaryName,status:"pending"}).toArray()
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async getAllWaiting(cemetaryName){
+        try{
+            if(getDatabase()){
+                return await getDatabase().collection(collectionTransaction).find({cemetaryName,status:"waiting"}).toArray()
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async getAllDone(cemetaryName){
+        try{
+            if(getDatabase()){
+                return await getDatabase().collection(collectionTransaction).find({cemetaryName,status:"done"}).toArray()
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async getAllCanceled(cemetaryName){
+        try{
+            if(getDatabase()){
+                return await getDatabase().collection(collectionTransaction).find({cemetaryName,status:"canceled"}).toArray()
             }
         }
         catch(err){

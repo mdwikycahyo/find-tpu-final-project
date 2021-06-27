@@ -81,9 +81,9 @@ class transactionController{
     }
     static async changeStatus(req, res, next){
         const id = req.params.id
+        const status = req.body.status
         try{
-            const status = "done"
-            const data = await Transaction.changeStatus(id)
+            const data = await Transaction.changeStatus(id, status)
             res.status(200).json({message: "status updated"})
 
         }
