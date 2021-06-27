@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(cors())
 
 app.get("/", (req, res) =>{
-    res.status(200).json({"pesan":"Masuk"})
+    res.status(200).json({msg:"FINAL PROJECT TPU SERVER"})
 })
 app.use(router)
 
