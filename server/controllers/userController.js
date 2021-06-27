@@ -2,6 +2,8 @@ const axios = require("axios")
 const radius = "1500"
 const keyword = "pemakaman"
 const User = require("../models/userModel")
+const Keeper = require("../models/keeperModel")
+const sortedData = require("../helpers/sortedCemetaryData")
 
 let api_key = "AIzaSyAhyFZadPdRIomY26veQj5j2_ztUz9G-Qw"
 
@@ -32,7 +34,20 @@ class UserController{
         const locationName = req.body.locationName
         try{
             const cemetarySpaceData = await User.getCemetaryData(locationName)
-            res.status(200).json(cemetarySpaceData)
+            const sortedCemetaryData = sortedData(cemetarySpaceData)
+            res.status(200).json(sortedCemetaryData)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async getCemetaryById(req, res, next){
+        const id = req.params.id
+        try{
+            const cemetaryData = await Keeper.getById(id)
+            const data = sortedData(cemetaryData)
+            res.status(200).json(data)
+
         }
         catch(err){
             console.log(err);

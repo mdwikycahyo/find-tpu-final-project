@@ -118,6 +118,58 @@ class KeeperController{
         await Keeper.deleteKeeper(id)
         res.status(200).json({message: "Keeper has been deleted"})
     }
+
+    static async getAllPending(req, res, next){
+        const cemetaryName = req.body.cemetaryName
+        try{
+            const cemetaryData = await Keeper.getAllPending(cemetaryName)
+            res.status(200).json(cemetaryData)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async getAllWaiting(req, res, next){
+        const cemetaryName = req.body.cemetaryName
+        try{
+            const cemetaryData = await Keeper.getAllWaiting(cemetaryName)
+            res.status(200).json(cemetaryData)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async getAllDone(req, res, next){
+        const cemetaryName = req.body.cemetaryName
+        try{
+            const cemetaryData = await Keeper.getAllDone(cemetaryName)
+            res.status(200).json(cemetaryData)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async getAllCanceled(req, res, next){
+        const cemetaryName = req.body.cemetaryName
+        try{
+            const cemetaryData = await Keeper.getAllCanceled(cemetaryName)
+            res.status(200).json(cemetaryData)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async changeStatus(req, res, next){
+        const status = req.body.status
+        const id = req.params.id
+        console.log(status);
+        try{
+            
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
 }
 
 module.exports = KeeperController
