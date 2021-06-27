@@ -36,7 +36,7 @@ export default function BodyTableCemetary(props) {
             >
               <img
                 className="object-cover w-full h-full rounded-full"
-                src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                src={props.cemetary.image_url}
                 alt=""
                 loading="lazy"
               />
@@ -52,6 +52,32 @@ export default function BodyTableCemetary(props) {
               </p>
             </div>
           </div>
+        </td>
+        <td className="px-4 py-3 text-xs">
+          <span
+            className="
+        px-2
+        py-1
+        font-semibold
+        leading-tight
+        
+      "
+          >
+            {props.cemetary.spaceLeft}
+          </span>
+        </td>
+        <td className="px-4 py-3 text-xs">
+          <span
+            className="
+        px-2
+        py-1
+        font-semibold
+        leading-tight
+        
+      "
+          >
+            {props.cemetary.spaceFilled}
+          </span>
         </td>
         <td className="px-4 py-3 text-xs">
           <ul

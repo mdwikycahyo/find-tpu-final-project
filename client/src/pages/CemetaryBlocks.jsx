@@ -30,7 +30,7 @@ export default function CemetaryBlocks() {
       <h1 className="title-font font-semibold text-4xl text-center text-blue-600 mt-1 mb-6 rounded-sm">
         Cemetary Blocks
       </h1>
-      <div className="mt-4 mx-12 justify-center">
+      <div className="mt-4 mx-12 pt-4 justify-center">
         <div className="w-full overflow-hidden rounded-lg shadow-xs">
           <div className="w-full overflow-x-auto">
             <table className=" w-full">
@@ -49,6 +49,8 @@ export default function CemetaryBlocks() {
                 "
                 >
                   <th className="px-4 py-3">Cemetary</th>
+                  <th className="px-4 py-3">Available Space</th>
+                  <th className="py-4 px-3">Space Filled</th>
                   <th className="px-4 py-3">Facilities</th>
                   <th className="px-4 py-3">Price</th>
                   <th className="px-4 py-3">Action</th>
