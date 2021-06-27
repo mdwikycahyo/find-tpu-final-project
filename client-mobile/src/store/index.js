@@ -24,6 +24,16 @@ export function login(email, password) {
     .catch(console.warn)
 }
 
+// doesnt works
+export function fetchTransaction() {
+  fetch('http://18.207.141.48:3000/keeper')
+  // console.log(response.data)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(console.warn)
+}
+
+
 function reducer(state = initialState, action) {
   if (action.type === 'LOGIN') {
     console.log({...state, access_token: action.payload.access_token}, '---------dari reducer')

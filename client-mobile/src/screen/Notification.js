@@ -1,61 +1,77 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, SafeAreaView, FlatList, StyleSheet, Button } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HStack, Text, Box, StatusBar } from 'native-base'
+import { fetchTransaction } from '../store'
 import styles from '../styles'
 const DATA = [
   {
-    id: '1',
-    name: 'Name',
-    address: 'Address',
-    phone: '08123456789',
-    facilities: ['A', 'B', 'C'],
+    "id": "1",
+    "name": "Customer Satu",
+    "address": "Address",
+    "phone": "08123456789",
+    "facilities": ["Tenda", "Tikar"],
+    "status": "pending"
   },
   {
-    id: '2',
-    name: 'Name',
-    address: 'Address',
-    phone: '08123456789',
-    facilities: ['A', 'B', 'C'],
+    "id": "2",
+    "name": "Customer Dua",
+    "address": "Address",
+    "phone": "08123456789",
+    "facilities": ["Tikar"],
+    "status": "waiting"
   },
   {
-    id: '3',
-    name: 'Name',
-    address: 'Address',
-    phone: '08123456789',
-    facilities: ['A', 'B', 'C'],
+    "id": "3",
+    "name": "Customer Tiga",
+    "address": "Address",
+    "phone": "08123456789",
+    "facilities": ["Ustadz"],
+    "status": "done"
   },
   {
-    id: '4',
-    name: 'Name',
-    address: 'Address',
-    phone: '08123456789',
-    facilities: ['A', 'B', 'C'],
+    "id": "4",
+    "name": "Customer Empat",
+    "address": "Address",
+    "phone": "08123456789",
+    "facilities": ["Bunga", "Tenda", "Tikar"],
+    "status": "pending"
   },
   {
-    id: '5',
-    name: 'Name',
-    address: 'Address',
-    phone: '08123456789',
-    facilities: ['A', 'B', 'C'],
+    "id": "5",
+    "name": "Customer Lima",
+    "address": "Address",
+    "phone": "08123456789",
+    "facilities": ["Tenda", "Tikar"],
+    "status": "waiting"
   },
   {
-    id: '6',
-    name: 'Name',
-    address: 'Address',
-    phone: '08123456789',
-    facilities: ['A', 'B', 'C'],
-  },
+    "id": "6",
+    "name": "Customer Enam",
+    "address": "Address",
+    "phone": "08123456789",
+    "facilities": ["Bunga"],
+    "status": "done"
+  }
 ]
 
 function Notification() {
+  // useEffect(() => {
+  //   fetchTransaction()
+  // }, [])
+
   const renderItem = ({ item }) => (
     <View style={stylesHome.item}>
       <View>
         <Text style={{ fontSize: 24 }}>{item.name}</Text>
         <Text style={{ fontSize: 16 }}>{item.phone}</Text>
-        <Text style={{ fontSize: 16 }}>Alamat: {item.address}</Text>
-        <Text style={{ fontSize: 16 }}>Fasilitas: {JSON.stringify(item.facilities)}</Text>
+        {/* <Text style={{ fontSize: 16 }}>Alamat: {item.address}</Text> */}
+        <Text style={{ fontSize: 16 }}>Fasilitas:</Text>
+        {item.facilities.map((facility, index)=> {
+          return (
+            <Text key={index} style={{ marginLeft: 10 }}>{'\u2B22'} {facility}</Text>
+          )
+        })}
       </View>
       <View style={{ color: 'black', position: 'absolute', bottom: 10, right: 10, width: '40%' }}>
         <Button title='Terima' color='#72c955' />
@@ -74,7 +90,7 @@ function Notification() {
         </HStack>
       </HStack>
       <SafeAreaView style={stylesHome.container}>
-        <FlatList data={DATA} renderItem={renderItem} keyExtractor={(item) => item.id} />
+        <FlatList data={DATA.filter(e => e.status === 'pending')} renderItem={renderItem} keyExtractor={(item) => item.id} />
       </SafeAreaView>
     </>
   )
@@ -99,8 +115,8 @@ const stylesHome = StyleSheet.create({
     fontSize: 24,
   },
   button: {
-    alignItems: "center",
-    backgroundColor: "#DDDDDD",
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
     padding: 10,
   },
 })

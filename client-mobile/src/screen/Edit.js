@@ -1,14 +1,13 @@
 import React from 'react'
-import { View, SafeAreaView, TextInput, StyleSheet, Image } from 'react-native'
+import { View, SafeAreaView, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HStack, Text, Box, StatusBar, Button } from 'native-base'
-import Counter from "react-native-counters";
+import Counter from 'react-native-counters'
 // import styles from '../styles'
 import image_test from '../../assets/test_image.jpg'
 import tombstones from '../../assets/tombstones.jpg'
 
 function Edit() {
-  
   return (
     <>
       <View style={styles.container}>
@@ -26,10 +25,18 @@ function Edit() {
           <View>
             <Image source={tombstones} style={{ width: 80, height: 80 }} />
           </View>
-          <View style={{width: 100}}>
+          <View style={{ width: 100 }}>
             <Text style={{ fontSize: 10 }}>Ubah jumlah lokasi tersedia apabila ada pemesanan diluar aplikasi</Text>
           </View>
-          <Counter start={1} />
+          
+
+          <TouchableOpacity style={styles.button}>
+            <Text>-</Text>
+          </TouchableOpacity>
+          <Text style={styles.box} >X</Text>
+          <TouchableOpacity style={styles.box}>
+            <Text>+</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.dataContainer}>
@@ -110,6 +117,21 @@ var styles = StyleSheet.create({
     // flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+  box: {
+    height: 30,
+    width: 30,
+    margin: 0,
+    borderWidth: 1,
+    // borderRightWidth: 3,
+    textAlign: 'center',
+  },
+  button: {
+    alignItems: 'center',
+    height: 30,
+    width: 30,
+    backgroundColor: '#DDDDDD',
+    padding: 10,
   },
 })
 
