@@ -17,21 +17,29 @@ export default function EditFormKeeper() {
   const initData = useSelector((state) => state.keeperReducer.keeper);
   console.log(initData, "<<data di form");
 
-  const [editInput, setEdit] = useState({
-    name: "",
-    email: "",
-    password: "",
-    phone: "",
+  const [keeper, setKeeper] = useState({
+    name: initData.keeperName,
+    email: initData.keeperEmail,
+    password: initData.keeperPassword,
+    phone: initData.keeperPhone,
   });
 
+  // const [editInput, setEdit] = useState({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  //   phone: "",
+  // });
+
   const editChange = (event) => {
-    setEdit({ ...editInput, [event.target.name]: event.target.value });
+    setKeeper({ ...keeper, [event.target.name]: event.target.value });
   };
 
   const editSubmit = (event) => {
     event.preventDefault();
-    console.log(editInput);
+    // console.log(editInput);
   };
+
   return (
     <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
       <h1>ini edit form</h1>
@@ -46,9 +54,9 @@ export default function EditFormKeeper() {
                 type="text"
                 placeholder="Name"
                 name="name"
-                defaultValue={initData.keeperName}
+                // defaultValue={initData.keeperName}
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={editInput.name}
+                value={keeper.name}
                 onChange={editChange}
               />
 
@@ -57,7 +65,7 @@ export default function EditFormKeeper() {
                 placeholder="Email"
                 name="email"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={editInput.email}
+                value={keeper.email}
                 onChange={editChange}
               />
               <input
@@ -65,7 +73,7 @@ export default function EditFormKeeper() {
                 placeholder="Password"
                 name="password"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={editInput.password}
+                value={keeper.password}
                 onChange={editChange}
               />
               <input
@@ -73,7 +81,7 @@ export default function EditFormKeeper() {
                 placeholder="Phone"
                 name="phone"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={editInput.phone}
+                value={keeper.phone}
                 onChange={editChange}
               />
               <div className="flex items-center justify-between">

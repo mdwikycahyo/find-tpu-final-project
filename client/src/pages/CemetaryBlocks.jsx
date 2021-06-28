@@ -27,10 +27,30 @@ export default function CemetaryBlocks() {
 
   return (
     <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
-      <h1 className="title-font font-semibold text-4xl text-center text-blue-600 mt-1 mb-6 rounded-sm">
+      <h1 className="title-font font-semibold text-4xl text-center text-blue-600 mt-1 rounded-sm">
         Cemetary Blocks
       </h1>
-      <div className="mt-4 mx-12 pt-4 justify-center">
+      <div className="mx-12">
+        <button
+          className="hover:bg-blue-200 hover:text-blue-800 group flex items-center rounded-md bg-blue-100 text-blue-600 text-sm font-medium px-4 py-2"
+          // onClick={toAddForm}
+        >
+          <svg
+            className="group-hover:text-blue-600 text-blue-500 mr-2"
+            width="12"
+            height="20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M6 5a1 1 0 011 1v3h3a1 1 0 110 2H7v3a1 1 0 11-2 0v-3H2a1 1 0 110-2h3V6a1 1 0 011-1z"
+            />
+          </svg>
+          New
+        </button>
+      </div>
+      <div className="mt-4 mx-12 justify-center">
         <div className="w-full overflow-hidden rounded-lg shadow-xs">
           <div className="w-full overflow-x-auto">
             <table className=" w-full">

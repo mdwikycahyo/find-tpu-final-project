@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router";
-
 import Swal from "sweetalert2";
 
 export default function Header() {

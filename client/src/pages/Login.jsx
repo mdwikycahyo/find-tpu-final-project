@@ -14,12 +14,13 @@ export default function Login() {
 
   const loginChange = (event) => {
     setLogin({ ...loginInput, [event.target.name]: event.target.value });
-    // console.log(loginInput, "<<<<input");
+    console.log(loginInput, "<<<<input");
   };
 
   const loginSubmit = (event) => {
     event.preventDefault();
     // alert(console.log("aku di klik yeay"));
+    console.log(loginInput);
     axios({
       method: "POST",
       url: "http://18.207.141.48:3000/admin/login",

@@ -1,5 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function BodyTableCemetary(props) {
   const history = useHistory();
@@ -9,6 +11,35 @@ export default function BodyTableCemetary(props) {
     history.push(`/cemetaryBlocks/edit/${id}`);
   }
 
+  function toDeleteCemetary(id) {
+    console.log(id, "<<aku di delete");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Logout",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios({
+          method: "DELETE",
+          url: `http://18.207.141.48:3000/keeper/${id}`,
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        })
+          .then(() => {
+            console.log("berhasil yeayy");
+            Swal.fire("this item success to delete");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+  }
   return (
     <tbody className="bg-white dark:divide-gray-700 dark:bg-gray-800">
       <tr
@@ -128,7 +159,11 @@ export default function BodyTableCemetary(props) {
                 />
               </svg>
             </button>
-            <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+            <button
+              class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
+              type="submit"
+              onClick={() => toDeleteCemetary(props.cemetary._id)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -142,7 +177,7 @@ export default function BodyTableCemetary(props) {
                   d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                 />
               </svg>
-            </div>
+            </button>
           </div>
         </td>
       </tr>

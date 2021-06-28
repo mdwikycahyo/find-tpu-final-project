@@ -98,14 +98,26 @@ export function addKeeper(data) {
         access_token: localStorage.access_token,
       },
       data: {
-        keeperName: data.name,
-        keeperEmail: data.email,
-        keeperPhone: data.phone,
-        keeperPassword: data.password,
+        cemetaryName: data.cemetaryName,
+        cemetaryLocation: data.cemetaryLocation,
+        width: data.width,
+        height: data.height,
+        latitude: data.latitude,
+        longitude: data.longitude,
+        image_url: [data.image_url],
+        price: data.price,
+        keeperName: data.keeperName,
+        keeperEmail: data.keeperEmail,
+        keeperPassword: data.keeperPassword,
+        keeperPhone: data.keeperPhone,
+        spaceLeft: data.spaceLeft,
+        spaceFilled: data.spaceFilled,
+        facilities: data.facilities.split(","),
       },
     })
       .then(() => {
         console.log("berhasil");
+        dispatch(setCemetaries(data));
       })
       .catch((err) => {
         dispatch(setErrors(err));
