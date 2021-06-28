@@ -14,6 +14,8 @@ import Detail from './components/Detail';
 import About from './components/About';
 import Payment from './components/Payment';
 import Contact from './components/Contact';
+import Xendit from './components/Xendit';
+import FinalPayment from './components/FinalPayment';
 
 function App() {
   return (
@@ -23,17 +25,23 @@ function App() {
           <Route exact path='/'>
             <Home />
           </Route>
-          <Route exact path='/detail'>
+          <Route exact path='/detail/:id'>
             <Detail />
           </Route>
           <Route exact path='/about'>
             <About />
           </Route>
-          <Route exact path='/payment'>
+          <Route exact path='/payment/:id'>
             <Payment />
           </Route>
           <Route exact path='/contact'>
             <Contact />
+          </Route>
+          <Route exact path='/xendit/:id'>
+            <Xendit />
+          </Route>
+          <Route exact path='/checkout/:id'>
+            <FinalPayment />
           </Route>
         </Switch>
       </Router>
