@@ -1,48 +1,101 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, SafeAreaView, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HStack, Text, Box, StatusBar, Button } from 'native-base'
 import Counter from 'react-native-counters'
+import { keeperDetail, updateKeeper } from '../store'
 // import styles from '../styles'
 import image_test from '../../assets/test_image.jpg'
 import tombstones from '../../assets/tombstones.jpg'
+import { AntDesign } from '@expo/vector-icons'
+import { useSelector, useDispatch } from 'react-redux'
 
 function Edit() {
-  return (
+  const access_token = useSelector((state) => state.access_token)
+  const detailKeeper = useSelector((state) => state.detailKeeper)
+  const detailLoading = useSelector((state) => state.detailLoading)
+  const [currentSpace, setCurrentSpace] = useState(0)
+
+  useEffect(() => {
+    keeperDetail('60d703835e6fba19f81c9421')
+  }, [])
+  useEffect(() => {
+    if (detailKeeper.spaceLeft) {
+      setCurrentSpace(detailKeeper.spaceLeft)
+    }
+  }, [detailKeeper])
+
+  return detailLoading ? (
+    <Text style={{ marginTop: 30 }}>LOADDDEENG..</Text>
+  ) : (
     <>
       <View style={styles.container}>
         <View style={styles.backgroundContainer}>
-          <Image source={image_test} resizeMode='cover' style={styles.backdrop} />
+          {/* {console.log(detailKeeper.image_url[0])} */}
+          <Image source={{ uri: detailKeeper.image_url[0] }} resizeMode='cover' style={styles.backdrop} />
+          {/* <Image source={image_test} resizeMode='cover' style={styles.backdrop} /> */}
         </View>
         <View style={styles.overlay}>
-          <Text style={styles.headline}>TPU ABC</Text>
-          <Text style={styles.address}>Jalan Lorem Ipsum Kelurahan Bla Bla</Text>
-          <Text style={styles.address}>Dikelola oleh Bapak Undertaker</Text>
-          <Text style={styles.address}>HP: 08123456789</Text>
+          <Text style={styles.headline}>{detailKeeper.cemetaryName}</Text>
+          <Text style={styles.address}>{detailKeeper.cemetaryLocation}</Text>
+        </View>
+
+        <View style={styles.detailContainer}>
+          <Text style={{ fontWeight: 'bold', color: 'black', fontSize: 18 }}>Data Pemakaman :</Text>
+          <View style={styles.detail}>
+            <Text style={{ color: 'black', fontSize: 14 }}>
+              {'\u2022'} Pengelola : {detailKeeper.keeperName}
+            </Text>
+            <Text style={{ color: 'black', fontSize: 14 }}>
+              {'\u2022'} HP : {detailKeeper.keeperPhone}
+            </Text>
+            <Text style={{ color: 'black', fontSize: 14 }}>
+              {'\u2022'} Tempat Tersedia : {detailKeeper.spaceLeft}
+            </Text>
+          </View>
         </View>
 
         <View style={styles.item}>
-          <View>
+          <View style={{ marginTop: 10 }}>
             <Image source={tombstones} style={{ width: 80, height: 80 }} />
           </View>
-          <View style={{ width: 100 }}>
+          <View style={{ width: 150, marginTop: 30 }}>
             <Text style={{ fontSize: 10 }}>Ubah jumlah lokasi tersedia apabila ada pemesanan diluar aplikasi</Text>
           </View>
-          
 
-          <TouchableOpacity style={styles.button}>
-            <Text>-</Text>
-          </TouchableOpacity>
-          <Text style={styles.box} >X</Text>
-          <TouchableOpacity style={styles.box}>
-            <Text>+</Text>
-          </TouchableOpacity>
-        </View>
+          <View>
+            <Text style={styles.box}>{currentSpace}</Text>
 
-        <View style={styles.dataContainer}>
-          <Button colorScheme='teal' mr={0} style={styles.inputButton}>
-            Save
-          </Button>
+            <View style={{ flexDirection: 'row' }}>
+              <TouchableOpacity onPress={() => setCurrentSpace(Number(currentSpace) - 1)}>
+                <AntDesign name='minuscircleo' size={24} color='black' />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setCurrentSpace(Number(currentSpace) + 1)}>
+                <AntDesign name='pluscircleo' size={24} color='black' />
+              </TouchableOpacity>
+            </View>
+
+            <Button onPress={() => updateKeeper(access_token, '60d703835e6fba19f81c9421', { 
+              "cemetaryName": detailKeeper.cemetaryName,
+              "cemetaryLocation": detailKeeper.cemetaryLocation,
+              "width":detailKeeper.width,
+              "height":detailKeeper.height,
+              "cemetaryType": detailKeeper.cemetaryType,
+              "latitude": detailKeeper.latitude,
+              "longitude": detailKeeper.longitude,
+              "image_url": detailKeeper.image_url,
+              "price": detailKeeper.price,
+              "keeperName": detailKeeper.keeperName,
+              "keeperEmail": detailKeeper.keeperEmail,
+              "keeperPassword": detailKeeper.keeperPassword,
+              "keeperPhone": detailKeeper.keeperPhone,
+              "spaceLeft": currentSpace,
+              "spaceFilled": detailKeeper.spaceFilled,
+              "facilities": detailKeeper.facilities
+             })} colorScheme='teal' mr={0}>
+              Save
+            </Button>
+          </View>
         </View>
       </View>
     </>
@@ -67,11 +120,22 @@ var styles = StyleSheet.create({
     top: '50%',
     // left: '-23%',
   },
+  detailContainer: {
+    width: '80%',
+    // flex: 1,
+    // alignItems: 'flex-start',
+    top: '37%',
+    // backgroundColor: 'green',
+    marginBottom: 40,
+  },
+  detail: {
+    left: 10,
+  },
   overlay: {
     backgroundColor: '#FFF',
     width: '80%',
-    height: '15%',
-    top: '33%',
+    height: '10%',
+    top: '35%',
     borderRadius: 10,
   },
   logo: {
@@ -103,13 +167,15 @@ var styles = StyleSheet.create({
   },
   inputButton: {
     height: 40,
-    width: 330,
+    width: 300,
+    top: 200,
     marginTop: '1%',
     marginBottom: '3%',
   },
   item: {
     backgroundColor: '#FFF',
     padding: 10,
+    width: '90%',
     marginVertical: 20,
     marginHorizontal: 16,
     borderRadius: 6,
@@ -120,9 +186,9 @@ var styles = StyleSheet.create({
   },
   box: {
     height: 30,
-    width: 30,
+    width: '100%',
     margin: 0,
-    borderWidth: 1,
+    // borderWidth: 1,
     // borderRightWidth: 3,
     textAlign: 'center',
   },
@@ -132,6 +198,8 @@ var styles = StyleSheet.create({
     width: 30,
     backgroundColor: '#DDDDDD',
     padding: 10,
+    borderWidth: 1,
+    borderRadius: 20,
   },
 })
 

@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    // marginVertical: 5,
   },
   container: {
     backgroundColor: '#0891b2',
@@ -53,10 +52,11 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    width: 150,
+    width: '100%',
     marginTop: '1%',
     marginBottom: '3%',
-    borderWidth: 1,
+    borderWidth: 0.7,
+    borderRadius: 4
   },
   text: {
     textTransform: 'capitalize',

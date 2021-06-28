@@ -2,78 +2,48 @@ import React from 'react'
 import { View, SafeAreaView, FlatList, StyleSheet, Button } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HStack, Text, Box, StatusBar } from 'native-base'
+import { useSelector } from 'react-redux'
+import { changeStatus } from '../store'
 import styles from '../styles'
 
-const DATA = [
-  {
-    id: '1',
-    name: 'Customer Satu',
-    address: 'Address',
-    phone: '08123456789',
-    facilities: ['Tenda', 'Tikar'],
-    status: 'pending',
-  },
-  {
-    id: '2',
-    name: 'Customer Dua',
-    address: 'Address',
-    phone: '08123456789',
-    facilities: ['Tikar'],
-    status: 'waiting',
-  },
-  {
-    id: '3',
-    name: 'Customer Tiga',
-    address: 'Address',
-    phone: '08123456789',
-    facilities: ['Ustadz'],
-    status: 'done',
-  },
-  {
-    id: '4',
-    name: 'Customer Empat',
-    address: 'Address',
-    phone: '08123456789',
-    facilities: ['Bunga', 'Tenda', 'Tikar'],
-    status: 'pending',
-  },
-  {
-    id: '5',
-    name: 'Customer Lima',
-    address: 'Address',
-    phone: '08123456789',
-    facilities: ['Tenda', 'Tikar'],
-    status: 'waiting',
-  },
-  {
-    id: '6',
-    name: 'Customer Enam',
-    address: 'Address',
-    phone: '08123456789',
-    facilities: ['Bunga'],
-    status: 'done',
-  },
-]
-
 function Processing() {
-  const renderItem = ({ item }) => (
-    <View style={stylesHome.item}>
-      <View>
-        <Text style={{ fontSize: 24 }}>{item.name}</Text>
-        <Text style={{ fontSize: 16 }}>{item.phone}</Text>
-        {/* <Text style={{ fontSize: 16 }}>Alamat: {item.address}</Text> */}
-        <Text style={{ fontSize: 16 }}>Fasilitas:</Text>
-        {item.facilities.map((facility, index) => {
-          return (
-            <Text key={index} style={{ marginLeft: 10 }}>
-              {'\u2B22'} {facility}
-            </Text>
-          )
-        })}
+  const access_token = useSelector((state) => state.access_token)
+  const transactions = useSelector((state) => state.transactions)
+  const transactionLoading = useSelector((state) => state.transactionLoading)
+  // console.log(transactions.filter((e) => e.status === 'waiting'))
+
+  const renderItem = ({ item }) =>
+    transactionLoading ? (
+      <Text>Loading..</Text>
+    ) : (
+      <View style={stylesHome.item}>
+        <View>
+          <Text style={{ fontSize: 24 }}>{item.payerName}</Text>
+          <Text style={{ fontSize: 16 }}>{item._id}</Text>
+          <Text style={{ fontSize: 16 }}>{item.phoneNumber}</Text>
+          <Text style={{ fontSize: 16 }}>{item.status}</Text>
+          {/* <Text style={{ fontSize: 16 }}>Alamat: {item.address}</Text> */}
+          <Text style={{ fontSize: 16 }}>Fasilitas:</Text>
+          {item.facility.map((fac, index) => {
+            return (
+              <Text key={index} style={{ marginLeft: 10 }}>
+                {'\u2B22'} {fac}
+              </Text>
+            )
+          })}
+        </View>
+        {/* {console.log(item.status)} */}
+        {item.status === 'waiting' ? (
+          <View style={{ color: 'black', position: 'absolute', bottom: 10, right: 10, width: '40%' }}>
+            <Button onPress={() => changeStatus(access_token, 'done', item._id)} title='Diproses..' color='#72c955'></Button>
+          </View>
+        ) : (
+          <View style={{ color: 'black', position: 'absolute', bottom: 10, right: 10, width: '40%' }}>
+            <Button title='Selesai' color='#72c955'></Button>
+          </View>
+        )}
       </View>
-      <View style={{ color: 'black', position: 'absolute', bottom: 10, right: 10, width: '40%' }}>{item.status === 'waiting' ? <Button title='Diproses..' color='#72c955'></Button> : <Button title='Selesai' color='#72c955'></Button>}</View>
-    </View>
-  )
+    )
   return (
     <>
       <StatusBar backgroundColor='#000' barStyle='light-content' />
@@ -86,7 +56,7 @@ function Processing() {
         </HStack>
       </HStack>
       <SafeAreaView style={stylesHome.container}>
-        <FlatList data={DATA.filter((e) => e.status !== 'pending')} renderItem={renderItem} keyExtractor={(item) => item.id} />
+        <FlatList data={transactions.filter((e) => e.status === 'waiting' || e.status === 'done')} renderItem={renderItem} keyExtractor={(item) => item.id} />
       </SafeAreaView>
     </>
   )
