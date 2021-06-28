@@ -20,7 +20,7 @@ export default function BodyTableCemetary(props) {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Logout",
+      confirmButtonText: "delete this item",
     }).then((result) => {
       if (result.isConfirmed) {
         axios({

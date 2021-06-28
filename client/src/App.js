@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar";
 import CemetaryKeeper from "./pages/CemetaryKeeper";
 import CemetaryBlocks from "./pages/CemetaryBlocks";
 import Dashboard from "./pages/Dashboard";
+import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AddFormKeeper from "./pages/AddFormKeeper";
 import EditFormKeeper from "./pages/EditFormKeeper";
@@ -47,6 +48,9 @@ function App() {
         </Route>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
         </Route>
       </Switch>
     </Router>

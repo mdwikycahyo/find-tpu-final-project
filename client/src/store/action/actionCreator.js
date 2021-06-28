@@ -3,6 +3,7 @@ import {
   SHOW_KEEPER,
   SHOW_KEEPER_DETAIL,
   SHOW_CEMETARY,
+  SHOW_TRANSACTION,
   SHOW_LOADING,
   SHOW_ERRORS,
 } from "./actionType";
@@ -24,6 +25,13 @@ export function setKeeperDetails(payload) {
 export function setCemetaries(payload) {
   return {
     type: SHOW_CEMETARY,
+    payload,
+  };
+}
+
+export function setTransactions(payload) {
+  return {
+    type: SHOW_TRANSACTION,
     payload,
   };
 }
@@ -78,6 +86,28 @@ export function fetchKeeperById(id) {
       .then(({ data }) => {
         console.log(data);
         dispatch(setKeeperDetails(data));
+      })
+      .catch((err) => {
+        dispatch(setErrors(err));
+      })
+      .finally(() => {
+        dispatch(setLoading(false));
+      });
+  };
+}
+
+export function fetchTransaction() {
+  return (dispatch) => {
+    axios({
+      method: "GET",
+      url: "http://18.207.141.48:3000/transaction",
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then(({ data }) => {
+        console.log(data);
+        dispatch(setTransactions(data));
       })
       .catch((err) => {
         dispatch(setErrors(err));

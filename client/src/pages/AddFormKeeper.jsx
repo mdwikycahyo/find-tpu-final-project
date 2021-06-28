@@ -41,6 +41,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("cemetaryName", { required: true })}
               />
+              {errors.cemetaryName && <span>This field is required</span>}
               <input
                 type="text"
                 placeholder="Cemetary Location"
@@ -50,6 +51,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("cemetaryLocation", { required: true })}
               />
+              {errors.cemetaryLocation && <span>This field is required</span>}
               <input
                 type="number"
                 placeholder="Width"
@@ -59,6 +61,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("width", { required: true })}
               />
+              {errors.width && <span>This field is required</span>}
               <label>Height</label>
               <input
                 type="number"
@@ -69,6 +72,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("height", { required: true })}
               />
+              {errors.height && <span>This field is required</span>}
               <input
                 type="text"
                 placeholder="Latitude"
@@ -78,6 +82,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("latitude", { required: true })}
               />
+              {errors.latitude && <span>This field is required</span>}
               <input
                 type="text"
                 placeholder="Longitude"
@@ -87,6 +92,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("longitude", { required: true })}
               />
+              {errors.longitude && <span>This field is required</span>}
               <input
                 type="text"
                 placeholder="Image Url"
@@ -96,6 +102,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("image_url", { required: true })}
               />
+              {errors.image_url && <span>This field is required</span>}
               <label>Price</label>
               <input
                 type="number"
@@ -106,7 +113,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("price", { required: true })}
               />
-
+              {errors.price && <span>This field is required</span>}
               <input
                 type="text"
                 placeholder="Keeper Name"
@@ -116,6 +123,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("keeperName", { required: true })}
               />
+              {errors.keeperName && <span>This field is required</span>}
               <input
                 type="text"
                 placeholder="Keeper Email"
@@ -125,6 +133,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("keeperEmail", { required: true })}
               />
+              {errors.keeperEmail && <span>This field is required</span>}
               <input
                 type="text"
                 placeholder="Keeper Password"
@@ -134,7 +143,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("keeperPassword", { required: true })}
               />
-
+              {errors.keeperPassword && <span>This field is required</span>}
               <input
                 type="text"
                 placeholder="Keeper Phone"
@@ -144,6 +153,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("keeperPhone", { required: true })}
               />
+              {errors.keeperPhone && <span>This field is required</span>}
               <label>Available Space</label>
               <input
                 type="number"
@@ -154,6 +164,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("spaceLeft", { required: true })}
               />
+              {errors.spaceLeft && <span>This field is required</span>}
               <label>Filled Space</label>
               <input
                 type="number"
@@ -164,6 +175,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("spaceFilled", { required: true })}
               />
+              {errors.spaceFilled && <span>This field is required</span>}
               <input
                 type="text"
                 placeholder="Facilities"
@@ -173,6 +185,7 @@ export default function AddFormKeeper() {
                 // onChange={inputChange}
                 {...register("facilities", { required: true })}
               />
+              {errors.facilities && <span>This field is required</span>}
               <div className="flex items-center justify-between">
                 <button
                   className=" bg-blue-800 hover:bg-blue-600 text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline"
