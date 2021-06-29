@@ -31,9 +31,7 @@ function Edit() {
     <>
       <View style={styles.container}>
         <View style={styles.backgroundContainer}>
-          {/* {console.log(detailKeeper.image_url[0])} */}
           <Image source={{ uri: detailKeeper.image_url[0] }} resizeMode='cover' style={styles.backdrop} />
-          {/* <Image source={image_test} resizeMode='cover' style={styles.backdrop} /> */}
         </View>
         <View style={styles.overlay}>
           <Text style={styles.headline}>{detailKeeper.cemetaryName}</Text>

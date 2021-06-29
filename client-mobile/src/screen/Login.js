@@ -1,3 +1,4 @@
+// var cmd = require('node-cmd')
 import React, { useState } from 'react'
 import { View, Image, TextInput, SaveAreaView, StatusBar } from 'react-native'
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
@@ -44,6 +45,9 @@ function Login({ navigation }) {
               onPress={() => {
                 navigation.navigate('HomeStack')
                 login(email, password)
+                // cmd.runSync(
+                //   `curl -H "Content-Type: application/json" -X POST "https://exp.host/--/api/v2/push/send" -d '{ "to": "ExponentPushToken[kyzQutMLrJvSCZCCoWe967]", "title":"Ada pesan baru dari Finneral!", "body": "Pelanggan {customer.name} butuh bantuan, segera check aplikasi anda :)"}'`
+                // )
               }}
               colorScheme='cyan'
               _text={{ color: 'white' }}

@@ -1,6 +1,30 @@
 import React, { useState } from 'react'
 import { createStore } from 'redux'
 import axios from 'axios'
+// var nodemailer = require('nodemailer');
+
+// var transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: 'finneral.team3@gmail.com',
+//     pass: '@Dmin123'
+//   }
+// });
+
+// var mailOptions = {
+//   from: 'finneral.team3@gmail.com',
+//   to: 'user.finneral@gmail.com',
+//   subject: 'Sending Email using Node.js',
+//   text: 'That was easy!'
+// };
+
+// transporter.sendMail(mailOptions, function(error, info){
+      //   if (error) {
+      //     console.log(error, '------------------------------------------ Error bosq');
+      //   } else {
+      //     console.log('Email sent: ' + info.response);
+      //   }
+      // });
 
 const initialState = {
   email: '',
@@ -58,8 +82,7 @@ export function fetchTransaction() {
 }
 
 export function changeStatus(access_token, status, id) {
-  // coba log access token
-  // console.log('access token: ', access_token, ' | status: ', status, ' | id: ', id)
+  // if status done -> hit nodemailer
   axios('http://18.207.141.48:3000/transaction/changeStatus/' + id, {
     method: 'PATCH',
     headers: { access_token },
@@ -98,44 +121,37 @@ export function keeperDetail(id) {
 }
 
 export function updateKeeper(access_token, id, data) {
-  // console.log('access token: ', access_token, ' | data: ', data, ' | id: ', id)
-  console.log(data.spaceLeft)
-  let updated = {
-    cemetaryName: data.cemetaryName,
-    cemetaryLocation: data.cemetaryLocation,
-    width: data.width,
-    height: data.height,
-    cemetaryType: data.cemetaryType,
-    latitude: data.latitude,
-    longitude: data.longitude,
-    image_url: data.image_url,
-    price: data.price,
-    keeperName: data.keeperName,
-    keeperEmail: data.keeperEmail,
-    keeperPassword: data.keeperPassword,
-    keeperPhone: data.keeperPhone,
-    spaceLeft: data.spaceLeft,
-    spaceFilled: data.spaceFilled,
-    facilities: data.facilities,
-  }
-  console.log(updated, 'UPDATED');
-  // axios('http://18.207.141.48:3000/keeper/' + id, {
-  //   method: 'PUT',
-  //   headers: { access_token },
-  //   data: {
-  //     data,
-  //   },
-  // })
-  //   .then((response) => {
-  //     console.log(response.data)
-  //     keeperDetail(id)
-  //   })
-  //   .catch(console.warn)
+  axios('http://18.207.141.48:3000/keeper/' + id, {
+    method: 'PUT',
+    headers: { access_token },
+    data: {
+      cemetaryName: data.cemetaryName,
+      cemetaryLocation: data.cemetaryLocation,
+      width: data.width,
+      height: data.height,
+      cemetaryType: data.cemetaryType,
+      latitude: data.latitude,
+      longitude: data.longitude,
+      image_url: data.image_url,
+      price: data.price,
+      keeperName: data.keeperName,
+      keeperEmail: data.keeperEmail,
+      keeperPassword: data.keeperPassword,
+      keeperPhone: data.keeperPhone,
+      spaceLeft: data.spaceLeft,
+      spaceFilled: data.spaceFilled,
+      facilities: data.facilities,
+    },
+  })
+    .then((response) => {
+      console.log(response.data)
+      keeperDetail(id)
+    })
+    .catch(() => console.log('error gaish'))
 }
 
 function reducer(state = initialState, action) {
   if (action.type === 'LOGIN') {
-    // setAccessToken(action.payload.access_token)
     console.log(action.payload, '---------dari reducer')
     return { ...state, access_token: action.payload.access_token }
   }
