@@ -32,7 +32,7 @@ export default function Dashboard() {
     <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
       {/* <h1>ini dashboard</h1> */}
       {/*===STATISTIC CARD BEGIN===*/}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4 mx-12">
         <div
           className="
             bg-blue-500
@@ -220,7 +220,7 @@ export default function Dashboard() {
       {/*===STATISTIC CARD END===*/}
 
       {/*===CLIENT ORDER TABLE BEGIN===*/}
-      <div className="mt-4 mx-4">
+      <div className="mt-4 mx-12 justify-center">
         <div className="w-full overflow-hidden rounded-lg shadow-xs">
           <div className="w-full overflow-x-auto">
             <table className="w-full">

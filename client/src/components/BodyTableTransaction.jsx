@@ -3,9 +3,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteTransaction } from "../store/action/actionCreator";
 import EditTransactionStatus from "../pages/EditTransactionStatus";
+import TransactionDetails from "./TransactionDetails";
 
 export default function BodyTableTransaction(props) {
   const [isModal, setModal] = useState(false);
+  const [isDetail, setDetail] = useState(false);
   const dispatch = useDispatch();
 
   function toDeleteTransaction(id) {
@@ -78,7 +80,7 @@ export default function BodyTableTransaction(props) {
             <button
               className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
               type="submit"
-              // onClick={() => toDeleteTransaction(props.item._id)}
+              onClick={() => setDetail(true)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -129,6 +131,13 @@ export default function BodyTableTransaction(props) {
           setModal={() => {
             setModal(!isModal);
           }}
+        />
+      ) : null}
+
+      {isDetail ? (
+        <TransactionDetails
+          payload={props.item}
+          setDetail={() => setDetail(!isDetail)}
         />
       ) : null}
     </tbody>
