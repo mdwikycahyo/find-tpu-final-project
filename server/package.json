@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "dev": "NODE_ENV=development npx nodemon app.js",
-    "test": "jest --forceExit --verbose --runInBand"
+    "dev": "NODE_ENV=development npx nodemon bin/www.js",
+    "test": "jest --forceExit --verbose --runInBand --coverage"
   },
   "keywords": [],
   "author": "Hanun Shahreza",

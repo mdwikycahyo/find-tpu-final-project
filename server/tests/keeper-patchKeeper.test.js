@@ -1,41 +1,50 @@
 const request = require("supertest");
-const { connect } = require("../config/mongodb");
 const app = require("../app");
+const { encode } = require("../helpers/bcrypt");
+const KeeperModel = require("../models/keeperModel");
 
-let client;
-let db;
+jest.mock("../models/keeperModel");
 
-const sampleId = "60d96e9c95ebbb8088dae478";
-const sampleSpaceId = "60d96e9c95ebbb8088dae477";
-
-let urlEndpoint = "/keeper/" + sampleId;
-
-let caseSuccess = {
-  cemetarySpaceId: sampleSpaceId,
-  position: [5, 5],
-};
+let sampleId;
+let sampleSpaceId;
 
 beforeAll(async () => {
-  let newConnection = await connect();
-  client = newConnection.client;
-  db = newConnection.db;
-});
-
-afterAll((done) => {
-  client.close();
-  done();
+  const inputData = await KeeperModel.createKeeper({
+    cemetaryName: "TPU Cilincing",
+    cemetaryLocation: "North Jakarta",
+    width: 10,
+    height: 10,
+    latitude: "-6.4286981999999995",
+    longitude: "106.8265268",
+    image_url: [
+      "https://cdn-2.tstatic.net/surabaya/foto/bank/images/fakta-di-balik-video-kuburan-keluarkan-api-misterius-viral-di-instagram.jpg",
+    ],
+    price: 800000,
+    keeperName: "Wiz Khalifa",
+    keeperEmail: "wiz.khalifa@mail.com",
+    keeperPassword: encode("wizkhalifa"),
+    keeperPhone: "089999999999",
+    spaceLeft: 100,
+    spaceFilled: 0,
+    facilities: ["Tenda", "Bunga", "Air"],
+  });
+  sampleId = inputData.ops[0]._id;
+  sampleSpaceId = inputData.ops[0].cemetarySpaceId;
 });
 
 describe("PATCH Cemetery data by ID | Success case", () => {
   test(`Update particular cemetery space data`, (done) => {
     request(app)
-      .patch(urlEndpoint)
-      .send(caseSuccess)
+      .patch("/keeper/" + sampleId)
+      .send({
+        cemetarySpaceId: sampleSpaceId,
+        position: [5, 5],
+      })
       .then((res) => {
         expect(res.status).toBe(200);
         expect(res.body).toEqual(expect.any(Object));
         expect(res.body).toHaveProperty("message", "Cemetary spaced filled");
         done();
       });
-  }, 10000);
+  });
 });
