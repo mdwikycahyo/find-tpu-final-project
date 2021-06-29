@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { addKeeper } from "../store/action/actionCreator";
@@ -14,7 +13,7 @@ export default function AddFormKeeper() {
     watch,
     formState: { errors },
   } = useForm();
-  // const onSubmit = (data) => console.log(data);
+
   const onSubmit = (data) => {
     // alert(JSON.stringify(data));
     dispatch(addKeeper(data));

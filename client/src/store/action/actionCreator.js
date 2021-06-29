@@ -1,4 +1,5 @@
 import axios from "axios";
+import Loading from "../../pages/Loading";
 import {
   SHOW_KEEPER,
   SHOW_KEEPER_DETAIL,
@@ -181,6 +182,47 @@ export function editStatus(data) {
       })
       .finally(() => {
         dispatch(setLoading(false));
+      });
+  };
+}
+
+export function editCemetary(data, id) {
+  console.log(data, "di edit creator");
+  console.log(id, "di edit creator");
+  return (dispatch) => {
+    axios({
+      method: "PUT",
+      url: `http://18.207.141.48:3000/keeper/${id}`,
+      headers: {
+        access_token: localStorage.access_token,
+      },
+      data: {
+        cemetaryName: data.cemetaryName,
+        cemetaryLocation: data.cemetaryLocation,
+        width: data.width,
+        height: data.height,
+        latitude: data.latitude,
+        longitude: data.longitude,
+        image_url: [data.image_url],
+        price: data.price,
+        keeperName: data.keeperName,
+        keeperEmail: data.keeperEmail,
+        keeperPassword: data.keeperPassword,
+        keeperPhone: data.keeperPhone,
+        spaceLeft: data.spaceLeft,
+        spaceFilled: data.spaceFilled,
+        facilities: data.facilities.split(","),
+      },
+    })
+      .then(() => {
+        console.log("berhasil yeaye");
+        dispatch(fetchData());
+      })
+      .catch((err) => {
+        dispatch(setErrors(err));
+      })
+      .finally(() => {
+        dispatch(setLoading(true));
       });
   };
 }

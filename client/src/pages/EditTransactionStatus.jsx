@@ -9,7 +9,7 @@ export default function EditTransactionStatus({ payload, setModal }) {
   // console.log(payload);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+    // alert(JSON.stringify(data));
     dispatch(editStatus(data));
     Swal.fire("status transaction has been changed");
   };
