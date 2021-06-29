@@ -261,7 +261,7 @@ export function deleteTransaction(id) {
     })
       .then(() => {
         console.log("berhasil yeay!!");
-        dispatch(fetchData());
+        dispatch(fetchTransaction());
       })
       .catch((err) => {
         dispatch(setErrors(err));

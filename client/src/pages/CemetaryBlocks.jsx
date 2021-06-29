@@ -13,7 +13,7 @@ export default function CemetaryBlocks() {
   useEffect(() => {
     dispatch(setLoading(true));
     dispatch(fetchData());
-  }, []);
+  }, [dispatch]);
 
   const cemetary = useSelector((state) => state.cemetaryReducer.cemetaries);
   console.log(cemetary, "<<<di table cemetary");

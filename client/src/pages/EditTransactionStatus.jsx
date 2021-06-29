@@ -39,7 +39,7 @@ export default function EditTransactionStatus({ payload, setModal }) {
                   type="text"
                   name="id"
                   className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  defaultValue={payload._id}
+                  value={payload._id}
                   {...register("id")}
                 />
 

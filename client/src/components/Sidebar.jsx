@@ -57,13 +57,13 @@ export default function Sidebar() {
         "
         >
           <ul className="flex flex-col py-4 space-y-1">
-            <li className="px-5 hidden md:block">
+            {/* <li className="px-5 hidden md:block">
               <div className="flex flex-row items-center h-8">
                 <div className="text-sm font-light tracking-wide text-gray-400 uppercase">
                   Main
                 </div>
               </div>
-            </li>
+            </li> */}
             <li>
               <Link
                 to="/dashboard"
@@ -224,13 +224,13 @@ export default function Sidebar() {
                 </span>
               </Link>
             </li>
-            <li className="px-5 hidden md:block">
+            {/* <li className="px-5 hidden md:block">
               <div className="flex flex-row items-center mt-5 h-8">
                 <div className="text-sm font-light tracking-wide text-gray-400 uppercase">
                   Settings
                 </div>
               </div>
-            </li>
+            </li> */}
           </ul>
           <p className="mb-14 px-5 py-3 hidden md:block text-center text-xs">
             TPU-Online

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 import { deleteTransaction } from "../store/action/actionCreator";
 import EditTransactionStatus from "../pages/EditTransactionStatus";
 import TransactionDetails from "./TransactionDetails";
@@ -12,7 +13,32 @@ export default function BodyTableTransaction(props) {
 
   function toDeleteTransaction(id) {
     console.log(id, "<<<id transaction");
-    dispatch(deleteTransaction(id));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "delete this item",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteTransaction(id));
+        Swal.fire("this item success to delete");
+      }
+    });
+  }
+
+  function wichColor(status) {
+    if (status === "done") {
+      return "text-green-700 bg-green-100";
+    } else if (status === "canceled") {
+      return "text-red-700 bg-red-100";
+    } else if (status === "waiting") {
+      return "text-yellow-700 bg-yellow-100";
+    } else if (status === "pending") {
+      return "text-blue-700 bg-blue-100";
+    }
   }
 
   return (
@@ -40,16 +66,13 @@ export default function BodyTableTransaction(props) {
         <td className="px-4 py-3 text-sm">{props.item.cemetaryName}</td>
         <td className="px-4 py-3 text-xs">
           <span
-            className="
-            px-2
-            py-1
-            font-semibold
-            leading-tight
-            text-green-700
-            bg-green-100
-            rounded-full
-            dark:bg-green-700 dark:text-green-100
-            "
+            className={`px-2
+              py-1
+              font-semibold
+              leading-tight
+              ${wichColor(props.item.status)}
+              rounded-full
+              dark:bg-green-700 dark:text-green-100`}
           >
             {props.item.status}
           </span>

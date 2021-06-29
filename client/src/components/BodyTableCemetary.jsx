@@ -114,6 +114,7 @@ export default function BodyTableCemetary(props) {
             {props.cemetary.facilities.map((item) => {
               return <li>{item}</li>;
             })}
+            {/* {props.cemetary.facilities} */}
           </ul>
         </td>
         <td className="px-4 py-3 text-xs">

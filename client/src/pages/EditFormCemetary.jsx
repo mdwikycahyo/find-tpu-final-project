@@ -9,6 +9,7 @@ import {
   fetchKeeperById,
   editCemetary,
 } from "../store/action/actionCreator";
+import Loading from "./Loading";
 import Swal from "sweetalert2";
 
 export default function EditFormCemetary() {
@@ -16,32 +17,28 @@ export default function EditFormCemetary() {
   const history = useHistory();
 
   let { id } = useParams();
-  console.log(id);
-
-  useEffect(() => {
-    dispatch(setLoading(true));
-    dispatch(fetchKeeperById(id));
-  }, []);
-
   const initData = useSelector((state) => state.keeperReducer.keeper);
-  console.log(initData, "<<data di form");
+  console.log(
+    initData._id,
+    "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< data di form"
+  );
 
   const [cemetary, setCemetary] = useState({
-    cemetaryName: initData.cemetaryName,
-    cemetaryLocation: initData.cemetaryLocation,
-    width: initData.width,
-    height: initData.height,
-    latitude: initData.latitude,
-    longitude: initData.longitude,
-    image_url: initData.image_url,
-    price: initData.price,
-    keeperName: initData.keeperName,
-    keeperEmail: initData.keeperEmail,
-    keeperPassword: initData.keeperPassword,
-    keeperPhone: initData.keeperPhone,
-    spaceLeft: initData.spaceLeft,
-    spaceFilled: initData.spaceFilled,
-    facilities: initData.facilities,
+    cemetaryName: "",
+    cemetaryLocation: "",
+    width: "",
+    height: "",
+    latitude: "",
+    longitude: "",
+    image_url: "",
+    price: "",
+    keeperName: "",
+    keeperEmail: "",
+    keeperPassword: "",
+    keeperPhone: "",
+    spaceLeft: "",
+    spaceFilled: "",
+    facilities: "",
   });
 
   const editChange = (event) => {
@@ -56,8 +53,34 @@ export default function EditFormCemetary() {
     Swal.fire("this item has been edit");
     history.push("/cemetaryBlocks");
   };
+  // console.log(id);
 
-  return (
+  useEffect(() => {
+    // dispatch(setLoading(true))
+    dispatch(fetchKeeperById(id));
+  }, []);
+  useEffect(() => {
+    setCemetary({
+      ...cemetary,
+      cemetaryName: initData.cemetaryName,
+      cemetaryLocation: initData.cemetaryLocation,
+      width: initData.width,
+      height: initData.height,
+      latitude: initData.latitude,
+      longitude: initData.longitude,
+      image_url: initData.image_url,
+      price: initData.price,
+      keeperName: initData.keeperName,
+      keeperEmail: initData.keeperEmail,
+      keeperPassword: initData.keeperPassword,
+      keeperPhone: initData.keeperPhone,
+      spaceLeft: initData.spaceLeft,
+      spaceFilled: initData.spaceFilled,
+      facilities: initData.facilities,
+    });
+  }, [initData._id]);
+
+  return initData._id ? (
     <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
       <h1>ini edit form</h1>
       <div className="pt-11">
@@ -219,5 +242,8 @@ export default function EditFormCemetary() {
         </div>
       </div>
     </div>
+  ) : (
+    // <h1>LOADDDDDIING</h1>
+    <Loading />
   );
 }
