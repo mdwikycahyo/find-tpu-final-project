@@ -1,12 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useHistory } from "react-router";
 import { setLoading, fetchData } from "../store/action/actionCreator";
 import BodyTableCemetary from "../components/BodyTableCemetary";
 import Loading from "./Loading";
 
 export default function CemetaryBlocks() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(setLoading(true));
@@ -26,6 +28,11 @@ export default function CemetaryBlocks() {
     return <h1>ada error ...</h1>;
   }
 
+  function toAddForm() {
+    // console.log("aku di klik yeay/");
+    history.push("/cemetaryBlocks/add");
+  }
+
   return (
     <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
       <h1 className="title-font font-semibold text-4xl text-center text-blue-600 mt-1 rounded-sm">
@@ -34,7 +41,7 @@ export default function CemetaryBlocks() {
       <div className="mx-12">
         <button
           className="hover:bg-blue-200 hover:text-blue-800 group flex items-center rounded-md bg-blue-100 text-blue-600 text-sm font-medium px-4 py-2"
-          // onClick={toAddForm}
+          onClick={toAddForm}
         >
           <svg
             className="group-hover:text-blue-600 text-blue-500 mr-2"

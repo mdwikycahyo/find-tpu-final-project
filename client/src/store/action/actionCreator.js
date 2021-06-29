@@ -1,5 +1,4 @@
 import axios from "axios";
-import Loading from "../../pages/Loading";
 import {
   SHOW_KEEPER,
   SHOW_KEEPER_DETAIL,
@@ -222,7 +221,30 @@ export function editCemetary(data, id) {
         dispatch(setErrors(err));
       })
       .finally(() => {
-        dispatch(setLoading(true));
+        dispatch(setLoading(false));
+      });
+  };
+}
+
+export function deleteCemetary(id) {
+  console.log(id, "<<di creator delete");
+  return (dispatch) => {
+    axios({
+      method: "DELETE",
+      url: `http://18.207.141.48:3000/keeper/${id}`,
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then(() => {
+        console.log("berhasil yeayy");
+        dispatch(fetchData());
+      })
+      .catch((err) => {
+        dispatch(setErrors(err));
+      })
+      .finally(() => {
+        dispatch(setLoading(false));
       });
   };
 }

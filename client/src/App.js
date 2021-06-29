@@ -8,9 +8,9 @@ import CemetaryBlocks from "./pages/CemetaryBlocks";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import AddFormKeeper from "./pages/AddFormKeeper";
-import EditFormKeeper from "./pages/EditFormKeeper";
+import AddFormCemetary from "./pages/AddFormCemetary";
 import EditFormCemetary from "./pages/EditFormCemetary";
+import EditForm from "./pages/EditForm";
 import EditTransactionStatus from "./pages/EditTransactionStatus";
 
 function App() {
@@ -30,12 +30,12 @@ function App() {
         <Route path="/cemetaryKeeper/edit/:id">
           <Header />
           <Sidebar />
-          <EditFormKeeper />
+          <EditForm />
         </Route>
-        <Route path="/cemetaryKeeper/add">
+        <Route path="/cemetaryBlocks/add">
           <Header />
           <Sidebar />
-          <AddFormKeeper />
+          <AddFormCemetary />
         </Route>
         <Route path="/cemetaryBlocks">
           <Header />

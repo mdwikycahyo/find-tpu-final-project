@@ -1,9 +1,11 @@
 import React from "react";
 import { useHistory } from "react-router";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { deleteCemetary } from "../store/action/actionCreator";
 import Swal from "sweetalert2";
 
 export default function BodyTableCemetary(props) {
+  const dispatch = useDispatch();
   const history = useHistory();
 
   function toEditCemetary(id) {
@@ -23,23 +25,12 @@ export default function BodyTableCemetary(props) {
       confirmButtonText: "delete this item",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios({
-          method: "DELETE",
-          url: `http://18.207.141.48:3000/keeper/${id}`,
-          headers: {
-            access_token: localStorage.access_token,
-          },
-        })
-          .then(() => {
-            console.log("berhasil yeayy");
-            Swal.fire("this item success to delete");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        dispatch(deleteCemetary(id));
+        Swal.fire("this item success to delete");
       }
     });
   }
+
   return (
     <tbody className="bg-white dark:divide-gray-700 dark:bg-gray-800">
       <tr
