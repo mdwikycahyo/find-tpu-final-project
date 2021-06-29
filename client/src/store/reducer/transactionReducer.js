@@ -3,6 +3,7 @@ import {
   SHOW_LOADING,
   SHOW_ERRORS,
 } from "../action/actionType";
+
 const initialState = {
   transactions: [],
   loading: false,
@@ -14,7 +15,7 @@ function transactionReducer(state = initialState, action) {
 
   switch (type) {
     case SHOW_TRANSACTION:
-      return { ...state, transactions: payload };
+      return { ...state, transactions: payload, status: payload };
     case SHOW_LOADING:
       return { ...state, loading: payload };
     case SHOW_ERRORS:

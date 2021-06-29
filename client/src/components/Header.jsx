@@ -71,7 +71,7 @@ export default function Header() {
           header-right
         "
         >
-          <div
+          {/* <div
             class="
             bg-white
             rounded
@@ -112,7 +112,7 @@ export default function Header() {
               bg-transparent
             "
             />
-          </div>
+          </div> */}
           <ul class="flex items-center">
             <li>
               <div class="block w-px h-6 mx-3 bg-gray-400 dark:bg-gray-700"></div>

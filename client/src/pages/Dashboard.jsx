@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchTransaction, setLoading } from "../store/action/actionCreator";
 import BodyTableTransaction from "../components/BodyTableTransaction";
+import Loading from "./Loading";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ export default function Dashboard() {
   const errors = useSelector((state) => state.transactionReducer.errors);
 
   if (loading) {
-    return <h1>lagi loading uy</h1>;
+    return <Loading />;
   }
 
   if (errors) {

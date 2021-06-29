@@ -148,6 +148,33 @@ export function addKeeper(data) {
       .then(() => {
         console.log("berhasil");
         dispatch(setCemetaries(data));
+        dispatch(fetchData());
+      })
+      .catch((err) => {
+        dispatch(setErrors(err));
+      })
+      .finally(() => {
+        dispatch(setLoading(false));
+      });
+  };
+}
+
+export function editStatus(data) {
+  console.log(data, "<<<status di creator");
+  return (dispatch) => {
+    axios({
+      method: "PATCH",
+      url: `http://18.207.141.48:3000/transaction/changeStatus/${data.id}`,
+      headers: {
+        access_token: localStorage.access_token,
+      },
+      data: {
+        status: data.status,
+      },
+    })
+      .then(() => {
+        console.log("berhasil");
+        dispatch(fetchTransaction());
       })
       .catch((err) => {
         dispatch(setErrors(err));

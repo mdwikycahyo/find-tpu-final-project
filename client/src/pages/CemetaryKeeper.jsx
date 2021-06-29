@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { setLoading, fetchData } from "../store/action/actionCreator";
 import { useHistory } from "react-router";
 import BodyTableKeeper from "../components/BodyTableKeeper";
+import Loading from "./Loading";
 
 export default function CemetaryKeeper() {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ export default function CemetaryKeeper() {
   const error = useSelector((state) => state.keeperReducer.errors);
 
   if (loading) {
-    return <h1>Lagi loading ceunah ....</h1>;
+    return <Loading />;
   }
 
   if (error) {

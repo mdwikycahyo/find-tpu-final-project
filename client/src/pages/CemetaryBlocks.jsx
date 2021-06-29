@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setLoading, fetchData } from "../store/action/actionCreator";
 import BodyTableCemetary from "../components/BodyTableCemetary";
+import Loading from "./Loading";
 
 export default function CemetaryBlocks() {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export default function CemetaryBlocks() {
   const error = useSelector((state) => state.cemetaryReducer.errors);
 
   if (loading) {
-    return <h1>Lagi loading ceunah ...</h1>;
+    return <Loading />;
   }
 
   if (error) {

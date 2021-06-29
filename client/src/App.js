@@ -11,11 +11,17 @@ import Login from "./pages/Login";
 import AddFormKeeper from "./pages/AddFormKeeper";
 import EditFormKeeper from "./pages/EditFormKeeper";
 import EditFormCemetary from "./pages/EditFormCemetary";
+import EditTransactionStatus from "./pages/EditTransactionStatus";
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/dashboard/editTransaction/:id">
+          <Header />
+          <Sidebar />
+          <EditTransactionStatus />
+        </Route>
         <Route path="/cemetaryBlocks/edit/:id">
           <Header />
           <Sidebar />
