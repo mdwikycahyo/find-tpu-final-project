@@ -248,3 +248,26 @@ export function deleteCemetary(id) {
       });
   };
 }
+
+export function deleteTransaction(id) {
+  console.log(id, "<<<di delete creator");
+  return (dispatch) => {
+    axios({
+      method: "DELETE",
+      url: `http://18.207.141.48:3000/transaction/${id}`,
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then(() => {
+        console.log("berhasil yeay!!");
+        dispatch(fetchData());
+      })
+      .catch((err) => {
+        dispatch(setErrors(err));
+      })
+      .finally(() => {
+        dispatch(setLoading(false));
+      });
+  };
+}
