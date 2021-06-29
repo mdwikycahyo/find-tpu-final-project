@@ -1,5 +1,5 @@
 function authorization (req, res, next){
-    if (req.user.role ==="keeper"){
+    if (req.user.role ==="keeper" || req.user.role ==="admin"){
         next()
     }
     else{
