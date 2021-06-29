@@ -17,7 +17,8 @@ class UserController{
             res.status(200).json(data.data.results)
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
+
         }
     }
     static async getSearchLocation(req, res, next){
@@ -27,7 +28,8 @@ class UserController{
             res.status(200).json(data.data.results)
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
+
         }
     }
     static async getCemetaryData (req, res, next) {
@@ -38,7 +40,7 @@ class UserController{
             res.status(200).json(sortedCemetaryData)
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
     static async getCemetaryById(req, res, next){
@@ -47,10 +49,9 @@ class UserController{
             const cemetaryData = await Keeper.getById(id)
             const data = sortedData(cemetaryData)
             res.status(200).json(data)
-
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
 }

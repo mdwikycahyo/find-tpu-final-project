@@ -14,7 +14,8 @@ class User{
             }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
+
         }
     }
 
@@ -25,7 +26,8 @@ class User{
             }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
+
         }
     }
     static async getTransactionById(id){
@@ -35,7 +37,8 @@ class User{
             }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
+
         }
     }
 
@@ -46,7 +49,8 @@ class User{
             }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
+
         }
     }
 
@@ -57,7 +61,8 @@ class User{
             }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
+
         }
     }
     static async getTransactionByDeceasedName(deceasedName){
@@ -67,7 +72,8 @@ class User{
             }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
+
         }
     }
 
@@ -79,7 +85,8 @@ class User{
             }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
+
         }
     }
     static async updateTransactionData(id, transactionData){
@@ -90,7 +97,8 @@ class User{
             }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
+
         }
     }
     static async deleteTransactionData(id){
@@ -100,7 +108,7 @@ class User{
             }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
 }

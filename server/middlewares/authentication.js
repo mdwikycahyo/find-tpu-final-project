@@ -1,32 +1,40 @@
-const {Admin} = require("../models/adminModel")
+const { decode } = require("jsonwebtoken")
 const {verify} = require("../helpers/jwt")
+const Keeper = require("../models/keeperModel")
 
 async function authentication(req, res, next){
     if(!req.headers.access_token){
-        next({name:"Unauthorized", message:"Login First"})
+        next({name:"Unauthorized", message:"Login first"})
     }
     else{
-        let decoded = verify(req.headers.access_token)
-        Admin.
-
-        User
-        .findByPk(decoded.id)
-        .then((data)=>{
-            if(data){
+        try{
+            let decoded = verify(req.headers.access_token)
+            if(decoded.email === "admin@gmail.com"){
                 req.user = {
-                    id : data.id,
-                    email : data.email,
-                    role: data.role
+                    email: decoded.email,
+                    id: decoded.id,
+                    role: decoded.role
                 }
                 next()
             }
             else{
-                next({name:"ResourceNotFound", message:"ID not found"})
+                const data = await Keeper.getById(decoded.id)
+                if(data){
+                    req.user = {
+                        id: decoded.id,
+                        email: decoded.email,
+                        role: "keeper"
+                    }
+                    next()
+                }
+                else{
+                    next({name:"ResourceNotFound", message:"Data not found"})
+                }
             }
-        })
-        .catch((err)=>{
-            next({name:"ServerError", message:err.message})
-        })
+        }
+        catch(err){
+            next({name:"ServerError", message:err})
+        }
     }
 }
 

@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken")
 
 function sign(payload){
-    return jwt.sign(payload, process.env.SECRET_KEY)
+    return jwt.sign(payload, "TPU")
 }
 
 function verify(token){
-    return jwt.verify(token, process.env.SECRET_KEY)
+    return jwt.verify(token, "TPU")
 }
 
 module.exports = {sign, verify}

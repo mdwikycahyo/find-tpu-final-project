@@ -14,9 +14,13 @@ class User{
                 locationData.cemetarySpace = cemetarySpace
                 return locationData
             }
+            else{
+                next({name:"ServerError", message:"Database not connected "})
+
+            }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
 }
