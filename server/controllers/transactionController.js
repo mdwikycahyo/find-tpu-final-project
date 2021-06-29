@@ -132,8 +132,7 @@ class transactionController{
             if(status === "done"){
                 const transactionData = await Transaction.getTransactionById(id)
                 const email = transactionData[0].email
-                nodemailerSend("fd.suparyadi@gmail.com")
-                console.log("HERE");
+                nodemailerSend(email)
             }
             const data = await Transaction.changeStatus(id, status)
             res.status(200).json({message: "status updated"})

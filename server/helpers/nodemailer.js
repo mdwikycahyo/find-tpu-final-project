@@ -12,7 +12,7 @@ function nodemailerSend(email){
     });
     let mailOptions = {
         from: 'finneral.team@yahoo.com',
-        to: 'fd.suparyadi@gmail.com', 
+        to: email, 
         subject: 'Renaissance Game',
         text: 'Terima Kasih telah menjadi member Renaissance Game, selamat bermain'
     };
