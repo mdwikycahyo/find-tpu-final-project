@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import "./App.css";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { GuardProvider, GuardedRoute } from "react-router-guards";
@@ -7,11 +6,9 @@ import Sidebar from "./components/Sidebar";
 import CemetaryKeeper from "./pages/CemetaryKeeper";
 import CemetaryBlocks from "./pages/CemetaryBlocks";
 import Dashboard from "./pages/Dashboard";
-// import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AddFormCemetary from "./pages/AddFormCemetary";
 import EditFormCemetary from "./pages/EditFormCemetary";
-// import EditForm from "./pages/EditForm";
 import EditTransactionStatus from "./pages/EditTransactionStatus";
 import Loading from "./pages/Loading";
 import Error from "./pages/Error";
@@ -32,6 +29,9 @@ function App() {
     <Router>
       <Switch>
         <GuardProvider guards={[requireLogin]} loading={Loading} error={Error}>
+          {/* <GuardedRoute exact path="/">
+            <Error />
+          </GuardedRoute> */}
           <GuardedRoute exact path="/login">
             <Login />
           </GuardedRoute>

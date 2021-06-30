@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 import { setLoading, fetchData } from "../store/action/actionCreator";
 import BodyTableCemetary from "../components/BodyTableCemetary";
 import Loading from "./Loading";
+import Error from "./Error";
 
 export default function CemetaryBlocks() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ export default function CemetaryBlocks() {
   }
 
   if (error) {
-    return <h1>ada error ...</h1>;
+    return <Error />;
   }
 
   function toAddForm() {

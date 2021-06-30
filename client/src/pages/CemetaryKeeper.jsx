@@ -2,13 +2,12 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setLoading, fetchData } from "../store/action/actionCreator";
-import { useHistory } from "react-router";
 import BodyTableKeeper from "../components/BodyTableKeeper";
 import Loading from "./Loading";
+import Error from "./Error";
 
 export default function CemetaryKeeper() {
   const dispatch = useDispatch();
-  const history = useHistory();
   useEffect(() => {
     dispatch(setLoading(true));
     dispatch(fetchData());
@@ -24,7 +23,7 @@ export default function CemetaryKeeper() {
   }
 
   if (error) {
-    return <h1>ada error ...</h1>;
+    return <Error />;
   }
 
   return (

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { fetchTransaction, setLoading } from "../store/action/actionCreator";
 import BodyTableTransaction from "../components/BodyTableTransaction";
 import Loading from "./Loading";
+import Error from "./Error";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ export default function Dashboard() {
   }
 
   if (errors) {
-    return <h1>errorrrrrrr</h1>;
+    return <Error />;
   }
 
   return (

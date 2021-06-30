@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
@@ -10,6 +10,7 @@ import {
   editCemetary,
 } from "../store/action/actionCreator";
 import Loading from "../pages/Loading";
+import Error from "./Error";
 import Swal from "sweetalert2";
 
 export default function EditFormCemetary() {
@@ -23,24 +24,6 @@ export default function EditFormCemetary() {
   const loading = useSelector((state) => state.keeperReducer.loading);
   const errors = useSelector((state) => state.keeperReducer.errors);
 
-  // const [cemetary, setCemetary] = useState({
-  //   // cemetaryName: initData.cemetaryName,
-  //   // cemetaryLocation: initData.cemetaryLocation,
-  //   // width: initData.width,
-  //   // height: initData.height,
-  //   // latitude: initData.latitude,
-  //   // longitude: initData.longitude,
-  //   // image_url: initData.image_url,
-  //   // price: initData.price,
-  //   // keeperName: initData.keeperName,
-  //   // keeperEmail: initData.keeperEmail,
-  //   // keeperPassword: initData.keeperPassword,
-  //   // keeperPhone: initData.keeperPhone,
-  //   // spaceLeft: initData.spaceLeft,
-  //   // spaceFilled: initData.spaceFilled,
-  //   // facilities: initData.facilities,
-  // });
-
   useEffect(() => {
     console.log("di use Effect");
     // console.log(initData, cemetary);
@@ -48,27 +31,13 @@ export default function EditFormCemetary() {
     dispatch(fetchKeeperById(id));
   }, [id]);
 
-  // useEffect(() => {
-  //   console.log("use effect ke2");
-  //   console.log(initData, "<<<initdata useEffect");
-  //   setCemetary(initData);
-  // }, [initData]);
-
-  // console.log(cemetary, "<<<cemetary");
-
-  // const editChange = (event) => {
-  //   setCemetary({ ...cemetary, [event.target.name]: event.target.value });
-  // };
-
   const { register, handleSubmit, setValue } = useForm({
     defaultValues: {},
   });
 
   useEffect(() => {
-    console.log("use effect ke2");
-    console.log(initData);
-    // setValue("cemetery", initData);
-    // setValue("nama", "hacktiv8");
+    // console.log("use effect ke2");
+    // console.log(initData);
     setValue("cemetaryName", initData.cemetaryName);
     setValue("cemetaryLocation", initData.cemetaryLocation);
     setValue("width", initData.width);
@@ -88,7 +57,7 @@ export default function EditFormCemetary() {
 
   const onSubmit = (data) => {
     // alert(JSON.stringify(data.facilities));
-    console.log(data.facilities);
+    // console.log(data.facilities);
     dispatch(editCemetary(data, id));
     Swal.fire("this item has been edit");
     history.push("/cemetaryBlocks");
@@ -99,14 +68,11 @@ export default function EditFormCemetary() {
   }
 
   if (errors) {
-    return <h1>errorrr ...</h1>;
+    return <Error />;
   }
 
   return (
     <div className="h-full ml-14 mb-10 md:ml-64">
-      {/* <h1>ini edit form</h1> */}
-      {/* <pre>{JSON.stringify(initData)}</pre> */}
-      {/* <pre>{JSON.stringify({cemetary})}</pre> */}
       <div className="pt-4">
         <div className=" w-11/12 bg-gray-50 shadow-md mx-auto text-center py-4 mt-2 rounded-xl">
           <h1 className=" text-gray-800 text-center py-4font-extrabold -mt-3 text-3xl">
@@ -119,7 +85,6 @@ export default function EditFormCemetary() {
                 placeholder="Cemetary Name"
                 name="cemetaryName"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // value={cemetary.cemetaryName}
                 {...register("cemetaryName", { required: true })}
               />
 
@@ -128,7 +93,6 @@ export default function EditFormCemetary() {
                 placeholder="Cemetary Location"
                 name="cemetaryLocation"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // defaultValue={cemetary.cemetaryLocation}
                 {...register("cemetaryLocation", { required: true })}
               />
 
@@ -137,7 +101,6 @@ export default function EditFormCemetary() {
                 placeholder="Width"
                 name="width"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // defaultValue={cemetary.width}
                 {...register("width", { required: true })}
               />
               <input
@@ -145,7 +108,6 @@ export default function EditFormCemetary() {
                 placeholder="Height"
                 name="height"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // defaultValue={cemetary.height}
                 {...register("height", { required: true })}
               />
 
@@ -154,7 +116,6 @@ export default function EditFormCemetary() {
                 placeholder="Latitude"
                 name="latitude"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // defaultValue={cemetary.latitude}
                 {...register("latitude", { required: true })}
               />
 
@@ -163,7 +124,6 @@ export default function EditFormCemetary() {
                 placeholder="Longitude"
                 name="longitude"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // defaultValue={cemetary.longitude}
                 {...register("longitude", { required: true })}
               />
 
@@ -172,7 +132,6 @@ export default function EditFormCemetary() {
                 placeholder="Image Url"
                 name="image_url"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // defaultValue={cemetary.image_url}
                 {...register("image_url", { required: true })}
               />
               <input
@@ -180,7 +139,6 @@ export default function EditFormCemetary() {
                 placeholder="Price"
                 name="price"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // defaultValue={cemetary.price}
                 {...register("price", { required: true })}
               />
 
@@ -189,7 +147,6 @@ export default function EditFormCemetary() {
                 placeholder="Keeper Name"
                 name="keeperName"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // defaultValue={cemetary.keeperName}
                 {...register("keeperName", { required: true })}
               />
 
@@ -198,7 +155,6 @@ export default function EditFormCemetary() {
                 placeholder="Keeper Email"
                 name="keeperEmail"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // defaultValue={cemetary.keeperEmail}
                 {...register("keeperEmail", { required: true })}
               />
 
@@ -207,7 +163,6 @@ export default function EditFormCemetary() {
                 placeholder="Keeper Password"
                 name="keeperPassword"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // defaultValue={cemetary.keeperPassword}
                 {...register("keeperPassword", { required: true })}
               />
 
@@ -216,7 +171,6 @@ export default function EditFormCemetary() {
                 placeholder="Keeper Phone"
                 name="keeperPhone"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // defaultValue={cemetary.keeperPhone}
                 {...register("keeperPhone", { required: true })}
               />
               <input
@@ -224,7 +178,6 @@ export default function EditFormCemetary() {
                 placeholder="Available Space"
                 name="spaceLeft"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // defaultValue={cemetary.spaceLeft}
                 {...register("spaceLeft", { required: true })}
               />
               <input
@@ -232,7 +185,6 @@ export default function EditFormCemetary() {
                 placeholder="Space Filled"
                 name="spaceFilled"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // defaultValue={cemetary.spaceFilled}
                 {...register("spaceFilled", { required: true })}
               />
               <input
@@ -240,7 +192,6 @@ export default function EditFormCemetary() {
                 placeholder="Facilities"
                 name="facilities"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                // defaultValue={cemetary.facilities}
                 {...register("facilities", { required: true })}
               />
               <div className="flex items-center justify-between">
