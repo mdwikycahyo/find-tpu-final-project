@@ -47,12 +47,30 @@ class XenditController{
                 },
                 data
             })
-            console.log(data);
             res.status(200).json(CreatedInvoice.data)
         }
         catch(err){
             next({name:"ServerError", message:err})
 
+        }
+    }
+
+    static async getInvoice(req, res, next){
+        const invoiceID = req.params.id
+        try{
+            console.log(invoiceID);
+            const getInvoice = await axios({
+                method:"POST",
+                url: `https://api.xendit.co/v2/invoices/60dc54ebe9a4efaf208df12d`,
+                headers:{
+                    "Authorization": "Basic "+token
+                }
+            })
+            res.status(200).json(getInvoice.data)
+        }
+        catch(err){
+            // console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
 }

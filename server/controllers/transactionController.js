@@ -1,6 +1,6 @@
 const Keeper = require("../models/keeperModel");
 const Transaction = require("../models/transactionModel")
-const nodemailerSend = require("../helpers/nodemailer");
+const {nodemailerSendNotification, nodemailerSendTransaction} = require("../helpers/nodemailer");
 const pushNotification = require("../helpers/pushNotification")
 
 class transactionController{
@@ -110,6 +110,7 @@ class transactionController{
                 cemetarySpaceId : cemetaryData.cemetarySpaceId,
                 position : req.body.spaceLocation
             }
+            nodemailerSendTransaction(transactionData)
             const transactionCreated = await Transaction.createTransaction(transactionData)
             const filledCemetary = await Keeper.updateCemetarySpace(id, cemetaryPayload)
             pushNotification(transactionData.payerName)
@@ -131,14 +132,14 @@ class transactionController{
         try{
             if(status === "done"){
                 const transactionData = await Transaction.getTransactionById(id)
-                const email = transactionData[0].email
-                nodemailerSend(email)
+                nodemailerSendNotification(transactionData[0])
             }
             const data = await Transaction.changeStatus(id, status)
             res.status(200).json({message: "status updated"})
 
         }
         catch(err){
+            console.log(err);
             next({name:"ServerError", message:err})
         }
     }

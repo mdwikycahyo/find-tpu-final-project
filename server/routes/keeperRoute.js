@@ -6,6 +6,8 @@ const authorizationKeeper = require("../middlewares/authorizationKeeper")
 // router.use(auhtorization)
 
 router.post("/login", keeperController.loginKeeper)
+router.get("/", keeperController.getAllData)
+
 
 router.use(authentication)
 router.use(authorizationKeeper)
