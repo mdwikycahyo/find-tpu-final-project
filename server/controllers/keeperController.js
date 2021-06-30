@@ -113,7 +113,7 @@ class KeeperController{
                 spaceFilled: req.body.spaceFilled,
                 facilities: req.body.facilities
             }
-            keeperData.keeperPassword = await encode(keeperData.keeperPassword)
+            // keeperData.keeperPassword = await encode(keeperData.keeperPassword)
             const updatedData = await Keeper.updateKeeperData(id, keeperData)
             res.status(201).json({"message": "Data updated"})
         }
