@@ -57,13 +57,6 @@ export default function Sidebar() {
         "
         >
           <ul className="flex flex-col py-4 space-y-1">
-            {/* <li className="px-5 hidden md:block">
-              <div className="flex flex-row items-center h-8">
-                <div className="text-sm font-light tracking-wide text-gray-400 uppercase">
-                  Main
-                </div>
-              </div>
-            </li> */}
             <li>
               <Link
                 to="/dashboard"
@@ -146,7 +139,7 @@ export default function Sidebar() {
             </li>
             <li>
               <Link
-                to="/cemetaryKeeper"
+                to="/cemetaryKeepers"
                 className="
                 relative
                 flex flex-row
@@ -180,7 +173,7 @@ export default function Sidebar() {
                   </svg>
                 </span>
                 <span className="ml-2 text-sm tracking-wide truncate">
-                  Cemetary Keeper
+                  Cemetary Keepers
                 </span>
               </Link>
             </li>

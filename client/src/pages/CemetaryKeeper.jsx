@@ -52,9 +52,8 @@ export default function CemetaryKeeper() {
                 "
                 >
                   <th className="px-4 py-3">Name</th>
-
+                  <th className="px-4 py-3">TPU</th>
                   <th className="px-4 py-3">Phone</th>
-                  {/* <th className="px-4 py-3">Action</th> */}
                 </tr>
               </thead>
 

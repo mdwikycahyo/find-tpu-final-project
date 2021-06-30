@@ -56,6 +56,19 @@ export default function BodyTableKeeper(props) {
         
       "
           >
+            {props.keeper.cemetaryName}
+          </span>
+        </td>
+        <td className="px-4 py-3 text-xs">
+          <span
+            className="
+        px-2
+        py-1
+        font-semibold
+        leading-tight
+        
+      "
+          >
             {props.keeper.keeperPhone}
           </span>
         </td>
