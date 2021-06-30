@@ -54,7 +54,7 @@ export function fetchData() {
   return (dispatch) => {
     axios({
       method: "GET",
-      url: "http://18.207.141.48:3000/keeper",
+      url: "http://18.207.141.48:3000/admin",
       headers: {
         access_token: localStorage.access_token,
       },
@@ -78,7 +78,7 @@ export function fetchKeeperById(id) {
   return (dispatch) => {
     axios({
       method: "GET",
-      url: `http://18.207.141.48:3000/keeper/${id}`,
+      url: `http://18.207.141.48:3000/admin/${id}`,
       headers: {
         access_token: localStorage.access_token,
       },
@@ -123,7 +123,7 @@ export function addKeeper(data) {
   return (dispatch) => {
     axios({
       method: "POST",
-      url: "http://18.207.141.48:3000/keeper",
+      url: "http://18.207.141.48:3000/admin",
       headers: {
         access_token: localStorage.access_token,
       },
@@ -147,7 +147,6 @@ export function addKeeper(data) {
     })
       .then(() => {
         console.log("berhasil");
-        dispatch(setCemetaries(data));
         dispatch(fetchData());
       })
       .catch((err) => {
@@ -191,7 +190,7 @@ export function editCemetary(data, id) {
   return (dispatch) => {
     axios({
       method: "PUT",
-      url: `http://18.207.141.48:3000/keeper/${id}`,
+      url: `http://18.207.141.48:3000/admin/${id}`,
       headers: {
         access_token: localStorage.access_token,
       },
@@ -210,7 +209,7 @@ export function editCemetary(data, id) {
         keeperPhone: data.keeperPhone,
         spaceLeft: data.spaceLeft,
         spaceFilled: data.spaceFilled,
-        facilities: data.facilities.split(","),
+        facilities: data.facilities,
       },
     })
       .then(() => {
@@ -231,7 +230,7 @@ export function deleteCemetary(id) {
   return (dispatch) => {
     axios({
       method: "DELETE",
-      url: `http://18.207.141.48:3000/keeper/${id}`,
+      url: `http://18.207.141.48:3000/admin/${id}`,
       headers: {
         access_token: localStorage.access_token,
       },

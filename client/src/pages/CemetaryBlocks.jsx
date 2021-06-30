@@ -13,7 +13,7 @@ export default function CemetaryBlocks() {
   useEffect(() => {
     dispatch(setLoading(true));
     dispatch(fetchData());
-  }, [dispatch]);
+  }, []);
 
   const cemetary = useSelector((state) => state.cemetaryReducer.cemetaries);
   console.log(cemetary, "<<<di table cemetary");
@@ -34,7 +34,7 @@ export default function CemetaryBlocks() {
   }
 
   return (
-    <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
+    <div className="h-full ml-14 mb-10 md:ml-64">
       <h1 className="title-font font-semibold text-4xl text-center text-blue-600 mt-1 rounded-sm">
         Cemetary Blocks
       </h1>

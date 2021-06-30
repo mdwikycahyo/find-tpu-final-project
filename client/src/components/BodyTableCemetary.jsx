@@ -31,6 +31,13 @@ export default function BodyTableCemetary(props) {
     });
   }
 
+  function priceFormat(money) {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(money);
+  }
+
   return (
     <tbody className="bg-white dark:divide-gray-700 dark:bg-gray-800">
       <tr
@@ -127,7 +134,7 @@ export default function BodyTableCemetary(props) {
           
         "
           >
-            Rp. {props.cemetary.price}
+            {priceFormat(props.cemetary.price)}
           </span>
         </td>
         <td className="px-4 py-3 text-center">

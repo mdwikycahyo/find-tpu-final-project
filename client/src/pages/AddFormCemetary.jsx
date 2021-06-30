@@ -1,11 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router";
 import { addKeeper } from "../store/action/actionCreator";
 import Swal from "sweetalert2";
 
 export default function AddFormCemetary() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const {
     register,
@@ -16,18 +18,18 @@ export default function AddFormCemetary() {
   const onSubmit = (data) => {
     // alert(JSON.stringify(data));
     dispatch(addKeeper(data));
-
     Swal.fire("you added a new data");
+    history.push("/cemetaryBlocks");
   };
 
   return (
-    <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
-      <div className="pt-11">
-        <div className="max-w-lg max-w-xs bg-gray-50 shadow-md rounded-lg mx-auto text-center py-12 mt-4 rounded-xl">
-          <h1 className=" text-gray-800 text-center font-extrabold -mt-3 text-3xl">
+    <div className="h-full ml-14 mb-10 md:ml-64">
+      <div className=" pt-4">
+        <div className=" w-11/12 bg-gray-50 shadow-md mx-auto text-center py-4 mt-2 rounded-xl">
+          <h1 className=" text-gray-800 text-center py-4 font-extrabold -mt-3 text-3xl">
             Cemetary Keeper Form
           </h1>
-          <div className="container py-5 max-w-md mx-auto text-left">
+          <div className="container py-5 max-w-4xl mx-auto text-left">
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* <label>Cemetary Name</label> */}
               <input
@@ -105,7 +107,7 @@ export default function AddFormCemetary() {
               />
               {errors.keeperName && <span>This field is required</span>}
               <input
-                type="text"
+                type="email"
                 placeholder="Keeper Email"
                 name="keeperEmail"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

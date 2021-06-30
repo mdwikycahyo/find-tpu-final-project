@@ -224,16 +224,9 @@ export default function Sidebar() {
                 </span>
               </Link>
             </li>
-            {/* <li className="px-5 hidden md:block">
-              <div className="flex flex-row items-center mt-5 h-8">
-                <div className="text-sm font-light tracking-wide text-gray-400 uppercase">
-                  Settings
-                </div>
-              </div>
-            </li> */}
           </ul>
-          <p className="mb-14 px-5 py-3 hidden md:block text-center text-xs">
-            TPU-Online
+          <p className="mb-14 px-5 py-3 hidden md:block text-center text-sm">
+            FINNERAL
           </p>
         </div>
       </div>

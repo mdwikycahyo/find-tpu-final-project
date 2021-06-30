@@ -52,14 +52,18 @@ export default function Login() {
       })
       .catch((err) => {
         console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.message,
+        });
       });
   };
 
   return (
     <div>
-      <h1>ini login page</h1>
-      <div className="pt-11">
-        <div className="max-w-lg max-w-xs bg-gray-50 shadow-xl rounded-lg mx-auto text-center py-12 mt-4 rounded-xl">
+      <div className="item-center justify-center bg-gradient-to-l from-blue-700 to-blue-500 h-screen p-32">
+        <div className="max-w-lg bg-gray-50 shadow-xl rounded-lg mx-auto text-center py-12 mt-4">
           <h1 className=" text-gray-800 text-center font-extrabold -mt-3 text-3xl">
             Login
           </h1>

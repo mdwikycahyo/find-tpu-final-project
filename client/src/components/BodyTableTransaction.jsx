@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
+import { masa } from "masa";
 import { deleteTransaction } from "../store/action/actionCreator";
 import EditTransactionStatus from "../pages/EditTransactionStatus";
 import TransactionDetails from "./TransactionDetails";
@@ -27,6 +28,17 @@ export default function BodyTableTransaction(props) {
         Swal.fire("this item success to delete");
       }
     });
+  }
+
+  function dateFormat(date) {
+    return masa(date).format("[hari] dddd, [tanggal] D MMMM YYYY"); // hari Minggu, tanggal 15 November 2020
+  }
+
+  function priceFormat(money) {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(money);
   }
 
   function wichColor(status) {
@@ -57,13 +69,36 @@ export default function BodyTableTransaction(props) {
           <div className="flex items-center text-sm">
             <div>
               <p className="font-semibold">{props.item.payerName}</p>
-              <p className="text-xs text-gray-600 dark:text-gray-400">
-                {props.item.phoneNumber}
-              </p>
+              {/* <p className="text-xs text-gray-600 dark:text-gray-400">
+                {timeTracker()}
+              </p> */}
             </div>
           </div>
         </td>
-        <td className="px-4 py-3 text-sm">{props.item.cemetaryName}</td>
+        <td className="px-4 py-3 text-sm">
+          <span
+            className="
+        px-2
+        py-1 font-medium
+        leading-tight
+        
+      "
+          >
+            {props.item.cemetaryName}
+          </span>
+        </td>
+        <td className="px-4 py-3 text-sm">
+          <span
+            className="
+        px-2
+        py-1 font-medium
+        leading-tight
+        
+      "
+          >
+            {dateFormat(props.item.burialDate)}
+          </span>
+        </td>
         <td className="px-4 py-3 text-xs">
           <span
             className={`px-2
@@ -77,8 +112,31 @@ export default function BodyTableTransaction(props) {
             {props.item.status}
           </span>
         </td>
-        <td className="px-4 py-3 text-sm">{props.item.burialDate}</td>
-        <td className="px-4 py-3 text-sm">{props.item.price}</td>
+        <td className="px-4 py-3 text-sm">
+          <span
+            className="
+        px-2
+        py-1
+        font-semibold
+        leading-tight
+        
+      "
+          >
+            {props.item.phoneNumber}
+          </span>
+        </td>
+        <td className="px-4 py-3 text-sm">
+          <span
+            className="
+        px-2
+        py-1 font-medium
+        leading-tight
+        
+      "
+          >
+            {priceFormat(props.item.price)}
+          </span>
+        </td>
         <td className="px-4 py-3 text-center">
           <div className="flex items-center">
             <button
