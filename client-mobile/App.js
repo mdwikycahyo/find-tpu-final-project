@@ -12,6 +12,7 @@ import * as Notifications from 'expo-notifications'
 import * as Permissions from 'expo-permissions'
 import OneSignal from 'react-native-onesignal'
 import Constants from 'expo-constants';
+import AnimatedLoader from 'react-native-animated-loader';
 
 const Stack = createStackNavigator()
 // Notifications.setNotificationHandler({
@@ -33,7 +34,7 @@ export default function App() {
       setNotification(notification);
     });
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log(response);
+      // console.log(response);
     });
     return () => {
       Notifications.removeNotificationSubscription(notificationListener.current);
@@ -157,7 +158,7 @@ async function registerForPushNotificationsAsync() {
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
+    // console.log(token);
   } else {
     alert('Must use physical device for Push Notifications');
   }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, View, SafeAreaView, FlatList, StyleSheet, Button, TouchableOpacity, ActivityIndicator, Modal, Pressable } from 'react-native'
+import { Alert, View, SafeAreaView, FlatList, StyleSheet, Button, TouchableOpacity, ActivityIndicator, Modal, Pressable, Image } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HStack, Text, Box, StatusBar } from 'native-base'
 import { fetchTransaction, changeStatus, fetchTransactionByID } from '../store'
@@ -10,6 +10,7 @@ import styles from '../styles'
 import { FontAwesome } from '@expo/vector-icons'
 import AnimatedLoader from 'react-native-animated-loader'
 import AwesomeAlert from 'react-native-awesome-alerts'
+// import done_image from '../../assets/checked.png'
 
 function Notification() {
   const access_token = useSelector((state) => state.access_token)
@@ -36,8 +37,12 @@ function Notification() {
       <Text>Loading...</Text>
     ) : (
       <>
-        
         <View style={stylesHome.item}>
+          <View>
+            {/* style={{ width: 80, height: 80 }}  */}
+            {/* <Image source={done_image} /> */}
+            <Text>TEXT</Text>
+          </View>
           <View>
             <View style={{ borderBottomWidth: 1, borderBottomColor: '#000', width: 170 }}>
               <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{item.payerName}</Text>
@@ -68,15 +73,13 @@ function Notification() {
                 backgroundColor: '#8ce089',
                 borderRadius: 10,
               }}
-              onPress={() => {
-                changeStatus(access_token, 'waiting', item._id)
-              }}
+              // onPress={() => {
+              //   changeStatus(access_token, 'waiting', item._id)
+              // }}
             >
-              <Text style={{ color: '#000' }}>Terima</Text>
+              <Text style={{ color: '#000' }}>{item.status}</Text>
             </TouchableOpacity>
           </View>
-
-          
         </View>
       </>
     )
@@ -87,16 +90,8 @@ function Notification() {
   ) : (
     <>
       <StatusBar backgroundColor='#000' barStyle='light-content' />
-      {/* <Box safeAreaTop backgroundColor='#FFF' /> */}
-      <HStack bg='#FFF' px={2} py={3} justifyContent='space-between' alignItems='center'>
-        <HStack space={4} alignItems='center'>
-          <Text color='black' fontSize={20} pt={2} px={5} fontWeight='bold'>
-            Belum Diproses
-          </Text>
-        </HStack>
-      </HStack>
       <SafeAreaView style={stylesHome.container}>
-        <FlatList data={transactions.filter((e) => e.status === 'pending')} renderItem={renderItem} keyExtractor={(item) => item._id} />
+        <FlatList data={transactions.filter((e) => e.status === 'done')} renderItem={renderItem} keyExtractor={(item) => item._id} />
       </SafeAreaView>
     </>
   )

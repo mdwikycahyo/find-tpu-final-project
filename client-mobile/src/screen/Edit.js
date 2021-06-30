@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, SafeAreaView, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, SafeAreaView, TextInput, StyleSheet, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HStack, Text, Box, StatusBar, Button } from 'native-base'
 import Counter from 'react-native-counters'
@@ -8,6 +8,7 @@ import { keeperDetail, updateKeeper } from '../store'
 import image_test from '../../assets/test_image.jpg'
 import tombstones from '../../assets/tombstones.jpg'
 import { AntDesign } from '@expo/vector-icons'
+import AnimatedLoader from "react-native-animated-loader";
 import { useSelector, useDispatch } from 'react-redux'
 
 function Edit() {
@@ -17,7 +18,7 @@ function Edit() {
   const [currentSpace, setCurrentSpace] = useState(0)
 
   useEffect(() => {
-    keeperDetail('60d703835e6fba19f81c9421')
+    keeperDetail('60daa743e6375341fc90b5fe')
   }, [])
   useEffect(() => {
     if (detailKeeper.spaceLeft) {
@@ -26,11 +27,15 @@ function Edit() {
   }, [detailKeeper])
 
   return detailLoading ? (
-    <Text style={{ marginTop: 30 }}>LOADDDEENG..</Text>
+    // <Text style={{ marginTop: 30 }}>LOADDDEENG..</Text>
+    <Text style={{ marginTop: '80%', marginLeft: '45%' }}>
+      <ActivityIndicator size='large' color='#00ff00' />
+    </Text>
   ) : (
     <>
       <View style={styles.container}>
         <View style={styles.backgroundContainer}>
+        {/* { uri: detailKeeper.image_url[0] } */}
           <Image source={{ uri: detailKeeper.image_url[0] }} resizeMode='cover' style={styles.backdrop} />
         </View>
         <View style={styles.overlay}>
@@ -73,7 +78,7 @@ function Edit() {
               </TouchableOpacity>
             </View>
 
-            <Button onPress={() => updateKeeper(access_token, '60d703835e6fba19f81c9421', { 
+            <Button onPress={() => updateKeeper(access_token, '60daa743e6375341fc90b5fe', { 
               "cemetaryName": detailKeeper.cemetaryName,
               "cemetaryLocation": detailKeeper.cemetaryLocation,
               "width":detailKeeper.width,
@@ -107,6 +112,10 @@ var styles = StyleSheet.create({
     bottom: '60%',
     left: 0,
     right: 0,
+  },
+  loadingContainer: {
+    marginTop: '80%',
+    marginLeft: '45%',
   },
   container: {
     flex: 1,

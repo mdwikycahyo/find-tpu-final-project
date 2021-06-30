@@ -36,7 +36,6 @@ function Notification() {
       <Text>Loading...</Text>
     ) : (
       <>
-        
         <View style={stylesHome.item}>
           <View>
             <View style={{ borderBottomWidth: 1, borderBottomColor: '#000', width: 170 }}>
@@ -68,15 +67,13 @@ function Notification() {
                 backgroundColor: '#8ce089',
                 borderRadius: 10,
               }}
-              onPress={() => {
-                changeStatus(access_token, 'waiting', item._id)
-              }}
+              // onPress={() => {
+              //   changeStatus(access_token, 'waiting', item._id)
+              // }}
             >
-              <Text style={{ color: '#000' }}>Terima</Text>
+              <Text style={{ color: '#000' }}>{item.status}</Text>
             </TouchableOpacity>
           </View>
-
-          
         </View>
       </>
     )
@@ -87,16 +84,8 @@ function Notification() {
   ) : (
     <>
       <StatusBar backgroundColor='#000' barStyle='light-content' />
-      {/* <Box safeAreaTop backgroundColor='#FFF' /> */}
-      <HStack bg='#FFF' px={2} py={3} justifyContent='space-between' alignItems='center'>
-        <HStack space={4} alignItems='center'>
-          <Text color='black' fontSize={20} pt={2} px={5} fontWeight='bold'>
-            Belum Diproses
-          </Text>
-        </HStack>
-      </HStack>
       <SafeAreaView style={stylesHome.container}>
-        <FlatList data={transactions.filter((e) => e.status === 'pending')} renderItem={renderItem} keyExtractor={(item) => item._id} />
+        <FlatList data={transactions.filter((e) => e.status === 'canceled')} renderItem={renderItem} keyExtractor={(item) => item._id} />
       </SafeAreaView>
     </>
   )

@@ -1,63 +1,76 @@
 // var cmd = require('node-cmd')
 import React, { useState } from 'react'
 import { View, Image, TextInput, SaveAreaView, StatusBar } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
 import { NativeBaseProvider, Box, Text, Heading, VStack, FormControl, Input, Link, Button, Icon, IconButton, HStack, Divider } from 'native-base'
 import styles from '../styles'
 import { login } from '../store'
+import logo from '../../assets/logo.png'
+import { Entypo } from '@expo/vector-icons'
+import { fontStyle } from 'styled-system'
 
 function Login({ navigation }) {
   const [email, setEmail] = useState('')
   const [password, setPasswordl] = useState('')
 
   return (
-    <>
-      <Box flex={1} p={2} w='90%' mx='auto' marginTop='20'>
-        <Heading size='lg' color='primary.500'>
-          Selamat Datang
-        </Heading>
+    <KeyboardAwareScrollView
+      style={{ backgroundColor: '#fff' }}
+      resetScrollToCoords={{ x: 0, y: 0 }}
+      // contentContainerStyle={styles.container}
+      // scrollEnabled={faxlse}
+    >
+      
+      <Box flex={1} p={2} w='90%' mx='auto' marginTop='10'>
+        <Image source={logo} style={{ left: '10%', top: '10%', width: '80%' }} />
         <VStack space={2} mt={5}>
           <FormControl>
-            <FormControl.Label _text={{ color: 'muted.700', fontSize: 'sm', fontWeight: 600 }}>Email</FormControl.Label>
-            <TextInput
-              style={styles.input}
-              placeholder='Email'
-              paddingHorizontal={8}
-              onChangeText={(email) => {
-                setEmail(email)
-              }}
-            />
+            {/* <FormControl.Label _text={{ color: 'muted.700', fontSize: 'sm', fontWeight: 600 }}>Email</FormControl.Label> */}
+            <View style={{ flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: '#000' }}>
+              <Entypo name='email' size={20} color='black' style={{ marginRight: 10, top: 19 }} />
+              <TextInput
+                style={styles.input,{marginTop: 5}}
+                placeholder='Email'
+                paddingHorizontal={8}
+                paddingVertical={10}
+                onChangeText={(email) => {
+                  setEmail(email)
+                }}
+              />
+            </View>
           </FormControl>
           <FormControl mb={5}>
-            <FormControl.Label _text={{ color: 'muted.700', fontSize: 'sm', fontWeight: 600 }}>Password</FormControl.Label>
-            <TextInput
-              style={styles.input}
-              placeholder='Password'
-              secureTextEntry={true}
-              paddingHorizontal={8}
-              onChangeText={(password) => {
-                setPasswordl(password)
-              }}
-            />
+          <View style={{ flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: '#000' }}>
+              {/* <Entypo name='email' size={20} color='black' style={{ marginRight: 10, top: 19 }} /> */}
+              <Entypo name="lock-open" size={20} color="black" style={{ marginRight: 10, top: 19 }}/>
+              <TextInput
+                style={styles.input,{marginTop: 5}}
+                placeholder='Password'
+                secureTextEntry={true}
+                paddingHorizontal={8}
+                paddingVertical={10}
+                onChangeText={(password) => {
+                  setPasswordl(password)
+                }}
+              />
+            </View>
           </FormControl>
           <VStack space={2}>
             <Button
               onPress={() => {
                 navigation.navigate('HomeStack')
                 login(email, password)
-                // cmd.runSync(
-                //   `curl -H "Content-Type: application/json" -X POST "https://exp.host/--/api/v2/push/send" -d '{ "to": "ExponentPushToken[kyzQutMLrJvSCZCCoWe967]", "title":"Ada pesan baru dari Finneral!", "body": "Pelanggan {customer.name} butuh bantuan, segera check aplikasi anda :)"}'`
-                // )
               }}
-              colorScheme='cyan'
-              _text={{ color: 'white' }}
+              backgroundColor='#545452'
+              _text={{ color: 'white', fontWeight: 'bold', fontStyle: ["normal"], fontSize: 20, fontVariants:["oldstyle-nums"] }}
             >
               Login
             </Button>
           </VStack>
         </VStack>
       </Box>
-    </>
+    </KeyboardAwareScrollView>
   )
 }
 

@@ -1,62 +1,91 @@
-import React from 'react'
-import { View, SafeAreaView, FlatList, StyleSheet, Button } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Alert, View, SafeAreaView, FlatList, StyleSheet, Button, TouchableOpacity, ActivityIndicator, Modal, Pressable } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HStack, Text, Box, StatusBar } from 'native-base'
+import { fetchTransaction, changeStatus, fetchTransactionByID } from '../store'
 import { useSelector } from 'react-redux'
-import { changeStatus } from '../store'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
 import styles from '../styles'
+import { FontAwesome } from '@expo/vector-icons'
+import AnimatedLoader from 'react-native-animated-loader'
+import AwesomeAlert from 'react-native-awesome-alerts'
 
-function Processing() {
+function Notification() {
   const access_token = useSelector((state) => state.access_token)
   const transactions = useSelector((state) => state.transactions)
   const transactionLoading = useSelector((state) => state.transactionLoading)
-  // console.log(transactions.filter((e) => e.status === 'waiting'))
+  const transactionById = useSelector((state) => state.transactionById)
+  const transactionByIdLoading = useSelector((state) => state.transactionByIdLoading)
+  const [modalVisible, setModalVisible] = useState(false)
+  const [detailOrder, setDetailOrder] = useState(false)
+
+  useEffect(() => {
+    fetchTransaction()
+  }, [])
+
+  // if (!transactionByIdLoading) {
+  //   // console.log(transactionByIdLoading)
+  //   setDetailOrder(transactionById)
+  // }
+
+  // console.log(detailOrder);
 
   const renderItem = ({ item }) =>
     transactionLoading ? (
-      <Text>Loading..</Text>
+      <Text>Loading...</Text>
     ) : (
-      <View style={stylesHome.item}>
-        <View>
-          <Text style={{ fontSize: 24 }}>{item.payerName}</Text>
-          <Text style={{ fontSize: 16 }}>{item._id}</Text>
-          <Text style={{ fontSize: 16 }}>{item.phoneNumber}</Text>
-          <Text style={{ fontSize: 16 }}>{item.status}</Text>
-          {/* <Text style={{ fontSize: 16 }}>Alamat: {item.address}</Text> */}
-          <Text style={{ fontSize: 16 }}>Fasilitas:</Text>
-          {item.facility.map((fac, index) => {
-            return (
-              <Text key={index} style={{ marginLeft: 10 }}>
-                {'\u2B22'} {fac}
+      <>
+        <View style={stylesHome.item}>
+          <View>
+            <View style={{ borderBottomWidth: 1, borderBottomColor: '#000', width: 170 }}>
+              <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{item.payerName}</Text>
+
+              <Text style={{ fontSize: 12, bottom: 3 }}>
+                <FontAwesome name='phone' size={12} color='black' /> {item.phoneNumber}
               </Text>
-            )
-          })}
+            </View>
+            <Text style={{ fontSize: 14 }}>Fasilitas:</Text>
+            {item.facility.map((fac, index) => {
+              return (
+                <Text key={index} style={{ marginLeft: 10, fontSize: 12 }}>
+                  {'\u2B22'} {fac}
+                </Text>
+              )
+            })}
+          </View>
+
+          <View style={{ position: 'absolute', bottom: 20, right: 10, width: '40%' }}>
+            <TouchableOpacity
+              style={{
+                // borderWidth: 0.5,
+                // borderColor: '#e6b319',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 110,
+                height: 40,
+                backgroundColor: '#8ce089',
+                borderRadius: 10,
+              }}
+              onPress={() => {
+                changeStatus(access_token, 'done', item._id)
+              }}
+            >
+              <Text style={{ color: '#000' }}>{item.status}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        {/* {console.log(item.status)} */}
-        {item.status === 'waiting' ? (
-          <View style={{ color: 'black', position: 'absolute', bottom: 10, right: 10, width: '40%' }}>
-            <Button onPress={() => changeStatus(access_token, 'done', item._id)} title='Diproses..' color='#72c955'></Button>
-          </View>
-        ) : (
-          <View style={{ color: 'black', position: 'absolute', bottom: 10, right: 10, width: '40%' }}>
-            <Button title='Selesai' color='#72c955'></Button>
-          </View>
-        )}
-      </View>
+      </>
     )
-  return (
+  return transactionLoading ? (
+    <Text style={{ marginTop: '95%', marginLeft: '45%' }}>
+      <ActivityIndicator size='large' color='#00ff00' />
+    </Text>
+  ) : (
     <>
       <StatusBar backgroundColor='#000' barStyle='light-content' />
-      <Box safeAreaTop backgroundColor='#FFF' />
-      <HStack bg='#FFF' px={1} py={3} justifyContent='space-between' alignItems='center'>
-        <HStack space={4} alignItems='center'>
-          <Text color='black' fontSize={20} pt={2} px={5} fontWeight='bold'>
-            Sedang Diproses
-          </Text>
-        </HStack>
-      </HStack>
       <SafeAreaView style={stylesHome.container}>
-        <FlatList data={transactions.filter((e) => e.status === 'waiting' || e.status === 'done')} renderItem={renderItem} keyExtractor={(item) => item.id} />
+        <FlatList data={transactions.filter((e) => e.status === 'waiting')} renderItem={renderItem} keyExtractor={(item) => item._id} />
       </SafeAreaView>
     </>
   )
@@ -66,13 +95,18 @@ const stylesHome = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
+    backgroundColor: '#545452',
+  },
+  loadingContainer: {
+    marginTop: '80%',
+    marginLeft: '45%',
   },
   item: {
     backgroundColor: '#FFF',
     padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-    borderRadius: 12,
+    marginVertical: 3,
+    marginHorizontal: 10,
+    borderRadius: 5,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -85,6 +119,43 @@ const stylesHome = StyleSheet.create({
     backgroundColor: '#DDDDDD',
     padding: 10,
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    left: 50,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    left: 20,
+    // textAlign: 'center',
+  },
 })
 
-export default Processing
+export default Notification

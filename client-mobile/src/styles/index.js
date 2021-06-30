@@ -52,11 +52,11 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    width: '100%',
+    width: '80%',
     marginTop: '1%',
     marginBottom: '3%',
-    borderWidth: 0.7,
-    borderRadius: 4
+    // borderWidth: 0.7,
+    // borderRadius: 4
   },
   text: {
     textTransform: 'capitalize',
