@@ -11,8 +11,9 @@ import { FontAwesome } from '@expo/vector-icons'
 import AnimatedLoader from 'react-native-animated-loader'
 import AwesomeAlert from 'react-native-awesome-alerts'
 
-function Notification() {
+function Processing() {
   const access_token = useSelector((state) => state.access_token)
+  const currentID = useSelector(state => state.currentID)
   const transactions = useSelector((state) => state.transactions)
   const transactionLoading = useSelector((state) => state.transactionLoading)
   const transactionById = useSelector((state) => state.transactionById)
@@ -21,8 +22,10 @@ function Notification() {
   const [detailOrder, setDetailOrder] = useState(false)
 
   useEffect(() => {
-    fetchTransaction()
+    fetchTransaction(currentID, access_token)
   }, [])
+
+  // console.log(transactions);
 
   // if (!transactionByIdLoading) {
   //   // console.log(transactionByIdLoading)
@@ -68,7 +71,8 @@ function Notification() {
                 borderRadius: 10,
               }}
               onPress={() => {
-                changeStatus(access_token, 'done', item._id)
+                changeStatus(access_token, 'done', item._id, currentID);
+                fetchTransaction(currentID, access_token)
               }}
             >
               <Text style={{ color: '#000' }}>{item.status}</Text>
@@ -158,4 +162,4 @@ const stylesHome = StyleSheet.create({
   },
 })
 
-export default Notification
+export default Processing

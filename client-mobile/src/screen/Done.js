@@ -8,11 +8,13 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 import styles from '../styles'
 import { FontAwesome } from '@expo/vector-icons'
+
+import { FontAwesome5 } from '@expo/vector-icons';
 import AnimatedLoader from 'react-native-animated-loader'
 import AwesomeAlert from 'react-native-awesome-alerts'
-// import done_image from '../../assets/checked.png'
+import checkedImage from '../../assets/checked.png'
 
-function Notification() {
+function Done() {
   const access_token = useSelector((state) => state.access_token)
   const transactions = useSelector((state) => state.transactions)
   const transactionLoading = useSelector((state) => state.transactionLoading)
@@ -41,14 +43,23 @@ function Notification() {
           <View>
             {/* style={{ width: 80, height: 80 }}  */}
             {/* <Image source={done_image} /> */}
-            <Text>TEXT</Text>
+            {/* <Text>TEXT</Text> */}
+            <Image
+              style={{width: 50, height: 50, marginRight: 15, top:10}}
+              source={checkedImage}
+            />
           </View>
           <View>
-            <View style={{ borderBottomWidth: 1, borderBottomColor: '#000', width: 170 }}>
+            <View style={{ borderBottomWidth: 1, borderBottomColor: '#000', width: 230 }}>
               <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{item.payerName}</Text>
 
               <Text style={{ fontSize: 12, bottom: 3 }}>
                 <FontAwesome name='phone' size={12} color='black' /> {item.phoneNumber}
+              </Text>
+              <Text style={{ fontSize: 12, bottom: 3 }}>
+                <FontAwesome5 name="money-bill-wave" size={10} color="green" /> Rp. {Number(item.price)
+                      .toFixed(2)
+                      .replace(/\d(?=(\d{3})+\.)/g, '$&,')}
               </Text>
             </View>
             <Text style={{ fontSize: 14 }}>Fasilitas:</Text>
@@ -59,26 +70,6 @@ function Notification() {
                 </Text>
               )
             })}
-          </View>
-
-          <View style={{ position: 'absolute', bottom: 20, right: 10, width: '40%' }}>
-            <TouchableOpacity
-              style={{
-                // borderWidth: 0.5,
-                // borderColor: '#e6b319',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 110,
-                height: 40,
-                backgroundColor: '#8ce089',
-                borderRadius: 10,
-              }}
-              // onPress={() => {
-              //   changeStatus(access_token, 'waiting', item._id)
-              // }}
-            >
-              <Text style={{ color: '#000' }}>{item.status}</Text>
-            </TouchableOpacity>
           </View>
         </View>
       </>
@@ -109,7 +100,10 @@ const stylesHome = StyleSheet.create({
   },
   item: {
     backgroundColor: '#FFF',
-    padding: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
     marginVertical: 3,
     marginHorizontal: 10,
     borderRadius: 5,
@@ -164,4 +158,4 @@ const stylesHome = StyleSheet.create({
   },
 })
 
-export default Notification
+export default Done

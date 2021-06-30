@@ -1,36 +1,12 @@
 import React, { useState } from 'react'
 import { createStore } from 'redux'
 import axios from 'axios'
-// var nodemailer = require('nodemailer');
-
-// var transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: 'finneral.team3@gmail.com',
-//     pass: '@Dmin123'
-//   }
-// });
-
-// var mailOptions = {
-//   from: 'finneral.team3@gmail.com',
-//   to: 'user.finneral@gmail.com',
-//   subject: 'Sending Email using Node.js',
-//   text: 'That was easy!'
-// };
-
-// transporter.sendMail(mailOptions, function(error, info){
-//   if (error) {
-//     console.log(error, '------------------------------------------ Error bosq');
-//   } else {
-//     console.log('Email sent: ' + info.response);
-//   }
-// });
 
 const initialState = {
   email: '',
   password: '',
   access_token: '',
-  currentID: '',
+  currentID: false,
 
   transactions: [],
   transactionLoading: true,
@@ -47,11 +23,9 @@ const initialState = {
   transactionByIdError: false,
 }
 
-// const [accessToken, setAccessToken] = useState('')
+
 
 export function login(email, password) {
-  // console.log(email, password, ' dari login reducer')
-  // const data = {email:}
   axios('http://18.207.141.48:3000/keeper/login', {
     method: 'POST',
     // ntar ambil dari parameter
@@ -59,8 +33,8 @@ export function login(email, password) {
       'Content-Type': 'application/json',
     },
     data: {
-      email: 'faza@gmail.com',
-      password: 'faza',
+      email: 'mortred@gmail.com',
+      password: 'mortred',
     },
   })
     .then((response) => {
@@ -75,13 +49,14 @@ export function login(email, password) {
 }
 
 // 60d703835e6fba19f81c9421 change id based on logged in user
-export function fetchTransaction() {
-  axios('http://18.207.141.48:3000/transaction/cemetary/60daa743e6375341fc90b5fe', {
+export function fetchTransaction(id, access_token) {
+  console.log(id, '<--- fetch all transaction');
+  axios('http://18.207.141.48:3000/transaction/cemetary/' + id, {
     method: 'GET',
-    headers: { access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhemFAZ21haWwuY29tIiwiaWQiOiI2MGRhYTc0M2U2Mzc1MzQxZmM5MGI1ZmUiLCJyb2xlIjoia2VlcGVyIiwiaWF0IjoxNjI1MDE5NjM4fQ.ICHYiMXTulBj91f-eq1t2qz1x6TRP0MwQ-UEUxMGu1E' },
+    headers: { access_token },
   })
     .then((response) => {
-      // console.log(response)
+      // console.log(response, '-----------dari store')
       store.dispatch({
         type: 'TRANSACTION',
         payload: response.data,
@@ -101,11 +76,11 @@ export function fetchTransaction() {
     )
 }
 
-export function fetchTransactionByID(id) {
+export function fetchTransactionByID(id, access_token) {
   // console.log(id,' masukkk');
   axios('http://18.207.141.48:3000/transaction/' + id, {
     method: 'GET',
-    headers: { access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhemFAZ21haWwuY29tIiwiaWQiOiI2MGRhYTc0M2U2Mzc1MzQxZmM5MGI1ZmUiLCJyb2xlIjoia2VlcGVyIiwiaWF0IjoxNjI1MDE5NjM4fQ.ICHYiMXTulBj91f-eq1t2qz1x6TRP0MwQ-UEUxMGu1E' },
+    headers: { access_token },
   })
     .then((response) =>
       store.dispatch({
@@ -127,18 +102,18 @@ export function fetchTransactionByID(id) {
     )
 }
 
-export function changeStatus(access_token, status, id) {
+export function changeStatus(access_token, status, id, keeperID) {
   // if status done -> hit nodemailer
   axios('http://18.207.141.48:3000/transaction/changeStatus/' + id, {
     method: 'PATCH',
-    headers: { access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhemFAZ21haWwuY29tIiwiaWQiOiI2MGRhYTc0M2U2Mzc1MzQxZmM5MGI1ZmUiLCJyb2xlIjoia2VlcGVyIiwiaWF0IjoxNjI1MDE5NjM4fQ.ICHYiMXTulBj91f-eq1t2qz1x6TRP0MwQ-UEUxMGu1E' },
+    headers: { access_token },
     data: {
       status: status,
     },
   })
     .then((response) => {
       console.log(response.data)
-      fetchTransaction()
+      // fetchTransaction(keeperID, access_token)
     })
     .catch(console.warn)
 }
@@ -172,7 +147,7 @@ export function keeperDetail(id) {
 export function updateKeeper(access_token, id, data) {
   axios('http://18.207.141.48:3000/keeper/' + id, {
     method: 'PUT',
-    headers: { access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZGFkZWRkZDM1NTEyMzIzNDNlYzYyMCIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjI1MDE3NDQyfQ.olbeq7rmcuoB2tarN8QXRY5jl07foJzBQOl4vdXZHoQ' },
+    headers: { access_token},
     data: {
       cemetaryName: data.cemetaryName,
       cemetaryLocation: data.cemetaryLocation,
@@ -201,7 +176,7 @@ export function updateKeeper(access_token, id, data) {
 
 function reducer(state = initialState, action) {
   if (action.type === 'LOGIN') {
-    console.log(action.payload)
+    // console.log(action.payload)
     return { ...state, access_token: action.payload.access_token, currentID: action.payload.id }
   }
 
@@ -216,7 +191,7 @@ function reducer(state = initialState, action) {
   }
 
   if (action.type === 'DETAIL_KEEPER') {
-    console.log(action.payload);
+    // console.log(action.payload);
     return { ...state, detailKeeper: action.payload }
   }
   if (action.type === 'DETAIL_LOADING') {

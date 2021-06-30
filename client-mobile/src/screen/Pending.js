@@ -11,8 +11,9 @@ import { FontAwesome } from '@expo/vector-icons'
 import AnimatedLoader from 'react-native-animated-loader'
 import AwesomeAlert from 'react-native-awesome-alerts'
 
-function Notification() {
+function Pending() {
   const access_token = useSelector((state) => state.access_token)
+  const currentID = useSelector((state) => state.currentID)
   const transactions = useSelector((state) => state.transactions)
   const transactionLoading = useSelector((state) => state.transactionLoading)
   const transactionById = useSelector((state) => state.transactionById)
@@ -21,8 +22,13 @@ function Notification() {
   const [detailOrder, setDetailOrder] = useState(false)
 
   useEffect(() => {
-    fetchTransaction()
-  }, [])
+    // if (currentID) {
+      fetchTransaction(currentID, access_token)
+    // }
+  }, [currentID])
+  console.log(currentID, '<--- dari pending');
+
+  // console.log(transactionLoading, transactions, currentID, 'dari pending')
 
   const renderItem = ({ item }) =>
     transactionLoading ? (
@@ -106,59 +112,58 @@ function Notification() {
           </View>
         </Modal>
         {/* ========================= MODAL ======================== */}
-            <View style={stylesHome.itemSmall}>
-              <View style={{ position: 'absolute', bottom: 14, right: 100 }}>
-                <TouchableOpacity
-                  style={{
-                    // borderWidth: 1,
-                    backgroundColor: '#db4f5d',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: 110,
-                    height: 40,
-                    borderRadius: 15,
-                    // top: 10,
-                    left: 65,
-                  }}
-                  onPress={() => {
-                    changeStatus(access_token, 'canceled', item._id)
-                  }}
-                >
-                  {/* <AntDesign name='delete' size={15} color='black' /> */}
-                  <Text style={stylesHome.textStyle}>Tolak</Text>
-                  
-                </TouchableOpacity>
-              </View>
-    
-              <View style={{ position: 'absolute', bottom: 14, right: 100 }}>
-                <TouchableOpacity
-                  style={{
-                    // borderWidth: 1,
-                    backgroundColor: '#40adaa',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: 110,
-                    height: 40,
-                    borderRadius: 15,
-                    // top: 0,
-                    right: 80,
-                  }}
-                  onPress={() => {
-                    setModalVisible(true)
-                    fetchTransactionByID(item._id)
-                  }}
-                >
-                  {/* <MaterialCommunityIcons name='text-box-search-outline' size={15} color='black' /> */}
-                  <Text style={stylesHome.textStyle}>Lihat Detail</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+        <View style={stylesHome.itemSmall}>
+          <View style={{ position: 'absolute', bottom: 14, right: 100 }}>
+            <TouchableOpacity
+              style={{
+                // borderWidth: 1,
+                backgroundColor: '#db4f5d',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 110,
+                height: 40,
+                borderRadius: 15,
+                // top: 10,
+                left: 65,
+              }}
+              onPress={() => {
+                changeStatus(access_token, 'canceled', item._id, currentID);
+                fetchTransaction(currentID, access_token)
+              }}
+            >
+              {/* <AntDesign name='delete' size={15} color='black' /> */}
+              <Text style={stylesHome.textStyle}>Tolak</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={{ position: 'absolute', bottom: 14, right: 100 }}>
+            <TouchableOpacity
+              style={{
+                // borderWidth: 1,
+                backgroundColor: '#40adaa',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 110,
+                height: 40,
+                borderRadius: 15,
+                // top: 0,
+                right: 80,
+              }}
+              onPress={() => {
+                setModalVisible(true)
+                fetchTransactionByID(item._id)
+              }}
+            >
+              <Text style={stylesHome.textStyle}>Lihat Detail</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
         <View style={stylesHome.itemBig}>
           <View>
             <View style={{ borderBottomWidth: 1, borderBottomColor: '#000', width: '100%' }}>
               <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{item.payerName}</Text>
               <Text style={{ fontSize: 12, bottom: 3 }}>
-                <FontAwesome name='phone' size={12} color='black' /> {item.phoneNumber}XXX
+                <FontAwesome name='phone' size={12} color='black' /> {item.phoneNumber}
               </Text>
             </View>
             <Text style={{ fontSize: 14 }}>Fasilitas:</Text>
@@ -184,15 +189,14 @@ function Notification() {
                 borderRadius: 10,
               }}
               onPress={() => {
-                changeStatus(access_token, 'waiting', item._id)
+                changeStatus(access_token, 'waiting', item._id, currentID)
+                fetchTransaction(currentID, access_token)
               }}
             >
               <Text style={[stylesHome.textStyle, { color: '#000' }]}>Terima</Text>
             </TouchableOpacity>
           </View>
         </View>
-
-
       </>
     )
   return transactionLoading ? (
@@ -241,8 +245,7 @@ const stylesHome = StyleSheet.create({
     // flexDirection: 'column',
     // flexWrap: 'wrap',
     height: 170,
-    bottom: 150
-    
+    bottom: 150,
   },
   itemSmall: {
     backgroundColor: '#d9d9d9',
@@ -256,7 +259,7 @@ const stylesHome = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     height: 150,
-    top: 90
+    top: 90,
   },
   title: {
     fontSize: 24,
@@ -305,4 +308,4 @@ const stylesHome = StyleSheet.create({
   },
 })
 
-export default Notification
+export default Pending
