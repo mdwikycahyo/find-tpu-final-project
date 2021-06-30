@@ -2,6 +2,7 @@ const {getDatabase} = require("../config/mongodb.js")
 const {ObjectId, Db} = require ('mongodb')
 const cemetaryMaker = require("../helpers/cemetaryMaker")
 const { get } = require("../routes/adminRoute.js")
+const e = require("express")
 const collectionKeeper = 'keeper'
 const collectionCemetarySpace = "cemetarySpace"
 const collectionTransaction = "transaction"
@@ -12,9 +13,12 @@ class Keeper{
             if(getDatabase()){
                 return await getDatabase().collection(collectionKeeper).findOne({keeperEmail:email})
             }
+            else{
+                next({name:"ServerError", message:"Database not connected "})
+            }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
     static async createKeeper(keeperData){
@@ -26,16 +30,25 @@ class Keeper{
                 return await getDatabase().collection(collectionKeeper).insertOne(keeperData)
             }
             else{
-                console.log(err);
+                next({name:"ServerError", message:"Database not connected "})
+
             }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
     static async getAllData(){
-        if(getDatabase()){
-            return await getDatabase().collection(collectionKeeper).find().toArray()
+        try{
+            if(getDatabase()){
+                return await getDatabase().collection(collectionKeeper).find().toArray()
+            }
+            else{
+                next({name:"ServerError", message:"Database not connected "})
+            }
+        }
+        catch(err){
+            next({name:"ServerError", message:err})
         }
     }
     static async getById(id){
@@ -47,10 +60,12 @@ class Keeper{
                 let fullData = keeperData[0]
                 fullData.cemetarySpace = cemetaryData[0]
                 return fullData
+            }else{
+                next({name:"ServerError", message:"Database not connected "})
             }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
     //Masih ERROR ATOMIC
@@ -60,9 +75,12 @@ class Keeper{
             if(getDatabase()){
                 return await getDatabase().collection(collectionKeeper).updateOne({_id: ObjectId(id)}, newValues)
             }
+            else{
+                next({name:"ServerError", message:"Database not connected "})
+            }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
     static async updateCemetarySpace(id, cemetaryPayload){
@@ -82,9 +100,13 @@ class Keeper{
                 await getDatabase().collection(collectionCemetarySpace).updateOne({_id:ObjectId(cemetarySpaceId)}, newCemetarySpaceData)
                 return ""
             }
+            else{
+                next({name:"ServerError", message:"Database not connected "})
+
+            }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
     static async deleteKeeper(id){
@@ -92,9 +114,12 @@ class Keeper{
             if(getDatabase()){
                 return await getDatabase().collection(collectionKeeper).deleteOne({_id:ObjectId(id)})
             }
+            else{
+                next({name:"ServerError", message:"Database not connected "})
+            }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
     static async getAllPending(cemetaryName){
@@ -102,9 +127,13 @@ class Keeper{
             if(getDatabase()){
                 return await getDatabase().collection(collectionTransaction).find({cemetaryName,status:"pending"}).toArray()
             }
+            else{
+                next({name:"ServerError", message:"Database not connected "})
+
+            }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
     static async getAllWaiting(cemetaryName){
@@ -112,9 +141,13 @@ class Keeper{
             if(getDatabase()){
                 return await getDatabase().collection(collectionTransaction).find({cemetaryName,status:"waiting"}).toArray()
             }
+            else{
+                next({name:"ServerError", message:"Database not connected "})
+
+            }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
     static async getAllDone(cemetaryName){
@@ -122,9 +155,13 @@ class Keeper{
             if(getDatabase()){
                 return await getDatabase().collection(collectionTransaction).find({cemetaryName,status:"done"}).toArray()
             }
+            else{
+                next({name:"ServerError", message:"Database not connected "})
+
+            }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
     static async getAllCanceled(cemetaryName){
@@ -132,9 +169,29 @@ class Keeper{
             if(getDatabase()){
                 return await getDatabase().collection(collectionTransaction).find({cemetaryName,status:"canceled"}).toArray()
             }
+            else{
+                next({name:"ServerError", message:"Database not connected "})
+
+            }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
+        }
+    }
+    static async getByStatus(cemetaryId, status){
+        console.log(cemetaryId);
+        console.log(status);
+        try{
+            if(getDatabase()){
+                return await getDatabase().collection(collectionTransaction).find({cemetaryId,status:status}).toArray()
+            }
+            else{
+                next({name:"ServerError", message:"Database not connected "})
+
+            }
+        }
+        catch(err){
+            next({name:"ServerError", message:err})
         }
     }
 }

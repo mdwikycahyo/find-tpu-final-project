@@ -9,11 +9,11 @@ class Admin{
                 return getDatabase().collection(collectionAdmin).insertOne(payload)
             }
             else{
-                console.log("ERROR");
+                next({name:"ServerError", message:"Database not connected "})
             }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
 
@@ -23,11 +23,11 @@ class Admin{
                 return getDatabase().collection(collectionAdmin).findOne({email:email})
             }
             else{
-                console.log("here");
+                next({name:"ServerError", message:"Database not connected "})
             }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
 }

@@ -1,24 +1,18 @@
 const router = require("express").Router()
 const keeperController = require("../controllers/keeperController")
-// const authentication = require("../middlewares/authentication")
-// const auhtorization = require("../middlewares/authorization")
+const authentication = require("../middlewares/authentication")
+const authorizationKeeper = require("../middlewares/authorizationKeeper")
 
-// router.use(authentication)
 // router.use(auhtorization)
 
 router.post("/login", keeperController.loginKeeper)
-router.post("/", keeperController.createKeeper)
-router.get("/", keeperController.getAllData)
-router.get("/:id", keeperController.getById)
+
+router.use(authentication)
+router.use(authorizationKeeper)
+
 router.put("/:id", keeperController.updateKeeperData)
-router.patch("/:id", keeperController.updateCemetarySpace)
-router.delete("/:id", keeperController.deleteKeeper)
-
 router.post("/status/pending", keeperController.getAllPending)
-router.post("/status/waiting", keeperController.getAllWaiting)
-router.post("/status/done", keeperController.getAllDone)
-router.post("/status/canceled", keeperController.getAllCanceled)
-
+router.post("/status/", keeperController.getByStatus)
 router.patch("/status/:id", keeperController.changeStatus)
 
 

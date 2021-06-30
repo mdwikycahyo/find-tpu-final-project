@@ -6,18 +6,18 @@ const {sign} = require("../helpers/jwt")
 //BELUM VALIDASI
 class AdminController{
     static async registerAdmin(req, res, next){
-        let adminData = {
-            email: req.body.email,
-            password: req.body.password,
-            role: req.body.role
-        }
         try{
+            let adminData = {
+                email: req.body.email,
+                password: req.body.password,
+                role: req.body.role
+            }
             adminData.password = await encode(adminData.password)
             const addedData = await Admin.createAdmin(adminData)
             res.status(201).json(addedData.ops[0])
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
 
     }
@@ -28,14 +28,16 @@ class AdminController{
         try{
             const adminData = await Admin.loginAdmin(email)
             if(adminData === null){
-                console.log("Not Found");
+                next({name:"ResourceNotFound", message:"Invalid email or password"})
             }
-            else if(decode(password, adminData.password)) {
-                console.log("Wrong password");
+            else if(!decode(password, adminData.password)) {
+                console.log(decode(password, adminData.password));
+                next({name:"Unauthorized", message:"Invalid email or password"})
+
             }
             else{
                 let payload = {
-                    _id: adminData._id,
+                    id: adminData._id,
                     email: adminData.email,
                     role: adminData.role
                 }
@@ -44,7 +46,7 @@ class AdminController{
             }
         }
         catch(err){
-            console.log(err);
+            next({name:"ServerError", message:err})
         }
     }
     
