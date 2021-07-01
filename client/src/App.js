@@ -29,10 +29,7 @@ function App() {
     <Router>
       <Switch>
         <GuardProvider guards={[requireLogin]} loading={Loading} error={Error}>
-          {/* <GuardedRoute exact path="/">
-            <Error />
-          </GuardedRoute> */}
-          <GuardedRoute exact path="/login">
+          <GuardedRoute exact path="/">
             <Login />
           </GuardedRoute>
           <GuardedRoute exact path="/dashboard" meta={{ auth: true }}>
@@ -69,6 +66,9 @@ function App() {
             <Sidebar />
             <EditTransactionStatus />
           </GuardedRoute>
+          {/* <GuardedRoute exact path="/">
+            <Error />
+          </GuardedRoute> */}
         </GuardProvider>
       </Switch>
     </Router>

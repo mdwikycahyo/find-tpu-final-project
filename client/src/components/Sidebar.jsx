@@ -18,7 +18,7 @@ export default function Sidebar() {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.clear();
-        history.push("/login");
+        history.push("/");
         Swal.fire("Logout!", "See You Again!", "success");
       }
     });
