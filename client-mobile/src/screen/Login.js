@@ -6,7 +6,7 @@ import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
 import { NativeBaseProvider, Box, Text, Heading, VStack, FormControl, Input, Link, Button, Icon, IconButton, HStack, Divider } from 'native-base'
 import styles from '../styles'
 import { login } from '../store'
-import logo from '../../assets/logo.png'
+import logo from '../../assets/finneral_2.png'
 import { Entypo } from '@expo/vector-icons'
 import { fontStyle } from 'styled-system'
 
@@ -23,8 +23,8 @@ function Login({ navigation }) {
     >
       <StatusBar hidden />
       
-      <Box flex={1} p={2} w='90%' mx='auto' marginTop='10'>
-        <Image source={logo} style={{ left: '10%', top: '10%', width: '80%' }} />
+      <Box flex={1} p={2} w='90%' mx='auto' marginTop='-20%'>
+        <Image source={logo} style={{ width: '100%' }} />
         <VStack space={2} mt={5}>
           <FormControl>
             {/* <FormControl.Label _text={{ color: 'muted.700', fontSize: 'sm', fontWeight: 600 }}>Email</FormControl.Label> */}

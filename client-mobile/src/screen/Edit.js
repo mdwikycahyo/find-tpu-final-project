@@ -53,7 +53,7 @@ function Edit() {
           <Text style={styles.headline}>{detailKeeper.cemetaryName}</Text>
           <Text style={styles.address}>{detailKeeper.cemetaryLocation}</Text>
         </View>
-        <View style={{ position: 'absolute', top: 286, height: 152, borderRadius: 10 }}>
+        <View style={{ position: 'absolute', top: 300, height: 152, borderRadius: 10 }}>
           <WebView
             scalesPageToFit={true}
             bounces={false}
@@ -164,7 +164,7 @@ function Edit() {
           show={showAlert}
           showProgress={false}
           title='Success'
-          message='Berhasil mengubah jumlah'
+          message='Jumlah tempat tersedia telah diubah!'
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={false}
           // showCancelButton={true}
