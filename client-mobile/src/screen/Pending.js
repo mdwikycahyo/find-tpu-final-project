@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { Alert, View, SafeAreaView, FlatList, StyleSheet, Button, TouchableOpacity, ActivityIndicator, Modal, Pressable } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HStack, Text, Box, StatusBar } from 'native-base'
-import { fetchTransaction, changeStatus, fetchTransactionByID } from '../store'
+import { fetchTransaction, changeStatus, fetchTransactionByID, resetLoading } from '../store'
 import { useSelector } from 'react-redux'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 import styles from '../styles'
-import { FontAwesome } from '@expo/vector-icons'
 import AnimatedLoader from 'react-native-animated-loader'
 import AwesomeAlert from 'react-native-awesome-alerts'
+import { Ionicons } from '@expo/vector-icons'
+import { FontAwesome } from '@expo/vector-icons'
+import { MaterialIcons } from '@expo/vector-icons'
+import { FontAwesome5 } from '@expo/vector-icons'
+
 
 function Pending() {
   const access_token = useSelector((state) => state.access_token)
@@ -20,15 +24,36 @@ function Pending() {
   const transactionByIdLoading = useSelector((state) => state.transactionByIdLoading)
   const [modalVisible, setModalVisible] = useState(false)
   const [detailOrder, setDetailOrder] = useState(false)
+  const [showAlert, setShowAlert] = useState(false)
+  const [showReject, setShowReject] = useState(false)
+  const [showRejectSuccess, setShowRejectSuccess] = useState(false)
+
+  function show() {
+    setShowAlert(true)
+  }
+  function hide() {
+    setShowAlert(false)
+  }
+
+  function rejectShow() {
+    setShowReject(true)
+  }
+  
+  function rejectHide() {
+    setShowReject(false)
+  }
+
+  function rejectSuccessShow() {
+    setShowRejectSuccess(true)
+  }
+
+  function rejectSuccessHide() {
+    setShowRejectSuccess(false)
+  }
 
   useEffect(() => {
-    // if (currentID) {
-      fetchTransaction(currentID, access_token)
-    // }
+    fetchTransaction(currentID, access_token)
   }, [currentID])
-  console.log(currentID, '<--- dari pending');
-
-  // console.log(transactionLoading, transactions, currentID, 'dari pending')
 
   const renderItem = ({ item }) =>
     transactionLoading ? (
@@ -36,7 +61,6 @@ function Pending() {
     ) : (
       <>
         {/* ========================= MODAL ======================== */}
-
         <Modal
           animationType='slide'
           transparent={true}
@@ -45,65 +69,87 @@ function Pending() {
             setModalVisible(!modalVisible)
           }}
         >
-          <View style={{ top: 60, left: 10, right: 50 }}>
+          <View style={{ top: 40 }}>
             <View
               style={{
-                backgroundColor: '#c9c8a9',
-                width: '94.5%',
-                height: '92%',
-                borderRadius: 20,
+                backgroundColor: '#FFF',
+                opacity: 0.7,
+                width: '100%',
+                height: '93.5%',
                 shadowColor: '#000',
                 shadowOffset: {
                   width: 0,
                   height: 2,
                 },
-                shadowOpacity: 1,
-                shadowRadius: 10,
-                elevation: 5,
               }}
             >
-              {/* https://stackoverflow.com/questions/44357336/setting-up-a-table-layout-in-react-native */}
-              <Text style={{ left: '32%', top: '3%', fontWeight: 'bold', color: 'black', fontSize: 22, marginBottom: 10 }}>Detail Order</Text>
-              {transactionByIdLoading ? (
-                <Text style={{ marginTop: '50%', marginLeft: '45%' }}>
-                  <ActivityIndicator size='large' color='#000' />
-                </Text>
-              ) : (
-                <>
-                  <Text style={{ left: '10%', top: '3%', color: 'black', fontSize: 14 }}>
-                    <Text style={{ fontWeight: 'bold' }}>Nama Pemesan:</Text> {transactionById.payerName}
+              <View style={stylesHome.overlay2nd}>
+                <Text style={{ top: '3%', fontWeight: 'bold', color: 'black', fontSize: 22, marginBottom: 10, borderBottomWidth: 1, textAlign: 'center', paddingBottom: 6 }}>Rincian Pesanan</Text>
+                {transactionByIdLoading ? (
+                  <Text style={{ marginTop: '25%', marginLeft: '45%' }}>
+                    <ActivityIndicator size='large' color='#000' />
                   </Text>
-                  <Text style={{ left: '10%', top: '3%', color: 'black', fontSize: 14 }}>
-                    <Text style={{ fontWeight: 'bold' }}>Telepon:</Text> {transactionById.phoneNumber}
-                  </Text>
-                  <Text style={{ left: '10%', top: '3%', color: 'black', fontSize: 14 }}>
-                    <Text style={{ fontWeight: 'bold' }}>Email:</Text> {transactionById.email}
-                  </Text>
-                  <Text style={{ left: '10%', top: '3%', color: 'black', fontSize: 14 }}>
-                    <Text style={{ fontWeight: 'bold' }}>Nama Jenazah:</Text> {transactionById.deceasedName}
-                  </Text>
-                  <Text style={{ left: '10%', top: '3%', color: 'black', fontSize: 14 }}>
-                    <Text style={{ fontWeight: 'bold' }}>Tanggal Lahir:</Text> {transactionById.bornDate}
-                  </Text>
-                  <Text style={{ left: '10%', top: '3%', color: 'black', fontSize: 14 }}>
-                    <Text style={{ fontWeight: 'bold' }}>Tanggal Meninggal:</Text> {transactionById.burialDate}
-                  </Text>
-                  <Text style={{ left: '10%', top: '3%', color: 'black', fontSize: 14 }}>
-                    <Text style={{ fontWeight: 'bold' }}>Nama Orang Tua:</Text> {transactionById.fatherName}
-                  </Text>
-                  <Text style={{ left: '10%', top: '3%', color: 'black', fontSize: 14 }}>
-                    <Text style={{ fontWeight: 'bold' }}>Fasilitas:</Text> {transactionById.facility.toString()}
-                  </Text>
-                  <Text style={{ left: '10%', top: '3%', color: 'black', fontSize: 14 }}>
-                    <Text style={{ fontWeight: 'bold' }}>Harga :</Text>Rp.{' '}
-                    {Number(transactionById.price)
-                      .toFixed(2)
-                      .replace(/\d(?=(\d{3})+\.)/g, '$&,')}
-                  </Text>
-                </>
-              )}
+                ) : (
+                  <>
+                    <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'row', top: 10 }}>
+                      <View style={{ left: '10%', flex: 1, alignSelf: 'stretch' }}>
+                        <Text style={{ color: 'black', fontSize: 12 }}>
+                          <Ionicons name='person' size={12} color='black' /> Nama Pemesan
+                        </Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>
+                          <FontAwesome name='phone' size={12} color='black' /> Telepon
+                        </Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>
+                          <MaterialIcons name='event-available' size={12} color='black' />
+                          Email
+                        </Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>
+                          <MaterialIcons name='drive-file-rename-outline' size={12} color='black' />
+                          Nama Jenazah
+                        </Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>
+                          <MaterialIcons name='date-range' size={12} color='black' />
+                          Tanggal Lahir
+                        </Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>
+                          <MaterialIcons name='date-range' size={12} color='black' />
+                          Tanggal Wafat
+                        </Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>
+                          <MaterialCommunityIcons name='human-male-female' size={12} color='black' />
+                          Nama Orang Tua
+                        </Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>
+                          <AntDesign name='customerservice' size={12} color='black' />
+                          Fasilitas
+                        </Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>
+                          <FontAwesome5 name='money-bill-wave' size={12} color='black' />
+                          Harga
+                        </Text>
+                      </View>
+                      <View style={{ flex: 1, alignSelf: 'stretch' }}>
+                        <Text style={{ color: 'black', fontSize: 12 }}>: {transactionById.payerName}</Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>: {transactionById.phoneNumber}</Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>: {transactionById.email}</Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>: {transactionById.deceasedName}</Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>: {transactionById.bornDate}</Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>: {transactionById.burialDate}</Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>: {transactionById.fatherName}</Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>: {transactionById.facility.toString()}</Text>
+                        <Text style={{ color: 'black', fontSize: 12 }}>
+                          : Rp.
+                          {Number(transactionById.price)
+                            .toFixed(2)
+                            .replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                        </Text>
+                      </View>
+                    </View>
+                  </>
+                )}
+              </View>
 
-              <Pressable style={{ left: '46%', top: 250 }} onPress={() => setModalVisible(!modalVisible)}>
+              <Pressable style={{ left: '46%', top: 250 }} onPress={() => {resetLoading(), setModalVisible(!modalVisible)}}>
                 <Text>
                   <AntDesign name='closecircleo' size={24} color='black' />
                 </Text>
@@ -127,8 +173,9 @@ function Pending() {
                 left: 65,
               }}
               onPress={() => {
-                changeStatus(access_token, 'canceled', item._id, currentID);
-                fetchTransaction(currentID, access_token)
+                // changeStatus(access_token, 'canceled', item._id, currentID)
+                // fetchTransaction(currentID, access_token)
+                rejectShow()
               }}
             >
               {/* <AntDesign name='delete' size={15} color='black' /> */}
@@ -151,7 +198,7 @@ function Pending() {
               }}
               onPress={() => {
                 setModalVisible(true)
-                fetchTransactionByID(item._id)
+                fetchTransactionByID(item._id, access_token)
               }}
             >
               <Text style={stylesHome.textStyle}>Lihat Detail</Text>
@@ -189,18 +236,75 @@ function Pending() {
                 borderRadius: 10,
               }}
               onPress={() => {
-                changeStatus(access_token, 'waiting', item._id, currentID)
-                fetchTransaction(currentID, access_token)
+                show()
+                // changeStatus(access_token, 'waiting', item._id, currentID)
+                // fetchTransaction(currentID, access_token)
               }}
             >
               <Text style={[stylesHome.textStyle, { color: '#000' }]}>Terima</Text>
             </TouchableOpacity>
+            <AwesomeAlert
+              show={showAlert}
+              showProgress={false}
+              title='Success'
+              message='Berhasil menerima order!'
+              closeOnTouchOutside={true}
+              closeOnHardwareBackPress={false}
+              // showCancelButton={true}
+              showConfirmButton={true}
+              // cancelText='No, cancel'
+              confirmText='Oke!'
+              confirmButtonColor='#8ce089'
+              onCancelPressed={() => {
+                hide()
+              }}
+              onConfirmPressed={() => {
+                hide()
+              }}
+            />
+            <AwesomeAlert
+              show={showReject}
+              showProgress={false}
+              title="Perhatian!"
+              message="Mau menolak order ini?"
+              closeOnTouchOutside={true}
+              closeOnHardwareBackPress={false}
+              showCancelButton={true}
+              showConfirmButton={true}
+              cancelText="Tidak"
+              confirmText="Ya"
+              confirmButtonColor="#DD6B55"
+              onCancelPressed={() => {
+                rejectHide()
+              }}
+              onConfirmPressed={() => {
+                changeStatus(access_token, 'canceled', item._id, currentID)
+                fetchTransaction(currentID, access_token)
+                rejectHide()
+                rejectSuccessShow()
+              }}
+            />
+            <AwesomeAlert
+              show={showRejectSuccess}
+              showProgress={false}
+              title='Success'
+              message='Berhasil menolak order!'
+              closeOnTouchOutside={true}
+              closeOnHardwareBackPress={false}
+              showConfirmButton={true}
+              confirmText='Oke!'
+              confirmButtonColor='#8ce089'
+              onConfirmPressed={() => {
+                rejectSuccessHide()
+                fetchTransaction(currentID, access_token)
+              }}
+            />
           </View>
         </View>
       </>
     )
   return transactionLoading ? (
-    <Text style={{ marginTop: '95%', marginLeft: '45%' }}>
+    <Text style={{ marginTop: '90%', marginLeft: '45%' }}>
       <ActivityIndicator size='large' color='#00ff00' />
     </Text>
   ) : (
@@ -232,6 +336,23 @@ const stylesHome = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+  overlay2nd: {
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    width: '90%',
+    height: '43%',
+    top: '10%',
+    left: 20,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
+    elevation: 6,
   },
   itemBig: {
     backgroundColor: '#FFF',

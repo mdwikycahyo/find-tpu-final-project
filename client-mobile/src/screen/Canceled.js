@@ -26,12 +26,6 @@ function Canceled() {
     fetchTransaction()
   }, [])
 
-  // if (!transactionByIdLoading) {
-  //   // console.log(transactionByIdLoading)
-  //   setDetailOrder(transactionById)
-  // }
-
-  // console.log(detailOrder);
 
   const renderItem = ({ item }) =>
     transactionLoading ? (

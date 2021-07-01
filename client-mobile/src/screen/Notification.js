@@ -20,23 +20,23 @@ function Notification() {
   const [modalVisible, setModalVisible] = useState(false)
   const [detailOrder, setDetailOrder] = useState(false)
 
+  const [showAlert, setShowAlert] = useState(false)
+  function show() {
+    setShowAlert(true)
+  }
+  function hide() {
+    setShowAlert(false)
+  }
+
   useEffect(() => {
     fetchTransaction()
   }, [])
-
-  // if (!transactionByIdLoading) {
-  //   // console.log(transactionByIdLoading)
-  //   setDetailOrder(transactionById)
-  // }
-
-  // console.log(detailOrder);
 
   const renderItem = ({ item }) =>
     transactionLoading ? (
       <Text>Loading...</Text>
     ) : (
       <>
-        
         <View style={stylesHome.item}>
           <View>
             <View style={{ borderBottomWidth: 1, borderBottomColor: '#000', width: 170 }}>
@@ -69,25 +69,45 @@ function Notification() {
                 borderRadius: 10,
               }}
               onPress={() => {
-                changeStatus(access_token, 'waiting', item._id)
+                // changeStatus(access_token, 'waiting', item._id)
+                show()
               }}
             >
               <Text style={{ color: '#000' }}>Terima</Text>
             </TouchableOpacity>
           </View>
-
-          
+          <AwesomeAlert
+            show={showAlert}
+            showProgress={false}
+            title='AwesomeAlert'
+            message='I have a message for you!'
+            closeOnTouchOutside={true}
+            closeOnHardwareBackPress={false}
+            showCancelButton={true}
+            showConfirmButton={true}
+            cancelText='No, cancel'
+            confirmText='Yes, delete it'
+            confirmButtonColor='#DD6B55'
+            onCancelPressed={() => {
+              hide()
+            }}
+            onConfirmPressed={() => {
+              hide()
+            }}
+          />
         </View>
       </>
     )
   return transactionLoading ? (
-    <Text style={{ marginTop: '95%', marginLeft: '45%' }}>
-      <ActivityIndicator size='large' color='#00ff00' />
-    </Text>
+    <>
+      <StatusBar backgroundColor='#FFF' barStyle='dark-content' />
+      <Text style={{ marginTop: '95%', marginLeft: '45%' }}>
+        <ActivityIndicator size='large' color='#00ff00' />
+      </Text>
+    </>
   ) : (
     <>
-      <StatusBar backgroundColor='#000' barStyle='light-content' />
-      {/* <Box safeAreaTop backgroundColor='#FFF' /> */}
+      <StatusBar backgroundColor='#FFF' barStyle='dark-content' />
       <HStack bg='#FFF' px={2} py={3} justifyContent='space-between' alignItems='center'>
         <HStack space={4} alignItems='center'>
           <Text color='black' fontSize={20} pt={2} px={5} fontWeight='bold'>

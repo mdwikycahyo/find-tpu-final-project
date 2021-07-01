@@ -21,6 +21,7 @@ function Login({ navigation }) {
       // contentContainerStyle={styles.container}
       // scrollEnabled={faxlse}
     >
+      <StatusBar hidden />
       
       <Box flex={1} p={2} w='90%' mx='auto' marginTop='10'>
         <Image source={logo} style={{ left: '10%', top: '10%', width: '80%' }} />

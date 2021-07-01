@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 // import { useRoute } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import Edit from '../screen/Edit'
 import Processing from '../screen/Processing'
@@ -12,11 +13,10 @@ import PendingCancel from './PendingCanceled'
 
 const Tab = createBottomTabNavigator()
 function TabNavigator() {
-  // const route = useRoute()
-  // console.log(route)
+
   return (
     <Tab.Navigator
-      initialRouteName='Notifikasi'
+      initialRouteName='Beranda'
       tabBarOptions={{
         activeTintColor: 'red',
       }}
@@ -32,10 +32,10 @@ function TabNavigator() {
       />
 
       <Tab.Screen
-        name='Notifikasi'
+        name='Beranda'
         options={{
           tabBarIcon: () => {
-            return <Ionicons name='notifications-circle-outline' size={40} color='black' />
+            return <FontAwesome5 name="home" size={34} color="black" />
           },
         }}
         component={PendingCancel}

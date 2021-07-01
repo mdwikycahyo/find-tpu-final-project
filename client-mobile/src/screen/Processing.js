@@ -1,38 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import { Alert, View, SafeAreaView, FlatList, StyleSheet, Button, TouchableOpacity, ActivityIndicator, Modal, Pressable } from 'react-native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HStack, Text, Box, StatusBar } from 'native-base'
-import { fetchTransaction, changeStatus, fetchTransactionByID } from '../store'
+import { fetchTransaction, changeStatus, resetLoadingTrans } from '../store'
 import { useSelector } from 'react-redux'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { AntDesign } from '@expo/vector-icons'
-import styles from '../styles'
 import { FontAwesome } from '@expo/vector-icons'
-import AnimatedLoader from 'react-native-animated-loader'
 import AwesomeAlert from 'react-native-awesome-alerts'
 
 function Processing() {
   const access_token = useSelector((state) => state.access_token)
-  const currentID = useSelector(state => state.currentID)
+  const currentID = useSelector((state) => state.currentID)
   const transactions = useSelector((state) => state.transactions)
   const transactionLoading = useSelector((state) => state.transactionLoading)
   const transactionById = useSelector((state) => state.transactionById)
   const transactionByIdLoading = useSelector((state) => state.transactionByIdLoading)
   const [modalVisible, setModalVisible] = useState(false)
   const [detailOrder, setDetailOrder] = useState(false)
+  const [showAlert, setShowAlert] = useState(false)
+  function show() {
+    setShowAlert(true)
+  }
+  function hide() {
+    setShowAlert(false)
+  }
 
   useEffect(() => {
+    resetLoadingTrans()
     fetchTransaction(currentID, access_token)
   }, [])
-
-  // console.log(transactions);
-
-  // if (!transactionByIdLoading) {
-  //   // console.log(transactionByIdLoading)
-  //   setDetailOrder(transactionById)
-  // }
-
-  // console.log(detailOrder);
 
   const renderItem = ({ item }) =>
     transactionLoading ? (
@@ -41,9 +36,8 @@ function Processing() {
       <>
         <View style={stylesHome.item}>
           <View>
-            <View style={{ borderBottomWidth: 1, borderBottomColor: '#000', width: 170 }}>
+            <View style={{ borderBottomWidth: 1, borderBottomColor: '#000', width: 300 }}>
               <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{item.payerName}</Text>
-
               <Text style={{ fontSize: 12, bottom: 3 }}>
                 <FontAwesome name='phone' size={12} color='black' /> {item.phoneNumber}
               </Text>
@@ -57,8 +51,16 @@ function Processing() {
               )
             })}
           </View>
+          
+          <View style={{ left:180 }}>
+            <MaterialCommunityIcons style={{top:-80, right:25}} name='timer' size={24} color='black' />
+            <Text style={{ fontSize: 14, bottom: 100 }}>
+               Sedang disiapkan ...
+            </Text>
 
-          <View style={{ position: 'absolute', bottom: 20, right: 10, width: '40%' }}>
+          </View>
+
+          <View style={{ position: 'absolute', bottom:20, right: 10, width: '40%' }}>
             <TouchableOpacity
               style={{
                 // borderWidth: 0.5,
@@ -71,18 +73,36 @@ function Processing() {
                 borderRadius: 10,
               }}
               onPress={() => {
-                changeStatus(access_token, 'done', item._id, currentID);
+                show()
+                changeStatus(access_token, 'done', item._id, currentID)
                 fetchTransaction(currentID, access_token)
               }}
             >
-              <Text style={{ color: '#000' }}>{item.status}</Text>
+              <Text style={{ color: '#000' }}>Selesai</Text>
             </TouchableOpacity>
           </View>
+          <AwesomeAlert
+            show={showAlert}
+            showProgress={false}
+            title='Success'
+            message='Order selesai'
+            closeOnTouchOutside={true}
+            closeOnHardwareBackPress={false}
+            // showCancelButton={true}
+            showConfirmButton={true}
+            // cancelText='No, cancel'
+            confirmText='Oke!'
+            confirmButtonColor='#8ce089'
+            onConfirmPressed={() => {
+              fetchTransaction(currentID, access_token)
+              hide()
+            }}
+          />
         </View>
       </>
     )
   return transactionLoading ? (
-    <Text style={{ marginTop: '95%', marginLeft: '45%' }}>
+    <Text style={{ marginTop: '75%', marginLeft: '45%' }}>
       <ActivityIndicator size='large' color='#00ff00' />
     </Text>
   ) : (
@@ -107,7 +127,10 @@ const stylesHome = StyleSheet.create({
   },
   item: {
     backgroundColor: '#FFF',
-    padding: 20,
+    paddingTop: 10,
+    paddingBottom: 0,
+    paddingLeft: 20,
+    paddingRight: 20,
     marginVertical: 3,
     marginHorizontal: 10,
     borderRadius: 5,
