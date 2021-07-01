@@ -75,11 +75,14 @@ export default function EditFormCemetary() {
     <div className="h-full ml-14 mb-10 md:ml-64">
       <div className="pt-4">
         <div className=" w-11/12 bg-gray-50 shadow-md mx-auto text-center py-4 mt-2 rounded-xl">
-          <h1 className=" text-gray-800 text-center py-4font-extrabold -mt-3 text-3xl">
+          <h1 className=" text-gray-800 text-center py-4 font-extrabold -mt-3 text-3xl">
             Cemetary Edit Form
           </h1>
           <div className="container py-5 max-w-4xl mx-auto text-left">
             <form onSubmit={handleSubmit(onSubmit)}>
+              <label className=" mb-4 text-blue-500 font-semibold">
+                Cemetary Name
+              </label>
               <input
                 type="text"
                 placeholder="Cemetary Name"
@@ -87,7 +90,9 @@ export default function EditFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("cemetaryName", { required: true })}
               />
-
+              <label className=" mb-4 text-blue-500 font-semibold">
+                Cemetary Location
+              </label>
               <input
                 type="text"
                 placeholder="Cemetary Location"
@@ -95,7 +100,7 @@ export default function EditFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("cemetaryLocation", { required: true })}
               />
-
+              <label className=" mb-4 text-blue-500 font-semibold">Width</label>
               <input
                 type="number"
                 placeholder="Width"
@@ -103,6 +108,9 @@ export default function EditFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("width", { required: true })}
               />
+              <label className=" mb-4 text-blue-500 font-semibold">
+                Height
+              </label>
               <input
                 type="number"
                 placeholder="Height"
@@ -110,7 +118,9 @@ export default function EditFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("height", { required: true })}
               />
-
+              <label className=" mb-4 text-blue-500 font-semibold">
+                Latitude
+              </label>
               <input
                 type="text"
                 placeholder="Latitude"
@@ -118,7 +128,9 @@ export default function EditFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("latitude", { required: true })}
               />
-
+              <label className=" mb-4 text-blue-500 font-semibold">
+                Longitude
+              </label>
               <input
                 type="text"
                 placeholder="Longitude"
@@ -126,7 +138,9 @@ export default function EditFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("longitude", { required: true })}
               />
-
+              <label className=" mb-4 text-blue-500 font-semibold">
+                Image Url
+              </label>
               <input
                 type="text"
                 placeholder="Image Url"
@@ -134,6 +148,7 @@ export default function EditFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("image_url", { required: true })}
               />
+              <label className=" mb-4 text-blue-500 font-semibold">Price</label>
               <input
                 type="number"
                 placeholder="Price"
@@ -141,7 +156,9 @@ export default function EditFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("price", { required: true })}
               />
-
+              <label className=" mb-4 text-blue-500 font-semibold">
+                Keeper Name
+              </label>
               <input
                 type="text"
                 placeholder="Keeper Name"
@@ -149,23 +166,9 @@ export default function EditFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("keeperName", { required: true })}
               />
-
-              <input
-                type="text"
-                placeholder="Keeper Email"
-                name="keeperEmail"
-                className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                {...register("keeperEmail", { required: true })}
-              />
-
-              <input
-                type="text"
-                placeholder="Keeper Password"
-                name="keeperPassword"
-                className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                {...register("keeperPassword", { required: true })}
-              />
-
+              <label className=" mb-4 text-blue-500 font-semibold">
+                Keeper Phone
+              </label>
               <input
                 type="text"
                 placeholder="Keeper Phone"
@@ -173,6 +176,9 @@ export default function EditFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("keeperPhone", { required: true })}
               />
+              <label className=" mb-4 text-blue-500 font-semibold">
+                Available Space
+              </label>
               <input
                 type="number"
                 placeholder="Available Space"
@@ -180,6 +186,9 @@ export default function EditFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("spaceLeft", { required: true })}
               />
+              <label className=" mb-4 text-blue-500 font-semibold">
+                Space Filled
+              </label>
               <input
                 type="number"
                 placeholder="Space Filled"
@@ -187,6 +196,9 @@ export default function EditFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("spaceFilled", { required: true })}
               />
+              <label className=" mb-4 text-blue-500 font-semibold">
+                Facilities
+              </label>
               <input
                 type="text"
                 placeholder="Facilities"

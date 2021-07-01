@@ -32,6 +32,9 @@ export default function AddFormCemetary() {
           <div className="container py-5 max-w-4xl mx-auto text-left">
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* <label>Cemetary Name</label> */}
+              {errors.cemetaryName && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="text"
                 placeholder="Cemetary Name"
@@ -39,7 +42,9 @@ export default function AddFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("cemetaryName", { required: true })}
               />
-              {errors.cemetaryName && <span>This field is required</span>}
+              {errors.cemetaryLocation && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="text"
                 placeholder="Cemetary Location"
@@ -47,7 +52,9 @@ export default function AddFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("cemetaryLocation", { required: true })}
               />
-              {errors.cemetaryLocation && <span>This field is required</span>}
+              {errors.width && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="number"
                 placeholder="Width"
@@ -55,8 +62,10 @@ export default function AddFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("width", { required: true })}
               />
-              {errors.width && <span>This field is required</span>}
-              {/* <label>Height</label> */}
+
+              {errors.height && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="number"
                 placeholder="Height"
@@ -64,7 +73,9 @@ export default function AddFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("height", { required: true })}
               />
-              {errors.height && <span>This field is required</span>}
+              {errors.latitude && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="text"
                 placeholder="Latitude"
@@ -72,7 +83,9 @@ export default function AddFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("latitude", { required: true })}
               />
-              {errors.latitude && <span>This field is required</span>}
+              {errors.longitude && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="text"
                 placeholder="Longitude"
@@ -80,7 +93,9 @@ export default function AddFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("longitude", { required: true })}
               />
-              {errors.longitude && <span>This field is required</span>}
+              {errors.image_url && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="text"
                 placeholder="Image Url"
@@ -88,8 +103,10 @@ export default function AddFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("image_url", { required: true })}
               />
-              {errors.image_url && <span>This field is required</span>}
-              {/* <label>Price</label> */}
+
+              {errors.price && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="number"
                 placeholder="Price"
@@ -97,7 +114,9 @@ export default function AddFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("price", { required: true })}
               />
-              {errors.price && <span>This field is required</span>}
+              {errors.keeperName && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="text"
                 placeholder="Keeper Name"
@@ -105,7 +124,9 @@ export default function AddFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("keeperName", { required: true })}
               />
-              {errors.keeperName && <span>This field is required</span>}
+              {errors.keeperEmail && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="email"
                 placeholder="Keeper Email"
@@ -113,7 +134,9 @@ export default function AddFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("keeperEmail", { required: true })}
               />
-              {errors.keeperEmail && <span>This field is required</span>}
+              {errors.keeperPassword && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="text"
                 placeholder="Keeper Password"
@@ -121,7 +144,9 @@ export default function AddFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("keeperPassword", { required: true })}
               />
-              {errors.keeperPassword && <span>This field is required</span>}
+              {errors.keeperPhone && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="text"
                 placeholder="Keeper Phone"
@@ -129,17 +154,21 @@ export default function AddFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("keeperPhone", { required: true })}
               />
-              {errors.keeperPhone && <span>This field is required</span>}
-              {/* <label>Available Space</label> */}
+
+              {errors.spaceLeft && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="number"
                 placeholder="Available Space"
                 name="spaceLeft"
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                {...register("spaceLeft", { required: true })}
+                {...register("spaceLeft", { min: 0 })}
               />
-              {errors.spaceLeft && <span>This field is required</span>}
-              {/* <label>Filled Space</label> */}
+
+              {errors.spaceFilled && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="number"
                 placeholder="Space Filled"
@@ -147,7 +176,9 @@ export default function AddFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("spaceFilled", { required: true })}
               />
-              {errors.spaceFilled && <span>This field is required</span>}
+              {errors.facilities && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <input
                 type="text"
                 placeholder="Facilities"
@@ -155,7 +186,6 @@ export default function AddFormCemetary() {
                 className="shadow appearance-none  rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("facilities", { required: true })}
               />
-              {errors.facilities && <span>This field is required</span>}
               <div className="flex items-center justify-between">
                 <button
                   className=" bg-blue-800 hover:bg-blue-600 text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline"
