@@ -69,11 +69,11 @@ function Pending() {
             setModalVisible(!modalVisible)
           }}
         >
-          <View style={{ top: 40 }}>
+          <View style={{ top: 42 }}>
             <View
               style={{
                 backgroundColor: '#FFF',
-                opacity: 0.7,
+                opacity: 0.9,
                 width: '100%',
                 height: '93.5%',
                 shadowColor: '#000',
@@ -173,7 +173,7 @@ function Pending() {
                 left: 65,
               }}
               onPress={() => {
-                // changeStatus(access_token, 'canceled', item._id, currentID)
+                changeStatus(access_token, 'canceled', item._id, currentID)
                 // fetchTransaction(currentID, access_token)
                 rejectShow()
               }}
@@ -236,9 +236,9 @@ function Pending() {
                 borderRadius: 10,
               }}
               onPress={() => {
+                changeStatus(access_token, 'waiting', item._id, currentID)
+                fetchTransaction(currentID, access_token)
                 show()
-                // changeStatus(access_token, 'waiting', item._id, currentID)
-                // fetchTransaction(currentID, access_token)
               }}
             >
               <Text style={[stylesHome.textStyle, { color: '#000' }]}>Terima</Text>
@@ -259,6 +259,7 @@ function Pending() {
                 hide()
               }}
               onConfirmPressed={() => {
+                fetchTransaction(currentID, access_token)
                 hide()
               }}
             />
@@ -278,7 +279,7 @@ function Pending() {
                 rejectHide()
               }}
               onConfirmPressed={() => {
-                changeStatus(access_token, 'canceled', item._id, currentID)
+                // changeStatus(access_token, 'canceled', item._id, currentID)
                 fetchTransaction(currentID, access_token)
                 rejectHide()
                 rejectSuccessShow()
@@ -321,7 +322,7 @@ const stylesHome = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
-    backgroundColor: '#545452',
+    backgroundColor: '#e8e8e8',
   },
   loadingContainer: {
     marginTop: '80%',
@@ -370,7 +371,7 @@ const stylesHome = StyleSheet.create({
   },
   itemSmall: {
     backgroundColor: '#d9d9d9',
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: 'black',
     padding: 20,
     marginVertical: 3,

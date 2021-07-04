@@ -85,7 +85,7 @@ const stylesHome = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
-    backgroundColor: '#545452',
+    backgroundColor: '#e8e8e8',
   },
   loadingContainer: {
     marginTop: '80%',

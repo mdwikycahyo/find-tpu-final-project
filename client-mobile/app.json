@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "client-mobile",
-    "slug": "client-mobile",
+    "name": "Finneral",
+    "slug": "finneral",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -34,10 +34,14 @@
         {
           "icon": "./local/path/to/myNotificationIcon.png",
           "color": "#ffffff",
-          "sounds": ["./local/path/to/mySound.wav", "./local/path/to/myOtherSound.wav"],
+          "sounds": [
+            "./local/path/to/mySound.wav",
+            "./local/path/to/myOtherSound.wav"
+          ],
           "mode": "production"
         }
       ]
-    ]
+    ],
+    "description": ""
   }
 }

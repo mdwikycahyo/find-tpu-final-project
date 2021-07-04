@@ -25,7 +25,7 @@ const initialState = {
 
 
 
-export function login(email, password) {
+export function login() {
   axios('http://18.207.141.48:3000/keeper/login', {
     method: 'POST',
     // ntar ambil dari parameter
@@ -33,8 +33,8 @@ export function login(email, password) {
       'Content-Type': 'application/json',
     },
     data: {
-      email: 'mortred@gmail.com',
-      password: 'mortred',
+      email: 'Bruce@mail.com',
+      password: 'bruce',
     },
   })
     .then((response) => {

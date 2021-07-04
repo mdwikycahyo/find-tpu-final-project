@@ -12,10 +12,10 @@ function Processing() {
   const currentID = useSelector((state) => state.currentID)
   const transactions = useSelector((state) => state.transactions)
   const transactionLoading = useSelector((state) => state.transactionLoading)
-  const transactionById = useSelector((state) => state.transactionById)
-  const transactionByIdLoading = useSelector((state) => state.transactionByIdLoading)
-  const [modalVisible, setModalVisible] = useState(false)
-  const [detailOrder, setDetailOrder] = useState(false)
+  // const transactionById = useSelector((state) => state.transactionById)
+  // const transactionByIdLoading = useSelector((state) => state.transactionByIdLoading)
+  // const [modalVisible, setModalVisible] = useState(false)
+  // const [detailOrder, setDetailOrder] = useState(false)
   const [showAlert, setShowAlert] = useState(false)
   function show() {
     setShowAlert(true)
@@ -119,7 +119,7 @@ const stylesHome = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
-    backgroundColor: '#545452',
+    backgroundColor: '#e8e8e8',
   },
   loadingContainer: {
     marginTop: '80%',

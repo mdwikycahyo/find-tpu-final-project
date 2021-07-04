@@ -35,9 +35,10 @@ function Login({ navigation }) {
                 placeholder='Email'
                 paddingHorizontal={8}
                 paddingVertical={10}
-                onChangeText={(email) => {
-                  setEmail(email)
-                }}
+                defaultValue= 'Bruce@mail.com'
+                // onChangeText={(email) => {
+                //   setEmail(email)
+                // }}
               />
             </View>
           </FormControl>
@@ -48,12 +49,13 @@ function Login({ navigation }) {
               <TextInput
                 style={styles.input,{marginTop: 5}}
                 placeholder='Password'
+                defaultValue= 'burce'
                 secureTextEntry={true}
                 paddingHorizontal={8}
                 paddingVertical={10}
-                onChangeText={(password) => {
-                  setPasswordl(password)
-                }}
+                // onChangeText={(password) => {
+                //   setPasswordl(password)
+                // }}
               />
             </View>
           </FormControl>
@@ -61,7 +63,7 @@ function Login({ navigation }) {
             <Button
               onPress={() => {
                 navigation.navigate('HomeStack')
-                login(email, password)
+                login()
               }}
               backgroundColor='#545452'
               _text={{ color: 'white', fontWeight: 'bold', fontStyle: ["normal"], fontSize: 20, fontVariants:["oldstyle-nums"] }}

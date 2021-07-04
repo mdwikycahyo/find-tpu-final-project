@@ -47,7 +47,7 @@ function Edit() {
       <View style={[styles.container, { top: 0 }]}>
         <View style={styles.backgroundContainer}>
           {/* { uri: detailKeeper.image_url[0][0] } */}
-          <Image source={{ uri: detailKeeper.image_url[0][0] }} resizeMode='cover' style={styles.backdrop} />
+          <Image source={{ uri: detailKeeper.image_url[0]}} resizeMode='cover' style={styles.backdrop} />
         </View>
         <View style={styles.overlay}>
           <Text style={styles.headline}>{detailKeeper.cemetaryName}</Text>
@@ -204,6 +204,7 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    backgroundColor: '#e8e8e8',
   },
   dataContainer: {
     flex: 1,
