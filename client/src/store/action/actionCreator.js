@@ -134,7 +134,7 @@ export function addKeeper(data) {
         height: data.height,
         latitude: data.latitude,
         longitude: data.longitude,
-        image_url: [data.image_url],
+        image_url: data.image_url.split(","),
         price: data.price,
         keeperName: data.keeperName,
         keeperEmail: data.keeperEmail,
